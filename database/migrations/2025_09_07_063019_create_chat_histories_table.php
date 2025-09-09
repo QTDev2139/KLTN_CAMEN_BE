@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
+        Schema::create('chat_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('code');    
-            $table->string('name');    
-            $table->timestamps();
+            $table->text("message");
+            $table->dateTime("sent_at");
+
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('languages');
+        Schema::dropIfExists('chat_histories');
     }
 };
