@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
-use App\Models\Post;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::all();
+        $post = Posts::all();
 
         // return response() -> json($post);
         return PostResource::collection($post);
@@ -35,7 +35,7 @@ class PostController extends Controller
     {
         $validated = $request->safe()->only('title', 'content');
 
-        $post = Post::create($validated);
+        $post = Posts::create($validated);
 
         // return response()->json($post, 201);
         return $post->toResource();
@@ -46,7 +46,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
 
         return response()->json($post);
     }
@@ -57,7 +57,7 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
 
         $post->update([
             'title' => $request->get('title'),
@@ -72,7 +72,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
 
         $post->delete();
 
