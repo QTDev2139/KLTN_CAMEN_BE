@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('grand_total');
             $table->text('note');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

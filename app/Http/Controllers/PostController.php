@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,11 +14,19 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Posts::all();
+        $posts = Post::query()
+            ->with([
+                'user:id,name',
+                'post_translations:id,post_id,languages_id,title,slug,content,meta_title,meta_description,thumbnail',
+                'post_translations.language:id,code,name',
+            ])
+            ->latest('id')
+            ->get();
 
-        // return response() -> json($post);
-        return PostResource::collection($post);
+        return PostResource::collection($posts);
+        // return response()->json($posts);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +43,7 @@ class PostController extends Controller
     {
         $validated = $request->safe()->only('title', 'content');
 
-        $post = Posts::create($validated);
+        $post = Post::create($validated);
 
         // return response()->json($post, 201);
         return $post->toResource();
@@ -46,7 +54,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Posts::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         return response()->json($post);
     }
@@ -57,7 +65,7 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request, $id)
     {
-        $post = Posts::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         $post->update([
             'title' => $request->get('title'),
@@ -72,7 +80,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Posts::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         $post->delete();
 
