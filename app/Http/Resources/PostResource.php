@@ -16,9 +16,16 @@ class PostResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            'post_id' => $this->id,
-            'title_name' => $this->title,
-            'content_at' => $this->created_at,
+            'id'        => $this->id,
+            'status'    => $this->status,
+            'user'      => $this->whenLoaded('user', fn() => [
+                'id'   => $this->user->id,
+                'name' => $this->user->name,
+            ]),
+            'translations' => PostTranslationResource::collection(
+                $this->whenLoaded('post_translations')
+            ),
+            'created_at'=> $this->created_at?->toISOString(),
         ];
     }
 }

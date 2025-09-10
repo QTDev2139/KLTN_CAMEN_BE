@@ -2,25 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Language;
+use App\Models\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class LanguageSeeder extends Seeder
+class PostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Language::insert([
+        Post::insert([
             [
-                'code' => 'vi',
-                'name' => 'Việt Nam',
-            ],
-            [
-                'code' => 'en',
-                'name' => 'English',
+                'user_id' => 1,
+                'status' => true
             ],
         ]);
     }

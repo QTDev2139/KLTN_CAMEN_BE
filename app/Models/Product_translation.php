@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post_translations extends Model
+class Product_translation extends Model
 {
-    //
+    
 }
