@@ -10,6 +10,13 @@ class Post extends Model
 {
     protected $fillable = [
         'user_id',
+        'languages_id',
+        'title',
+        'slug',
+        'content',
+        'meta_title',
+        'meta_description',
+        'thumbnail',
         'status',
     ];
 
@@ -18,8 +25,8 @@ class Post extends Model
         return $this -> belongsTo(User::class, 'user_id');
     }
 
-    //1 Post -> n Post_translation
-    public function post_translations(): HasMany {
-        return $this -> hasMany(Post_translation::class, 'post_id');
-    }
+    //n Post -> 1 Languages
+    public function language(): BelongsTo{
+        return $this -> belongsTo(Language::class, 'languages_id');
+    } 
 }

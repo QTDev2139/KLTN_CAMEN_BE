@@ -6,7 +6,12 @@ use App\Http\Controllers\PostController;
 use ILLuminate\support\Facades\Route;
 
 Route::apiResource('language', LanguagesController::class);
-Route::apiResource('posts', PostController::class);
+
+Route::apiResource('posts', PostController::class)->only(['index', 'show']);
+// private (yêu cầu JWT)
+Route::apiResource('posts', PostController::class)
+    ->only(['store','update','destroy'])
+    ->middleware('auth:api');
 
 // Trong đó:
 // get là phương thức HTTP.
