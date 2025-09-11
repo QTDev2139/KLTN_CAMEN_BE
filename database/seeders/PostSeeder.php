@@ -16,8 +16,47 @@ class PostSeeder extends Seeder
         Post::insert([
             [
                 'user_id' => 1,
-                'status' => true
+                'languages_id' => 1,
+                'title' => 'Test bai viet 1',
+                'slug' => 'test-bai-viet-1',
+                'content' => 'Noi dung test bai viet 1',
+                'meta_title' => 'abc',
+                'meta_description' => 'abc',
+                'thumbnail' => 'image',
+            ],
+            [
+                'user_id' => 1,
+                'languages_id' => 2,
+                'title' => 'Test bai viet 2',
+                'slug' => 'test-bai-viet-2',
+                'content' => 'Noi dung test bai viet 2',
+                'meta_title' => 'abc',
+                'meta_description' => 'abc',
+                'thumbnail' => 'image',
+            ],
+            [
+                'user_id' => 1,
+                'languages_id' => 2,
+                'title' => 'Test bai viet 3',
+                'slug' => 'test-bai-viet-3',
+                'content' => 'Noi dung test bai viet 3',
+                'meta_title' => 'abc',
+                'meta_description' => 'abc',
+                'thumbnail' => 'image',
+            ],
+            [
+                'user_id' => 1,
+                'languages_id' => 1,
+                'title' => 'Test bai viet 4',
+                'slug' => 'test-bai-viet-4',
+                'content' => 'Noi dung test bai viet 4',
+                'meta_title' => 'abc',
+                'meta_description' => 'abc',
+                'thumbnail' => 'image',
             ],
         ]);
     }
 }
+
+
+                

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,8 +19,7 @@ class PostController extends Controller
         $posts = Post::query()
             ->with([
                 'user:id,name',
-                'post_translations:id,post_id,languages_id,title,slug,content,meta_title,meta_description,thumbnail',
-                'post_translations.language:id,code,name',
+                'language:id,code'
             ])
             ->latest('id')
             ->get();
@@ -41,11 +42,20 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $validated = $request->safe()->only('title', 'content');
+
+        $thumbnail = null;
+        // Xứ lý lưu file
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            $thumbnail = $file->storeAs('image', $file_name);
+        }
+
+        $validated = $request->safe()->only('languages_id', 'title', 'slug', 'content', 'meta_title', 'meta_description');
+        $validated['user_id'] = Auth::guard('api')->id();
+        $validated['thumbnail'] = $thumbnail;
 
         $post = Post::create($validated);
-
-        // return response()->json($post, 201);
         return $post->toResource();
     }
 
@@ -66,10 +76,25 @@ class PostController extends Controller
     public function update(StorePostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
+        $thumbnail = null;
+
+        if($request -> hasFile('thumbnail')) {
+            Storage::delete($post->thumbnail);
+
+            $file = $request->file('thumbnail');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            $thumbnail = $file->storeAs('image', $file_name);
+        }
 
         $post->update([
+            'languages_id' => $request->get('languages_id'),
             'title' => $request->get('title'),
-            'content' => $request->get('content')
+            'slug' => $request->get('slug'),
+            'content' => $request->get('content'),
+            'meta_title' => $request->get('meta_title'),
+            'meta_description' => $request->get('meta_description'),
+            'thumbnail' => $thumbnail,
+            
         ]);
 
         return response()->json($post);
@@ -81,8 +106,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-
+        
         $post->delete();
+        Storage::delete($post->thumbnail);
 
         return response()->json($post, 204);
     }
