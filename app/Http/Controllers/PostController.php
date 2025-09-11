@@ -64,9 +64,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::with([
+            'user:id,name',
+            'language:id,code'
+        ])->findOrFail($id);
 
-        return response()->json($post);
+        return new PostResource($post);
     }
 
 
@@ -78,7 +81,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $thumbnail = null;
 
-        if($request -> hasFile('thumbnail')) {
+        if ($request->hasFile('thumbnail')) {
             Storage::delete($post->thumbnail);
 
             $file = $request->file('thumbnail');
@@ -94,7 +97,7 @@ class PostController extends Controller
             'meta_title' => $request->get('meta_title'),
             'meta_description' => $request->get('meta_description'),
             'thumbnail' => $thumbnail,
-            
+
         ]);
 
         return response()->json($post);
@@ -106,7 +109,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        
+
         $post->delete();
         Storage::delete($post->thumbnail);
 
