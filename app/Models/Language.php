@@ -12,8 +12,8 @@ class Language extends Model
         'name'
     ];
 
-    // 1 Language -> n Post_translations
-    public function post_translations(): HasMany{
-        return $this -> hasMany(Post_translation::class, 'languages_id');
+    // 1 Language -> n Post
+    public function posts(): HasMany{
+        return $this -> hasMany(Post::class, 'languages_id');
     }
 }

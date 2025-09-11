@@ -16,15 +16,24 @@ class PostResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            'id'        => $this->id,
-            'status'    => $this->status,
+            'id'               => $this->id,
+            'title'            => $this->title,
+            'slug'             => $this->slug,
+            'content'          => $this->content,
+            'meta_title'       => $this->meta_title,
+            'meta_description' => $this->meta_description,
+            'thumbnail'        => $this->thumbnail,
+            'status'           => $this->status,
+
             'user'      => $this->whenLoaded('user', fn() => [
-                'id'   => $this->user->id,
-                'name' => $this->user->name,
+                'id'    => $this->user->id,
+                'name'  => $this->user->name,
             ]),
-            'translations' => PostTranslationResource::collection(
-                $this->whenLoaded('post_translations')
-            ),
+            'language'=> $this->whenLoaded('language', fn() => [
+                'id' => $this->language->id,
+                'code' => $this->language->code,
+            ]) ,
+            
             'created_at'=> $this->created_at?->toISOString(),
         ];
     }
