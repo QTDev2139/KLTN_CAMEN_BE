@@ -17,6 +17,7 @@ class Post extends Model
         'meta_title',
         'meta_description',
         'thumbnail',
+        'translation_key',
         'status',
     ];
 

@@ -48,10 +48,10 @@ class PostController extends Controller
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
             $file_name = time() . '_' . $file->getClientOriginalName();
-            $thumbnail = $file->storeAs('image', $file_name);
+            $thumbnail = $file->storeAs('image', $file_name, 'public');
         }
 
-        $validated = $request->safe()->only('languages_id', 'title', 'slug', 'content', 'meta_title', 'meta_description');
+        $validated = $request->safe()->only('languages_id', 'title', 'slug', 'content', 'meta_title', 'meta_description', 'translation_key');
         $validated['user_id'] = Auth::guard('api')->id();
         $validated['thumbnail'] = $thumbnail;
 
@@ -68,6 +68,27 @@ class PostController extends Controller
             'user:id,name',
             'language:id,code'
         ])->findOrFail($id);
+
+        return new PostResource($post);
+    }
+
+    public function getKey( $slug )
+    {
+        $post = Post::with(['user:id,name', 'language:id,code'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        return new PostResource($post);
+    }
+    public function showByLangAndKey(Request $request)
+    {
+        $code = $request->query('lang');
+        $key = $request->query('key');
+
+        $post = Post::with(['user:id,name', 'language:id,code'])
+            ->where('translation_key', $key)
+            ->whereHas('language', fn($q) => $q->where('code', $code))
+            ->firstOrFail();
 
         return new PostResource($post);
     }
@@ -97,6 +118,7 @@ class PostController extends Controller
             'meta_title' => $request->get('meta_title'),
             'meta_description' => $request->get('meta_description'),
             'thumbnail' => $thumbnail,
+            'translation_key' => $request->get('translation_key'),
 
         ]);
 
