@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAuthRequest;
+use App\Mail\VerifyOtpMail;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -14,12 +19,62 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'refresh']]);
+        $this->middleware('auth:api', ['except' => ['login', 'refresh', 'requestOtp', 'verifyOtp']]);
+    }
+    public function requestOtp(StoreAuthRequest $request) {
+        $name = $request -> input('name');
+        $email = $request -> input('email');
+        $password = $request -> input('password');
+        if(User::where('email', $email) -> exists()) {
+            return response() -> json([
+                "message" => "Email đã được sử dụng",
+            ], 409);
+        }
+
+        $otp = random_int(100000, 999999);
+
+        // Lưu tạm thời vào cache, register:otp:$email dùng làm key
+        Cache::put("register:otp:$email", [
+            'otp_hash' => Hash::make($otp),
+            'password_hash' => Hash::make($password),
+            'name' => $name,
+        ], now() -> addMinutes(2)); // Thời gian sống 2'
+
+        // Gửi mail
+        $Mail = Mail::to($email)->send(new VerifyOtpMail($otp));
+
+        return response() -> json(['message' => 'OTP đã được gửi đến email'], 200);
+
+        
+    }
+    public function verifyOtp(StoreAuthRequest $request) {
+        $email = strtolower($request->input('email'));
+        $otp = $request->input('otp');
+
+        $cached = Cache::get("register:otp:$email");
+
+        if(!$cached) {
+            return response() -> json(['message' => 'OTP đã hết hạn'], 410);
+        }
+
+        if(!Hash::check($otp, $cached['otp_hash'])) {
+            return response() -> json(['message' => 'OTP không chính xác'], 422);
+        }
+
+        $user = User::create([
+            'name' => $cached['name'],
+            'email' => $email,
+            'password' => $cached['password_hash'],
+        ]);
+
+        Cache::forget("register:otp:$email");
+
+        return response()->json(['message' => 'Đăng ký thành công'], 201);
+
     }
     public function login()
     {
         $credentials = request(['email', 'password']);
-
         if (! $token = Auth::guard('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
