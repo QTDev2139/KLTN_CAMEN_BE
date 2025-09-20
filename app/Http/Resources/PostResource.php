@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class PostResource extends JsonResource
 {
@@ -22,7 +23,8 @@ class PostResource extends JsonResource
             'content'          => $this->content,
             'meta_title'       => $this->meta_title,
             'meta_description' => $this->meta_description,
-            'thumbnail'        => $this->thumbnail,
+            'thumbnail'        => $this->thumbnail ? asset('storage/' . $this->thumbnail) : null,
+            'translation_key'  => $this->translation_key,
             'status'           => $this->status,
 
             'user'      => $this->whenLoaded('user', fn() => [
@@ -34,7 +36,7 @@ class PostResource extends JsonResource
                 'code' => $this->language->code,
             ]) ,
             
-            'created_at'=> $this->created_at?->toISOString(),
+            'created_at'=> $this->created_at?->format('d/m/Y'),
         ];
     }
 }
