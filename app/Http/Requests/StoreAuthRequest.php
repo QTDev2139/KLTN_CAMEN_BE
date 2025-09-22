@@ -24,7 +24,8 @@ class StoreAuthRequest extends FormRequest
         return [
             'name' => 'sometimes|string',
             'email' => 'sometimes|string|email',
-            'password' => 'sometimes|string|min:6'
+            'password' => 'sometimes|string|min:6',
+            'newPassword' => 'sometimes|string|min:6'
         ];
     }
 }

@@ -11,7 +11,7 @@
                 <a href="camenfood">camenfood</a>
             </div>
             <div style="padding: 2px 0;">
-                <span>Số điện thoại:</span>
+                <span>Phone:</span>
                 <span>0865452731</span>
             </div>
             <div style="padding: 2px 0;">
