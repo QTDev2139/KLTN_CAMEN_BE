@@ -27,8 +27,12 @@ Route::group([
 
 ], function ($router) {
 
-    Route::post('register/request-otp', [AuthController::class, 'requestOtp']);
-    Route::post('register/verify-otp', [AuthController::class, 'verifyOtp']);
+    Route::post('register/request-otp', [AuthController::class, 'requestOtpForRegister']);
+    Route::post('register/verify-otp', [AuthController::class, 'verifyOtpForRegister']);
+    Route::post('forgotten-password/request-otp', [AuthController::class, 'requestOtpForForgottenPassword']);
+    Route::post('forgotten-password/verify-otp', [AuthController::class, 'verifyOtpForForgottenPassword']);
+    Route::post('forgotten-password/reset-password', [AuthController::class, 'resetPassword']);
+    Route::post('change-password', [AuthController::class, 'changePassword']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);

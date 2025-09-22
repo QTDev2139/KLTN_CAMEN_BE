@@ -27,7 +27,7 @@ class VerifyOtpMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'OTP Register CamenFood',
+            subject: 'OTP CamenFood',
         );
     }
 
