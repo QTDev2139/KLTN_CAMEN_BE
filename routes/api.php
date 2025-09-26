@@ -1,5 +1,5 @@
 <?php
-
+// status: 200-299: thành công (tại FE trả về try), >=400: thất bại (tại FE trả về catch)
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use ILLuminate\support\Facades\Route;
@@ -29,8 +29,10 @@ Route::group([
 
     Route::post('register/request-otp', [AuthController::class, 'requestOtpForRegister']);
     Route::post('register/verify-otp', [AuthController::class, 'verifyOtpForRegister']);
+    Route::post('register/resend-otp', [AuthController::class, 'resendOtpForRegister']);
     Route::post('forgotten-password/request-otp', [AuthController::class, 'requestOtpForForgottenPassword']);
     Route::post('forgotten-password/verify-otp', [AuthController::class, 'verifyOtpForForgottenPassword']);
+    Route::post('forgotten-password/resend-otp', [AuthController::class, 'resendOtpForForgottenPassword']);
     Route::post('forgotten-password/reset-password', [AuthController::class, 'resetPassword']);
     Route::post('change-password', [AuthController::class, 'changePassword']);
     Route::post('login', [AuthController::class, 'login']);
