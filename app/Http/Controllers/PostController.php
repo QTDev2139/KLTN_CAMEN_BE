@@ -21,7 +21,7 @@ class PostController extends Controller
                 'user:id,name',
                 'language:id,code'
             ])
-            ->latest('id')
+            ->orderBy('id', 'desc')
             ->get();
 
         return PostResource::collection($posts);
@@ -48,7 +48,7 @@ class PostController extends Controller
         if ($request->hasFile('thumbnail')) {
             $file = $request->file('thumbnail');
             $file_name = time() . '_' . $file->getClientOriginalName();
-            $thumbnail = $file->storeAs('image', $file_name, 'public');
+            $thumbnail = $file->storeAs('post_img', $file_name, 'public');
         }
 
         $validated = $request->safe()->only('languages_id', 'title', 'slug', 'content', 'meta_title', 'meta_description', 'translation_key');
@@ -107,7 +107,7 @@ class PostController extends Controller
 
             $file = $request->file('thumbnail');
             $file_name = time() . '_' . $file->getClientOriginalName();
-            $thumbnail = $file->storeAs('image', $file_name);
+            $thumbnail = $file->storeAs('post_img', $file_name);
         }
 
         $post->update([
