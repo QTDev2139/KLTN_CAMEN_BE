@@ -59,7 +59,7 @@ class AuthController extends Controller
         ], now()->addMinutes(20));
 
         // Gửi mail
-        $Mail = Mail::to($email)->send(new VerifyOtpMail($otp));
+        $Mail = Mail::to($email)->queue(new VerifyOtpMail($otp));
 
         return response()->json(['message' => 'OTP đã được gửi đến email'], 200);
     }
@@ -80,7 +80,7 @@ class AuthController extends Controller
         Cache::put("register:otp:$email", $merged, now()->addMinutes(2));
 
         // Gửi mail
-        $Mail = Mail::to($email)->send(new VerifyOtpMail($otp));
+        $Mail = Mail::to($email)->queue(new VerifyOtpMail($otp));
 
         return response()->json(['message' => 'OTP đã được gửi đến email'], 200);
     }
@@ -135,7 +135,7 @@ class AuthController extends Controller
         ], now()->addMinutes(20));
 
         // Gửi mail
-        $Mail = Mail::to($email)->send(new VerifyOtpMail($otp));
+        $Mail = Mail::to($email)->queue(new VerifyOtpMail($otp));
         return response()->json(['message' => 'OTP đã được gửi đến email'], 200);
     }
     public function resendOtpForForgottenPassword(StoreAuthRequest $request)
@@ -151,7 +151,7 @@ class AuthController extends Controller
         Cache::put("forget_password:otp:$email", ['otp_hash' => Hash::make($otp)], now()->addMinutes(2));
 
         // Gửi mail
-        $Mail = Mail::to($email)->send(new VerifyOtpMail($otp));
+        $Mail = Mail::to($email)->queue(new VerifyOtpMail($otp));
         return response()->json(['message' => 'OTP đã được gửi đến email'], 200);
     }
     public function verifyOtpForForgottenPassword(StoreAuthRequest $request)
@@ -192,7 +192,7 @@ class AuthController extends Controller
         $cached = Cache::get("password:reset_token:$resetToken");
 
         if (!$cached) {
-            return response()->json(['message' => 'Token không hợp lệ hoặc đã hết hạn'], 410);
+            return response()->json(['message' => 'Vui lòng thực hiện lại thao tác'], 410);
         }
 
         $email = $cached['email'];

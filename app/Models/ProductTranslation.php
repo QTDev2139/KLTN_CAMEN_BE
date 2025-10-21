@@ -12,7 +12,6 @@ class ProductTranslation extends Model
         'name',
         'slug',
         'description',
-        'ingredient',
         'nutrition_info',
         'usage_instruction',
         'reason_to_choose',

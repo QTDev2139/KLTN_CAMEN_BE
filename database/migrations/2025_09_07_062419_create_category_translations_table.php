@@ -11,21 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_translations', function (Blueprint $table) {
+        Schema::create('category_translations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug');
-            // $table->text('short_description');
-            $table->text('description');
-            $table->text('nutrition_info'); // Giá trị dinh dưỡng
-            $table->text('usage_instruction'); // HDSD
-            $table->text('reason_to_choose'); // Lý do chọn sản phẩm
-
-            $table->unsignedBigInteger('product_id');
+            
             $table->unsignedBigInteger('language_id');
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('language_id')->references('id')->on('languages')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
+            
             $table->timestamps();
+            
         });
     }
 
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_translations');
+        Schema::dropIfExists('category_translations');
     }
 };

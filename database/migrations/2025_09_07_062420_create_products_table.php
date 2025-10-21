@@ -15,15 +15,14 @@ return new class extends Migration
             $table->id();
             // $table->decimal('base_price');
             $table->boolean('is_active')->default(true);
-            $table->decimal('price');
-            // $table->string('product_img');
-            $table->decimal('compare_at_price'); // Giá khuyến mãi
+            $table->float('price');
+            $table->float('compare_at_price'); // Giá khuyến mãi
             $table->integer('stock_quantity'); // số lượng tồn
             $table->string('origin')->default("Việt nam");
-            $table->decimal('expiry_months')->default(12); // Hạn sử dụng tính theo tháng
-            $table->decimal('quantity_per_pack'); // Số lượng mỗi combo
+            $table->integer('quantity_per_pack'); // Số lượng mỗi combo
             $table->string('shipping_from')->default("TP. Hồ Chí Minh");
-            
+            $table->enum('type', ['domestic', 'export'])->default('domestic'); // Cột type chỉ có thể nhận 1 trong 2 giá trị đó
+
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
