@@ -14,21 +14,9 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::insert([
-            [
-                'name' => 'sản phẩm',
-                'slug' => 'san-pham',
-                'language_id' => 1,
-            ],
-            [
-                'name' => 'Combo 3 gói',
-                'slug' => 'combo-3-goi',
-                'language_id' => 1,
-            ],
-            [
-                'name' => 'Combo 10 gói',
-                'slug' => 'combo-10-goi',
-                'language_id' => 1,
-            ],
+            ['id' => 1],
+            ['id' => 2],
+            ['id' => 3],
         ]);
     }
 }

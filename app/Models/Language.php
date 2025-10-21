@@ -14,14 +14,14 @@ class Language extends Model
 
     // 1 Language -> n Post
     public function posts(): HasMany{
-        return $this -> hasMany(Post::class, 'languages_id');
+        return $this -> hasMany(Post::class, 'language_id');
     }
-    // 1 Language -> n Category
+    // 1 Language -> n CategoryTranslations
     public function categories(): HasMany{
-        return $this -> hasMany(Category::class, 'languages_id');
+        return $this -> hasMany(CategoryTranslation::class, 'language_id');
     }
     // 1 Language -> n ProductTranslation
     public function product_translations(): HasMany{
-        return $this -> hasMany(ProductTranslation::class, 'languages_id');
+        return $this -> hasMany(ProductTranslation::class, 'language_id');
     }
 }

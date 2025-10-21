@@ -15,27 +15,51 @@ class ProductResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'                   => $this->id,
+            'is_active'            => $this->is_active,
             'price'                => $this->price,
             'compare_at_price'     => $this->compare_at_price,
+            'stock_quantity'       => $this->stock_quantity,
+            'origin'               => $this->origin,
+            'quantity_per_pack'    => $this->quantity_per_pack,
+            'type'                 => $this->type,
             'shipping_from'        => $this->shipping_from,
+            'category_id'          => $this->category_id,
             'product_translations' => $this->whenLoaded('product_translations', function () {
-                $p_tran = $this->product_translations->first();
-                return $p_tran ? [
-                    'id'          => $p_tran->id,
-                    'language_id' => $p_tran->language_id,
-                    'name'        => $p_tran->name,
-                    'slug'        => $p_tran->slug,
-                    'description' => $p_tran->description,
-                ] : null;
+                return $this->product_translations
+                    // tùy chọn: sắp xếp theo language_id hoặc name
+                    ->sortBy('language_id')
+                    ->values()
+                    ->map(function ($t) {
+                        return [
+                            'id'                => $t->id,
+                            'language_id'       => $t->language_id,
+                            'name'              => $t->name,
+                            'slug'              => $t->slug,
+                            'description'       => $t->description,
+                            'nutrition_info'    => $t->nutrition_info,
+                            'usage_instruction' => $t->usage_instruction,
+                            'reason_to_choose'  => $t->reason_to_choose,
+                        ];
+                    });
             }),
 
+
             'product_images' => $this->whenLoaded('product_images', function () {
-                $cover = $this->product_images->sortBy('sort_order')->first();
-                return $cover ? [
-                    'id'        => $cover->id,
-                    'image_url' => $cover->image_url,
-                ] : null;
+                return $this->product_images
+                    ->sortBy('sort_order')
+                    ->values()
+                    ->map(function ($img) {
+                        return [
+                            'id'         => $img->id,
+                            'sort_order' => $img->sort_order,
+                            'image_url'  => $img->image_url
+                                ? asset('storage/' . $img->image_url)   // hoặc Storage::url(...)
+                                : null,
+                        ];
+                    });
             }),
+
 
         ];
     }
