@@ -9,18 +9,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     protected $fillable = [
-        'id',
-        'name',
-        'slug',
-        'languages_id',
+        'id',   
     ];
 
-    //n Categories -> 1 Languages
-    public function language(): BelongsTo{
-        return $this -> belongsTo(Language::class, 'languages_id');
-    } 
     // 1 Category -> n Products
     public function products(): HasMany{
         return $this -> hasMany(Product::class, 'category_id');
+    }
+    // 1 Category -> n CategoryTranslation
+    public function categoryTranslation(): HasMany{
+        return $this -> hasMany(CategoryTranslation::class, 'category_id');
     }
 }
