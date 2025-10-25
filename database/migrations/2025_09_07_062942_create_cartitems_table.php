@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('cartitems', function (Blueprint $table) {
             $table->id();
             $table->integer('qty');
-            $table->decimal('unit_price');
+            $table->decimal('unit_price', 10, 2);
+            $table->decimal('subtotal', 10, 2);
+
             $table->unsignedBigInteger('cart_id');
-            $table->unsignedBigInteger('product_id');
             $table->foreign('cart_id')->references('id')->on('carts')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });
     }
