@@ -29,14 +29,16 @@ Route::prefix('posts')->group(function () {
     Route::get('/lang/{code}/key/{key}', [PostController::class, 'showByLangAndKey']); // Bài viết theo ngôn ngữ + key
 });
 Route::prefix('product')->group(function () {
-    Route::get('/{lang}', [ProductController::class, 'index']);           // Danh sách sản phẩm
-    Route::get('/slug/{slug}/lang/{lang}', [ProductController::class, 'showProductToCategory']);           // Danh sách sản phẩm theo category
+    Route::get('/{lang}', [ProductController::class, 'index']);                 // Danh sách sản phẩm
+    Route::get('/slug/{slug}/lang/{lang}', [ProductController::class, 'showProductByCategory']);           // Danh sách sản phẩm theo category
+    Route::get('/id/{id}', [ProductController::class, 'showProductById']);           // Danh sách sản phẩm theo id
     Route::get('/{slug}/lang/{lang}', [ProductController::class, 'show']);           // Chi tiết sản phẩm
-    Route::post('/', [ProductController::class, 'store']);           // Tạo sản phẩm
-    Route::delete('/{id}', [ProductController::class, 'destroy']);           // Xóa sản phẩm
+    Route::put('/{id}', [ProductController::class, 'update']);                      // Cập nhật sản phẩm
+    Route::post('/', [ProductController::class, 'store']);                      // Tạo sản phẩm
+    Route::delete('/{id}', [ProductController::class, 'destroy']);              // Xóa sản phẩm
 });
 Route::prefix('category')->group(function () {
-    Route::get('/{lang}', [CategoryController::class, 'index']);           // Danh sách sản phẩm
+    Route::get('/{lang}', [CategoryController::class, 'index']);                // Danh sách sản phẩm
 });
 
 // ====================

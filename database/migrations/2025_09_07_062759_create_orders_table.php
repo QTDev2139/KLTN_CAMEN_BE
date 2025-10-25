@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('status');
-            $table->decimal('subtotal');
-            $table->decimal('discount_total');
-            $table->decimal('grand_total');
-            $table->text('note');
+            $table->string('code')->unique();
+            $table->enum('status', ['pending', 'paid', 'processing', 'shipped', 'completed', 'cancelled'])->default('pending');
+            $table->decimal('subtotal', 10, 2)->default(0);
+            $table->decimal('discount_total', 10, 2)->default(0); // Tổng số tiền sau giảm giá
+            $table->decimal('grand_total', 10, 2)->default(0); // Tổng số tiền cuối cùng 
+            $table->enum('payment_method', ['cod', 'vnpay', 'momo'])->default('cod');
+            $table->json('shipping_address');
+            $table->text('note')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->timestamps(); 
         });
     }
 

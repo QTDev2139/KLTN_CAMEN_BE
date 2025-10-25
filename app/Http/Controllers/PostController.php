@@ -101,7 +101,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $thumbnail = null;
-
+        
         if ($request->hasFile('thumbnail')) {
             Storage::delete($post->thumbnail);
 
