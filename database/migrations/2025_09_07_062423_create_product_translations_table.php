@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->text('nutrition_info'); // Giá trị dinh dưỡng
             $table->text('usage_instruction'); // HDSD
-            $table->text('reason_to_choose'); // Lý do chọn sản phẩm
+            $table->text('reason_to_choose')->nullable(); // Lý do chọn sản phẩm
 
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('language_id');
