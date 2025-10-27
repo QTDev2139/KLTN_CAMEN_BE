@@ -15,10 +15,10 @@ class Product extends Model
         'compare_at_price',
         'stock_quantity',
         'origin',
-        'expiry_months',
         'quantity_per_pack',
         'shipping_from',
         'category_id',
+        'type'
 
     ];
 

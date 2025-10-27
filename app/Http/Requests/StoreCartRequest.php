@@ -21,9 +21,21 @@ class StoreCartRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'product_id' => 'required|exists:products,id',
-            'qty' => 'required|integer|min:1'
-        ];
+        if ($this->isMethod('post')) {
+            // thêm vào giỏ
+            return [
+                'product_id' => ['required', 'exists:products,id'],
+                'qty'        => ['required', 'integer', 'min:1'],
+            ];
+        }
+
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            // cập nhật giỏ
+            return [
+                'qty' => ['required', 'integer', 'min:1'],
+            ];
+        }
+
+        return [];
     }
 }

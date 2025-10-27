@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCartRequest;
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Cartitem;
 use App\Models\Product;
@@ -14,20 +15,24 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($lang)
     {
         $user = Auth::user();
         if (!$user) {
             return response()->json(['message' => 'Vui lòng đăng nhập để xem giỏ hàng'], 401);
         }
 
-        $cart = Cart::with(['cartitems.product.product_translations', 'cartitems.product.product_images'])
+        $cart = Cart::with([
+            'cartitems.product.product_translations' => fn($language) => $language->whereRelation('language', 'code', $lang),
+            'cartitems.product.product_images'
+        ])
             ->where('user_id', $user->id)
             ->first();
         if (!$cart) {
             return response()->json(['message' => 'Giỏ hàng trống'], 200);
         }
-        return response()->json($cart);
+        // FIX: Dùng make() thay vì collection()
+        return CartResource::make($cart);
     }
 
     /**
