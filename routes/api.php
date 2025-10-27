@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
@@ -39,6 +40,12 @@ Route::prefix('product')->group(function () {
 });
 Route::prefix('category')->group(function () {
     Route::get('/{lang}', [CategoryController::class, 'index']);                // Danh sách sản phẩm
+});
+Route::prefix('cart')->group(function () {
+    Route::get('/{lang}', [CartController::class, 'index']);              
+    Route::post('/', [CartController::class, 'store']);              
+    Route::put('/{id}', [CartController::class, 'update']);              
+    Route::delete('/{id}', [CartController::class, 'destroy']);              
 });
 
 // ====================

@@ -41,16 +41,29 @@ class CategoryTranslationSeeder extends Seeder
                 'name' => '3-pack Combo',
                 'slug' => 'combo-3-pack',
             ],
-
-            // Category 3: Combo 10 gói
+            // Category 3: Combo 6 gói
             [
                 'category_id' => 3,
+                'language_id' => 1,
+                'name' => 'Combo 3 gói',
+                'slug' => 'combo-3-goi',
+            ],
+            [
+                'category_id' => 3,
+                'language_id' => 2,
+                'name' => '3-pack Combo',
+                'slug' => 'combo-3-pack',
+            ],
+
+            // Category 4: Combo 10 gói
+            [
+                'category_id' => 4,
                 'language_id' => 1,
                 'name' => 'Combo 10 gói',
                 'slug' => 'combo-10-goi',
             ],
             [
-                'category_id' => 3,
+                'category_id' => 4,
                 'language_id' => 2,
                 'name' => '10-pack Combo',
                 'slug' => 'combo-10-pack',
