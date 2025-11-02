@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -46,6 +49,13 @@ Route::prefix('cart')->group(function () {
     Route::post('/', [CartController::class, 'store']);              
     Route::put('/{id}', [CartController::class, 'update']);              
     Route::delete('/{id}', [CartController::class, 'destroy']);              
+});
+Route::prefix('coupon')->group(function () {
+    Route::get('/', [CouponController::class, 'index']);              
+    Route::get('/active-coupons', [CouponController::class, 'getActiveCoupons']);              
+    Route::post('/', [CouponController::class, 'store']);              
+    Route::put('/{id}', [CouponController::class, 'update']);              
+    Route::delete('/{id}', [CouponController::class, 'destroy']);              
 });
 
 // ====================
@@ -93,4 +103,16 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', UserController::class)
         ->only(['index', 'show', 'store', 'update', 'destroy', 'updateRole']);
     Route::post('/update-role/{role}', [UserController::class, 'updateRole']);
+
+    // Quản lý đơn hàng
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::post('/orders', [OrderController::class, 'store']);
+    Route::match(['put','patch'], '/orders/{id}', [OrderController::class, 'update']);
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+
+});
+Route::prefix('payment')->group(function () {
+    Route::post('/vnpay', [PaymentController::class, 'vnpay_payment']);
+    Route::get('/vnpay/callback', [PaymentController::class, 'vnpay_callback']);
+    Route::get('/vnpay/status/{order_id}', [PaymentController::class, 'vnpay_status']);
 });

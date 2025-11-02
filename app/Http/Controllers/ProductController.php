@@ -81,9 +81,9 @@ class ProductController extends Controller
         }
         // 1. Tạo product
         $product = Product::create([
-            'is_active'         => $data['is_active']         ?? true,
+            'is_active'         => $data['is_active'],
             'price'             => $data['price'],
-            'compare_at_price'  => $data['compare_at_price']  ?? null,
+            'compare_at_price'  => $data['compare_at_price'],
             'stock_quantity'    => $data['stock_quantity'],
             'origin'            => $data['origin'],
             'quantity_per_pack' => $data['quantity_per_pack'],
@@ -98,8 +98,8 @@ class ProductController extends Controller
                 'name'              => $p_tran['name'],
                 'slug'              => $p_tran['slug'],
                 'description'       => $p_tran['description'],
-                'nutrition_info'    => $p_tran['nutrition_info']    ?? null,
-                'usage_instruction' => $p_tran['usage_instruction'] ?? null,
+                'nutrition_info'    => $p_tran['nutrition_info'],
+                'usage_instruction' => $p_tran['usage_instruction'],
                 'reason_to_choose'  => $p_tran['reason_to_choose']  ?? null,
             ]);
         }

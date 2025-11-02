@@ -19,10 +19,14 @@ return new class extends Migration
             $table->decimal('discount_total', 10, 2)->default(0); // Tổng số tiền sau giảm giá
             $table->decimal('grand_total', 10, 2)->default(0); // Tổng số tiền cuối cùng 
             $table->enum('payment_method', ['cod', 'vnpay', 'momo'])->default('cod');
+            $table->enum('payment_status', ['unpaid', 'paid', 'failed', 'refunded'])->default('unpaid');
+            $table->string('transaction_code')->nullable();
             $table->json('shipping_address');
             $table->text('note')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('coupon_id')->nullable();
+            $table->foreign('coupon_id')->references('id')->on('coupons')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps(); 
         });
     }

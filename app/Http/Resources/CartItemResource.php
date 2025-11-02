@@ -20,7 +20,6 @@ class CartItemResource extends JsonResource
             'unit_price' => $this->unit_price,
             'subtotal' => $this->subtotal,
             'product_id' => $this->product_id,
-            // FIX: product_translations là collection, cần dùng first()
             'product_name' => $this->product?->product_translations?->first()?->name ?? 'N/A',
             'product_image' => asset('storage/' . $this->product?->product_images?->first()?->image_url)
 
