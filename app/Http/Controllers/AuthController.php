@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAuthRequest;
 use App\Mail\VerifyOtpMail;
 use App\Models\User;
+use App\Http\Resources\UserResource;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -241,18 +242,19 @@ class AuthController extends Controller
 
     public function profile()
     {
-        try {
-            return response()->json(Auth::guard('api')->user());
-        } catch (JWTException $exception) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $user = Auth::guard('api')->user();
+        if (!$user) {
+            return response()->json(['error' => 'Đăng nhập thất bại'], 401);
         }
+        $user = User::with('role')->find($user->id);
+        return UserResource::make($user);
     }
 
     public function logout()
     {
         Auth::guard('api')->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Đăng xuất thành công']);
     }
 
     // refresh Trả về token mới với thời gian sống mới

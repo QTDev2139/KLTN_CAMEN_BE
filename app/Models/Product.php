@@ -39,4 +39,9 @@ class Product extends Model
     public function cartitems(): HasMany {
         return $this -> hasMany(Cartitem::class, 'product_id'); 
     }
+
+    // 1 Product -> n OrderItems
+    public function orderitems(): HasMany {
+        return $this -> hasMany(OrderItem::class, 'product_id');
+    }
 }
