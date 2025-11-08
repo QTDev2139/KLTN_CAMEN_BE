@@ -53,6 +53,7 @@ Route::prefix('cart')->group(function () {
 Route::prefix('coupon')->group(function () {
     Route::get('/', [CouponController::class, 'index']);              
     Route::get('/active-coupons', [CouponController::class, 'getActiveCoupons']);              
+    Route::get('/{id}', [CouponController::class, 'show']);              
     Route::post('/', [CouponController::class, 'store']);              
     Route::put('/{id}', [CouponController::class, 'update']);              
     Route::delete('/{id}', [CouponController::class, 'destroy']);              
@@ -106,8 +107,9 @@ Route::middleware('auth:api')->group(function () {
 
     // Quản lý đơn hàng
     Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::post('/orders', [OrderController::class, 'store']);
-    Route::match(['put','patch'], '/orders/{id}', [OrderController::class, 'update']);
+    Route::put('/orders/{id}', [OrderController::class, 'update']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
 });

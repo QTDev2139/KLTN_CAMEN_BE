@@ -215,7 +215,7 @@ class AuthController extends Controller
         $newPassword = $request->input('newPassword');
         $user = $request->user();
         if (!$user) {
-            return response()->json(['message' => 'Không được phép'], 401);
+            return response()->json(['message' => 'Không được phép'], 407);
         }
         if ($user->role_id != 4) {
             return response()->json(['message' => 'Chỉ khách hàng mới được đổi mật khẩu'], 403);
@@ -232,7 +232,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
         if (! $token = Auth::guard('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Tài khoản hoặc mật khẩu không chính xác'], 407);
         }
 
         $refreshToken = $this->createReFreshToken();
@@ -244,7 +244,7 @@ class AuthController extends Controller
     {
         $user = Auth::guard('api')->user();
         if (!$user) {
-            return response()->json(['error' => 'Đăng nhập thất bại'], 401);
+            return response()->json(['error' => 'Đăng nhập thất bại'], 407);
         }
         $user = User::with('role')->find($user->id);
         return UserResource::make($user);
@@ -281,7 +281,7 @@ class AuthController extends Controller
 
             return $this->respondWithToken($token, $refreshToken);
         } catch (Exception $exception) {
-            return response()->json(['error' => 'Refresh Token Invalid'], 401);
+            return response()->json(['error' => 'Refresh Token Invalid'], 407);
         }
     }
 
