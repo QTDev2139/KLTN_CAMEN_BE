@@ -24,7 +24,6 @@ class PaymentController extends Controller
         // Cấu hình VNPay
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
         $vnp_Returnurl = "https://nonsignificantly-spiflicated-xiao.ngrok-free.dev/api/payment/vnpay/callback";
-
         $vnp_TmnCode = "ZIGCWE3V";
         $vnp_HashSecret = "CWPZ26DKIC1VFQXK5NWGW8MRECDJP8SW";
 
