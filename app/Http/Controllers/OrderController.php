@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Models\Cart;
 use App\Models\Cartitem;
 use App\Models\Coupon;
@@ -19,26 +20,38 @@ class OrderController extends Controller
      * GET /api/orders
      * Danh sách đơn của user đăng nhập (mới nhất trước)
      */
-    public function index(Request $request)
+    public function index()
     {
         $user = Auth::user();
         if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
         }
 
-        $perPage = (int)($request->query('per_page', 10));
         $orders = Order::with([
             'orderItems.product.product_images',
             'coupon',
         ])
-            ->where('user_id', $user->id)
             ->orderByDesc('id')
-            ->paginate($perPage);
+            ->get();
 
-        return response()->json([
-            'message' => 'Lấy danh sách đơn hàng thành công',
-            'data' => $orders,
-        ]);
+        return response()->json($orders);
+    }
+
+    public function show($id)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
+        }
+
+        $order = Order::with([
+            'orderItems.product.product_images',
+            'orderItems.product.product_translations',
+            'coupon',
+        ])->where('id', $id)->firstOrFail();
+
+        return OrderResource::make($order);
+        // return response()->json($order);
     }
 
     /**
@@ -49,7 +62,7 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
         }
 
         $validated = $request->validate([
@@ -108,20 +121,23 @@ class OrderController extends Controller
             } else {
                 $discountTotal = min((float)$coupon->discount_value, $subtotal);
             }
+            $coupon->update([
+                'usage_count' => DB::raw('usage_count + 1'),
+            ]);
         }
 
         $grandTotal = max($subtotal - $discountTotal, 0);
 
         // Tạo đơn + items trong transaction
         $order = DB::transaction(function () use ($user, $validated, $coupon, $subtotal, $discountTotal, $grandTotal, $cart, $paymentMethod) {
-            $code = 'ORD' . now()->format('YmdHis') . strtoupper(Str::random(4));
+            $code = 'CM' . now()->format('YmdHis') . strtoupper(Str::random(4));
 
             $order = Order::create([
                 'code'            => $code,
                 'status'          => 'pending',
                 'payment_method'  => $paymentMethod,
-                'payment_status'  => 'unpaid', // ✅ Mặc định unpaid
-                'transaction_code' => null, // ✅ Null khi tạo, cập nhật sau khi thanh toán
+                'payment_status'  => 'unpaid',
+                'transaction_code' => null,
                 'subtotal'        => $subtotal,
                 'discount_total'  => $discountTotal,
                 'grand_total'     => $grandTotal,
@@ -166,38 +182,30 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
         }
 
         $validated = $request->validate([
-            'status' => ['required', 'in:pending,processing,paid,completed,cancelled,failed'],
-            'note' => ['nullable', 'string', 'max:1000'],
+            'status' => ['required', 'in:pending,processing,shipped,completed,cancelled,failed'],
+            // 'note' => ['nullable', 'string', 'max:1000'],
         ]);
 
-        $order = Order::where('id', $id)
-            ->where('user_id', $user->id)
-            ->firstOrFail();
+        $order = Order::findOrFail($id);
 
-        // Rule đơn giản: user chỉ được chuyển từ pending -> cancelled hoặc cập nhật note
+        if ($validated['status'] !== $order->status && $validated['status'] === 'completed') {
+            $order->status = $validated['status'];
+            $order->payment_status = 'paid';
+            $order->save();
+            return response()->json(['message' => 'Cập nhật đơn hàng thành công']);
+        }
         if ($validated['status'] !== $order->status) {
-            if ($order->status !== 'pending' || $validated['status'] !== 'cancelled') {
-                return response()->json(['message' => 'Không thể cập nhật trạng thái đơn này'], 422);
-            }
-            $order->status = 'cancelled';
-            $order->payment_status = $order->payment_status === 'paid' ? 'paid' : 'failed';
+            $order->status = $validated['status'];
+            $order->save();
+            return response()->json(['message' => 'Cập nhật đơn hàng thành công']);
         }
 
-        if (array_key_exists('note', $validated)) {
-            $order->note = $validated['note'];
-        }
-
-        $order->save();
-
-        return response()->json([
-            'message' => 'Cập nhật đơn hàng thành công',
-            'data' => $order->fresh()->load(['orderItems.product.product_images', 'coupon']),
-        ]);
     }
+
 
     /**
      * DELETE /api/orders/{id}
@@ -207,7 +215,7 @@ class OrderController extends Controller
     {
         $user = Auth::user();
         if (!$user) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
         }
 
         $order = Order::where('id', $id)

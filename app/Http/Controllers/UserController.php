@@ -37,7 +37,7 @@ class UserController extends Controller
         $role_id = $request->input('role_id');
         if(User::where('email', $email)->exists()) {
             return response()->json([
-                "message" => "Email đã được sử dụng",
+                "message" => "Email đã được sử dụngg",
             ], 409);
         }
 
