@@ -43,6 +43,9 @@ class ProductResource extends JsonResource
                         ];
                     });
             }),
+            'reviews' => $this->whenLoaded('reviews', function () {
+                return ReviewResource::collection($this->reviews->sortByDesc('rating')->values());
+            }),
 
 
             'product_images' => $this->whenLoaded('product_images', function () {

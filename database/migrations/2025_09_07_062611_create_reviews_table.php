@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->integer('rating');
             $table->text('comment');
+            $table->json('images')->nullable()->after('comment');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('order_item_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('order_item_id')->references('id')->on('orderitems')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

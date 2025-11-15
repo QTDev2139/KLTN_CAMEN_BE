@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\OrderResource;
 use App\Models\Cart;
-use App\Models\Cartitem;
+use App\Models\CartItem;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -20,6 +20,7 @@ class OrderController extends Controller
      * GET /api/orders
      * Danh sách đơn của user đăng nhập (mới nhất trước)
      */
+    // Quản lý đơn hàng tất cả khách hàng
     public function index()
     {
         $user = Auth::user();
@@ -51,9 +52,29 @@ class OrderController extends Controller
         ])->where('id', $id)->firstOrFail();
 
         return OrderResource::make($order);
-        // return response()->json($order);
     }
+    // Người dùng Quản lý đơn hàng của mình
+    public function userOrders($lang)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
+        }
 
+        $orders = Order::with([
+            'orderItems.product.product_images',
+            'orderItems.product.product_translations' => fn($q) => $q->whereRelation('language', 'code', $lang),
+            'coupon',
+            // chỉ load review của user hiện tại
+            'orderItems.review' => fn($q) => $q->where('user_id', $user->id),
+        ])
+            ->where('user_id', $user->id)
+            ->orderByDesc('id')
+            ->get();
+
+        return OrderResource::collection($orders);
+    }
+    
     /**
      * POST /api/orders
      * Tạo đơn hàng từ giỏ hiện tại (có thể đính kèm coupon_code)
@@ -83,7 +104,7 @@ class OrderController extends Controller
         }
 
         // Tính subtotal từ cart items
-        $subtotal = $cart->cartitems->sum(function (Cartitem $ci) {
+        $subtotal = $cart->cartitems->sum(function (CartItem $ci) {
             // ưu tiên unit_price trên cart item; fallback sang product->price nếu thiếu
             $unit = $ci->unit_price ?? optional($ci->product)->price ?? 0;
             return $unit * (int)$ci->qty;
@@ -203,7 +224,6 @@ class OrderController extends Controller
             $order->save();
             return response()->json(['message' => 'Cập nhật đơn hàng thành công']);
         }
-
     }
 
 

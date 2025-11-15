@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -45,18 +46,18 @@ Route::prefix('category')->group(function () {
     Route::get('/{lang}', [CategoryController::class, 'index']);                // Danh sách sản phẩm
 });
 Route::prefix('cart')->group(function () {
-    Route::get('/{lang}', [CartController::class, 'index']);              
-    Route::post('/', [CartController::class, 'store']);              
-    Route::put('/{id}', [CartController::class, 'update']);              
-    Route::delete('/{id}', [CartController::class, 'destroy']);              
+    Route::get('/{lang}', [CartController::class, 'index']);
+    Route::post('/', [CartController::class, 'store']);
+    Route::put('/{id}', [CartController::class, 'update']);
+    Route::delete('/{id}', [CartController::class, 'destroy']);
 });
 Route::prefix('coupon')->group(function () {
-    Route::get('/', [CouponController::class, 'index']);              
-    Route::get('/active-coupons', [CouponController::class, 'getActiveCoupons']);              
-    Route::get('/{id}', [CouponController::class, 'show']);              
-    Route::post('/', [CouponController::class, 'store']);              
-    Route::put('/{id}', [CouponController::class, 'update']);              
-    Route::delete('/{id}', [CouponController::class, 'destroy']);              
+    Route::get('/', [CouponController::class, 'index']);
+    Route::get('/active-coupons', [CouponController::class, 'getActiveCoupons']);
+    Route::get('/{id}', [CouponController::class, 'show']);
+    Route::post('/', [CouponController::class, 'store']);
+    Route::put('/{id}', [CouponController::class, 'update']);
+    Route::delete('/{id}', [CouponController::class, 'destroy']);
 });
 
 // ====================
@@ -107,14 +108,24 @@ Route::middleware('auth:api')->group(function () {
 
     // Quản lý đơn hàng
     Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/user/lang/{lang}', [OrderController::class, 'userOrders']);
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::put('/orders/{id}', [OrderController::class, 'update']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
+    Route::prefix('payment')->group(function () {
+        Route::post('/vnpay', [PaymentController::class, 'vnpay_payment']);
+        Route::get('/vnpay/status/{order_id}', [PaymentController::class, 'vnpay_status']);
+    });
+    
+    Route::prefix('review')->group(function () {
+        Route::post('/', [ReviewController::class, 'store']);
+        Route::get('/', [ReviewController::class, 'index']);
+        Route::delete('/{id}', [ReviewController::class, 'destroy']);
+    });
+
 });
 Route::prefix('payment')->group(function () {
-    Route::post('/vnpay', [PaymentController::class, 'vnpay_payment']);
     Route::get('/vnpay/callback', [PaymentController::class, 'vnpay_callback']);
-    Route::get('/vnpay/status/{order_id}', [PaymentController::class, 'vnpay_status']);
 });
