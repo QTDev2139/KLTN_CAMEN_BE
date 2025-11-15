@@ -22,7 +22,6 @@ class CartItemResource extends JsonResource
             'product_id' => $this->product_id,
             'product_name' => $this->product?->product_translations?->first()?->name ?? 'N/A',
             'product_image' => asset('storage/' . $this->product?->product_images?->first()?->image_url)
-
         ];
     }
 }
