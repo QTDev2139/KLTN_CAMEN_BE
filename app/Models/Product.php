@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Review;
 
 class Product extends Model
 {
@@ -37,11 +38,29 @@ class Product extends Model
 
     // 1 Product -> n CartItems
     public function cartitems(): HasMany {
-        return $this -> hasMany(Cartitem::class, 'product_id'); 
+        return $this -> hasMany(CartItem::class, 'product_id'); 
     }
 
     // 1 Product -> n OrderItems
     public function orderitems(): HasMany {
         return $this -> hasMany(OrderItem::class, 'product_id');
     }
+
+    // 1 Products -> n Reviews
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'product_id');
+    }
+
+    // // Tính rating trung bình
+    // public function averageRating()
+    // {
+    //     return $this->reviews()->avg('rating');
+    // }
+
+    // // Đếm số lượng review
+    // public function reviewsCount()
+    // {
+    //     return $this->reviews()->count();
+    // }
 }

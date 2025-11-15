@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
-use App\Models\Cartitem;
+use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +59,7 @@ class CartController extends Controller
         }
 
         // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
-        $existingCartItem = Cartitem::where('cart_id', $cart->id)
+        $existingCartItem = CartItem::where('cart_id', $cart->id)
             ->where('product_id', $product->id)
             ->first();
 
@@ -108,7 +108,7 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        $cartItem = Cartitem::findOrFail($id);
+        $cartItem = CartItem::findOrFail($id);
         $cartItem->delete();
 
         return response()->json(['message' => 'Xóa sản phẩm khỏi giỏ hàng thành công'], 200);

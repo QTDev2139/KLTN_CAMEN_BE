@@ -50,6 +50,7 @@ class ProductController extends Controller
                 'product_images',
                 // 'product_images' => fn($q) => $q->orderBy('sort_order'),
                 'product_translations' => fn($language) => $language->whereRelation('language', 'code', $lang),
+                'reviews' 
 
             ])
             ->firstOrFail();
