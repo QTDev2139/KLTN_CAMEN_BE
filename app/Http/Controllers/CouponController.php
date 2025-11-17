@@ -66,37 +66,22 @@ class CouponController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreCouponRequest $request, $id)
-    {
-        $coupon = Coupon::findOrFail($id);
-        if ($request->input('end_date') < $request->input('start_date')) {
-            return response()->json(['message' => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu'], 422);
-        }
-
-        $existingCoupon = Coupon::where('code', $request->input('code'))
-            ->where('id', '!=', $coupon->id)
-            ->first();
-        if ($existingCoupon) {
-            return response()->json(['message' => 'Mã coupon đã tồn tại'], 422);
-        }
-
-        $coupon->update($request->validated());
-
-        return response()->json(['message' => 'Cập nhật thành công'], 200);
-    }
+    
     public function updateStatus(Request $request, $id)
     {
         $coupon = Coupon::findOrFail($id);
         $coupon->state = $request->input('state');
+        $coupon->is_active = 1;
         $coupon->save();
 
-        return response()->json(['message' => 'Cập nhật trạng thái thành công'], 200);
+        return response()->json(['message' => 'Duyệt thành công'], 200);
     }
 
-    public function toggleActive(Request $request, $id)
+    public function updateActive(Request $request, $id)
     {
         $coupon = Coupon::findOrFail($id);
         $coupon->is_active = $request->input('is_active');
+        $coupon->reason_end = $request->input('reason_end');
         $coupon->save();
 
         return response()->json(['message' => 'Cập nhật trạng thái hoạt động thành công'], 200);

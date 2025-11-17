@@ -167,6 +167,15 @@ class PaymentController extends Controller
                 'response_code' => $vnp_ResponseCode
             ]);
 
+            $cart = Cart::where('user_id', $order->user_id)
+                ->orderByDesc('id')
+                ->first();
+
+            if ($cart) {
+                $cart->cartitems()->delete();
+                $cart->update(['is_active' => false]);
+            }
+
             return redirect()->away($frontend . '/payment-callback?status=failed&order_id=' . $orderCode . '&code=' . $vnp_ResponseCode);
         }
     }
