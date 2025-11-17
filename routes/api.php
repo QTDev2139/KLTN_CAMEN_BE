@@ -56,7 +56,8 @@ Route::prefix('coupon')->group(function () {
     Route::get('/active-coupons', [CouponController::class, 'getActiveCoupons']);
     Route::get('/{id}', [CouponController::class, 'show']);
     Route::post('/', [CouponController::class, 'store']);
-    Route::put('/{id}', [CouponController::class, 'update']);
+    Route::put('/status/{id}', [CouponController::class, 'updateStatus']);
+    Route::put('/active/{id}', [CouponController::class, 'updateActive']);
     Route::delete('/{id}', [CouponController::class, 'destroy']);
 });
 
