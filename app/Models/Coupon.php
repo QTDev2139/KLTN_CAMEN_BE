@@ -12,6 +12,7 @@ class Coupon extends Model
         'code',
         'discount_type',
         'discount_value',
+        'max_discount_amount',
         'min_order_amount',
         'usage_limit',
         'used_count',
@@ -20,6 +21,8 @@ class Coupon extends Model
         'state',
         'is_active',
         'user_id',
+        'note',
+        'reason_end',
     ];
 
     protected $casts = [
