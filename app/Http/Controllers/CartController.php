@@ -87,7 +87,7 @@ class CartController extends Controller
      */
     public function update(StoreCartRequest $request, string $id)
     {
-        $cartItem = Cartitem::findOrFail($id);
+        $cartItem = CartItem::findOrFail($id);
         $product = $cartItem->product;
 
         // Kiểm tra tồn kho 

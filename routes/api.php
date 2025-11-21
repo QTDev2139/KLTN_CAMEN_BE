@@ -104,8 +104,9 @@ Route::middleware('auth:api')->group(function () {
 
     // Quản lý nhân viên / người dùng
     Route::apiResource('users', UserController::class)
-        ->only(['index', 'show', 'store', 'update', 'destroy', 'updateRole']);
+        ->only(['index', 'store', 'update', 'destroy']);
     Route::post('/update-role/{role}', [UserController::class, 'updateRole']);
+    Route::get('/dsnv/customer', [UserController::class, 'getDsnv']);
 
     // Quản lý đơn hàng
     Route::get('/orders', [OrderController::class, 'index']);
@@ -129,4 +130,31 @@ Route::middleware('auth:api')->group(function () {
 });
 Route::prefix('payment')->group(function () {
     Route::get('/vnpay/callback', [PaymentController::class, 'vnpay_callback']);
+});
+
+
+
+use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\ChatMessageController;
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('chat/rooms/open', [ChatRoomController::class, 'openRoom']);
+
+    // Danh sách phòng chat của user hiện tại
+    Route::get('chat/rooms', [ChatRoomController::class, 'index']);
+
+    // Mở / tạo phòng chat giữa customer & staff
+    Route::post('chat/rooms/{roomId}/join', [ChatRoomController::class, 'joinRoom']);
+
+    // Xem thông tin 1 room
+    Route::get('chat/rooms/{room}', [ChatRoomController::class, 'show']);
+
+    // Lấy tin nhắn trong room
+    Route::get('chat/rooms/{room}/messages', [ChatMessageController::class, 'index']);
+
+    // Gửi tin nhắn
+    Route::post('chat/rooms/{room}/messages', [ChatMessageController::class, 'store']);
+
+    // Đánh dấu đã đọc (optional)
+    Route::post('chat/rooms/{room}/read', [ChatMessageController::class, 'markAsRead']);
 });
