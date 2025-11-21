@@ -64,23 +64,27 @@ class User extends Authenticatable implements JWTSubject
     }
 
     //n User -> 1 Role
-    public function role(): BelongsTo {
-        return $this -> belongsTo(Role::class, 'role_id');
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     //1 User -> n Post
-    public function posts(): HasMany {
-        return $this -> hasMany(Post::class, 'user_id');
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class, 'user_id');
     }
 
     //1 User -> 1 Cart
-    public function cart(): HasOne {
-        return $this -> hasOne(Cart::class, 'user_id');
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class, 'user_id');
     }
 
     //1 User -> n Coupon
-    public function coupons(): HasMany {
-        return $this -> hasMany(Coupon::class, 'user_id');
+    public function coupons(): HasMany
+    {
+        return $this->hasMany(Coupon::class, 'user_id');
     }
 
     //1 User -> n Reviews
@@ -89,4 +93,20 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Review::class, 'user_id');
     }
 
+
+    // 1 User -> n ChatRooms (as customer or staff)
+    public function customerChatRooms(): HasMany
+    {
+        return $this->hasMany(ChatRoom::class, 'customer_id');
+    }
+
+    public function staffChatRooms(): HasMany
+    {
+        return $this->hasMany(ChatRoom::class, 'staff_id');
+    }
+
+    public function chatMessages(): HasMany
+    {
+        return $this->hasMany(ChatMessage::class, 'sender_id');
+    }
 }

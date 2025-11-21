@@ -53,9 +53,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $User)
+    // Show danh sách nhân viên là customer
+    public function getDsnv()
     {
-        //
+        $users = User::where('role_id', 6)->get();
+        return UserResource::collection($users);
     }
 
     /**
