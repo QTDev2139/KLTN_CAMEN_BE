@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cartitem extends Model
+class CartItem extends Model
 {
     protected $fillable = [
         'qty',
@@ -13,6 +13,8 @@ class Cartitem extends Model
         'cart_id',
         'product_id',
     ];
+
+    protected $table = 'cartitems';
 
     // 1 CartItem -> n Cart
     public function cart()

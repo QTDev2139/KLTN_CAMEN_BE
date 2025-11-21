@@ -131,7 +131,7 @@ class PaymentController extends Controller
             if ($order) {
                 $order->update([
                     'payment_status' => 'paid',
-                    'transaction_code' => $transactionNo, // ✅ Lưu mã giao dịch VNPay
+                    'transaction_code' => $transactionNo, //  Lưu mã giao dịch VNPay
                     'payment_method' => 'vnpay',
                 ]);
             }

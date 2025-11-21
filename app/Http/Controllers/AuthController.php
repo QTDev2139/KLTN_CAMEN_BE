@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAuthRequest;
 use App\Mail\VerifyOtpMail;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Models\ChatRoom;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -235,6 +236,13 @@ class AuthController extends Controller
             return response()->json(['error' => 'Tài khoản hoặc mật khẩu không chính xác'], 407);
         }
 
+        $user = Auth::guard('api')->user();
+
+        if ($user->role_id == 4) {
+            ChatRoom::firstOrCreate([
+                'customer_id' => $user->id,
+            ]);
+        }
         $refreshToken = $this->createReFreshToken();
 
         return $this->respondWithToken($token, $refreshToken);

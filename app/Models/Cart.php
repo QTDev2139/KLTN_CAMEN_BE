@@ -19,6 +19,6 @@ class Cart extends Model
 
     // 1 Cart -> n CartItems
     public function cartitems() {
-        return $this -> hasMany(Cartitem::class, 'cart_id');
+        return $this -> hasMany(CartItem::class, 'cart_id');
     }
 }
