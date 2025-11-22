@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'processing', 'shipped', 'completed', 'cancelled'])->default('pending');
             $table->decimal('subtotal', 10, 2)->default(0);
             $table->decimal('discount_total', 10, 2)->default(0); // Tổng số tiền sau giảm giá
+            $table->decimal('ship_fee', 10, 2)->default(50000);
             $table->decimal('grand_total', 10, 2)->default(0); // Tổng số tiền cuối cùng 
             $table->enum('payment_method', ['cod', 'vnpay', 'momo'])->default('cod');
             $table->enum('payment_status', ['unpaid', 'paid', 'failed', 'refunded'])->default('unpaid');
