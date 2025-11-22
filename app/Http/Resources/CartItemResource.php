@@ -19,7 +19,16 @@ class CartItemResource extends JsonResource
             'qty' => $this->qty,
             'unit_price' => $this->unit_price,
             'subtotal' => $this->subtotal,
-            'product_id' => $this->product_id,
+            // Trả về chỉ id + quantity_per_pack. Nếu relation chưa được load vẫn trả về product_id numeric
+            'product_id' => $this->when($this->relationLoaded('product'), function () {
+                return [
+                    'id' => $this->product->id,
+                    'quantity_per_pack' => $this->product->quantity_per_pack ?? null,
+                ];
+            }, [
+                'id' => $this->product_id,
+                'quantity_per_pack' => null,
+            ]),
             'product_name' => $this->product?->product_translations?->first()?->name ?? 'N/A',
             'product_image' => asset('storage/' . $this->product?->product_images?->first()?->image_url)
         ];

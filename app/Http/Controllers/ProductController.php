@@ -50,7 +50,7 @@ class ProductController extends Controller
                 'product_images',
                 // 'product_images' => fn($q) => $q->orderBy('sort_order'),
                 'product_translations' => fn($language) => $language->whereRelation('language', 'code', $lang),
-                'reviews' 
+                'reviews'
 
             ])
             ->firstOrFail();
@@ -82,7 +82,6 @@ class ProductController extends Controller
         }
         // 1. Tạo product
         $product = Product::create([
-            'is_active'         => $data['is_active'],
             'price'             => $data['price'],
             'compare_at_price'  => $data['compare_at_price'],
             'stock_quantity'    => $data['stock_quantity'],
@@ -126,11 +125,26 @@ class ProductController extends Controller
         $data = $request->validated();
         $product = Product::findOrFail($id);
 
-        // Kiểm tra có gửi ảnh không
-        if (empty($data['product_images']) || count($data['product_images']) === 0) {
+        // Hỗ trợ cả ảnh mới (product_images) và ảnh đã tồn tại (existing_images)
+        $submittedImages = $data['product_images'] ?? [];
+        $existingImages  = $data['existing_images']  ?? [];
+
+        // Tổng số ảnh được gửi (ảnh mới + ảnh đã tồn tại)
+        $total_images_submitted = count($submittedImages) + count($existingImages);
+
+        if ($total_images_submitted === 0) {
             return response()->json([
                 'message' => 'Vui lòng chọn ít nhất một ảnh cho sản phẩm.'
             ], 422);
+        }
+
+        // Kiểm tra ảnh mới (mỗi ảnh mới phải có file hoặc image_url)
+        foreach ($submittedImages as $idx => $p_img) {
+            if (!$request->hasFile("product_images.$idx.image") && empty($p_img['image_url'])) {
+                return response()->json([
+                    'message' => "Ảnh mới #$idx phải có file hoặc image_url."
+                ], 422);
+            }
         }
 
         // Cập nhật bảng product
@@ -163,41 +177,10 @@ class ProductController extends Controller
             );
         }
 
-        // FIXED: Cập nhật product_images
-        $this->handleProductImages($data['product_images'], $request, $product->id);
+        // Xử lý ảnh: xử lý riêng existing và new để không làm lệch index file upload
+        $this->processImagesForUpdate($existingImages, $submittedImages, $request, $product->id);
 
         return response()->json(['message' => 'Cập nhật sản phẩm thành công'], 200);
-    }
-
-    /**
-     * Handle product images for update
-     */
-    private function handleProductImages($productImages, $request, $productId)
-    {
-        $existingImageIds = collect($productImages)->pluck('id')->filter()->toArray();
-
-        // Xóa ảnh cũ không có trong danh sách mới
-        $imagesToDelete = ProductImage::where('product_id', $productId)
-            ->whereNotIn('id', $existingImageIds)
-            ->get();
-
-        foreach ($imagesToDelete as $img) {
-            if ($img->image_url) {
-                Storage::disk('public')->delete($img->image_url);
-            }
-            $img->delete();
-        }
-
-        // Xử lý ảnh mới/cập nhật
-        foreach ($productImages as $idx => $p_img) {
-            if (isset($p_img['id']) && $p_img['id']) {
-                // Cập nhật ảnh đã có
-                $this->updateExistingImage($p_img, $request, $idx);
-            } else {
-                // Tạo ảnh mới
-                $this->createNewImage($p_img, $request, $idx, $productId);
-            }
-        }
     }
 
     /**
@@ -231,27 +214,74 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Create new product image
-     */
-    private function createNewImage($imageData, $request, $index, $productId)
-    {
-        $image_url = null;
 
-        if ($request->hasFile("product_images.$index.image")) {
-            $file = $request->file("product_images.$index.image");
-            $file_name = time() . '_' . $file->getClientOriginalName();
-            $image_url = $file->storeAs('product_img', $file_name, 'public');
+    private function processImagesForUpdate(array $existingImages, array $submittedImages, $request, $productId)
+    {
+        // Lấy id của ảnh tồn tại từ payload FE (chỉ các id có giá trị)
+        $existingImageIds = collect($existingImages)->pluck('id')->filter()->toArray();
+
+        // Xóa ảnh trong db không còn xuất hiện trong existing_images (FE muốn xóa)
+        $imagesToDelete = ProductImage::where('product_id', $productId)
+            ->when(count($existingImageIds) > 0, fn($q) => $q->whereNotIn('id', $existingImageIds))
+            ->when(count($existingImageIds) === 0, fn($q) => $q) // nếu không còn existingImages thì xóa tất cả product images trước khi thêm mới
+            ->get();
+
+        foreach ($imagesToDelete as $img) {
+            if ($img->image_url) {
+                Storage::disk('public')->delete($img->image_url);
+            }
+            $img->delete();
         }
 
-        ProductImage::create([
-            'product_id' => $productId,
-            'image_url'  => $image_url,
-            'sort_order' => $imageData['sort_order'] ?? $index,
-        ]);
+        // Cập nhật ảnh đã tồn tại (dùng index của existing_images trong payload để kiểm tra file: existing_images.$idx.image)
+        foreach ($existingImages as $idx => $p_img) {
+            if (empty($p_img['id'])) {
+                continue;
+            }
+            $existingImage = ProductImage::find($p_img['id']);
+            if (!$existingImage) {
+                continue;
+            }
+
+            $image_url = $existingImage->image_url;
+            // Nếu FE gửi file để thay ảnh cũ theo key existing_images.$idx.image
+            if ($request->hasFile("existing_images.$idx.image")) {
+                if ($image_url) {
+                    Storage::disk('public')->delete($image_url);
+                }
+                $file = $request->file("existing_images.$idx.image");
+                $file_name = time() . '_' . $file->getClientOriginalName();
+                $image_url = $file->storeAs('product_img', $file_name, 'public');
+            }
+
+            $existingImage->update([
+                'image_url'  => $image_url,
+                'sort_order' => $p_img['sort_order'] ?? $idx,
+            ]);
+        }
+
+        // Tạo ảnh mới từ product_images (dùng index của product_images payload để lấy file: product_images.$idx.image)
+        foreach ($submittedImages as $idx => $p_img) {
+            $image_url = $p_img['image_url'] ?? null;
+
+            if ($request->hasFile("product_images.$idx.image")) {
+                $file = $request->file("product_images.$idx.image");
+                $file_name = time() . '_' . $file->getClientOriginalName();
+                $image_url = $file->storeAs('product_img', $file_name, 'public');
+            }
+
+            // Nếu vẫn null (đã bị chặn phía trên), bỏ qua tạo để tránh lỗi DB
+            if (empty($image_url)) {
+                continue;
+            }
+
+            ProductImage::create([
+                'product_id' => $productId,
+                'image_url'  => $image_url,
+                'sort_order' => $p_img['sort_order'] ?? $idx,
+            ]);
+        }
     }
-
-
     public function destroy($id)
     {
         $product = Product::with(['product_images', 'product_translations'])->findOrFail($id);

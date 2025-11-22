@@ -13,6 +13,7 @@ class Order extends Model
         'status',
         'subtotal',
         'discount_total',
+        'ship_fee',
         'grand_total',
         'payment_method',
         'payment_status',
@@ -27,6 +28,7 @@ class Order extends Model
     protected $casts = [
         'subtotal'       => 'decimal:2',
         'discount_total' => 'decimal:2',
+        'ship_fee'      => 'decimal:2',
         'grand_total'    => 'decimal:2',
         'shipping_address' => 'array',
     ];

@@ -13,17 +13,16 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            // $table->decimal('base_price');
             $table->boolean('is_active')->default(true);
-            $table->float('price');
-            $table->float('compare_at_price'); // Giá khuyến mãi
-            $table->integer('stock_quantity'); // số lượng tồn
+            $table->float('price')->nullable();
+            $table->float('compare_at_price')->nullable(); // Giá khuyến mãi
+            $table->integer('stock_quantity')->nullable(); // số lượng tồn
             $table->string('origin')->default("Việt nam");
-            $table->integer('quantity_per_pack'); // Số lượng mỗi combo
+            $table->integer('quantity_per_pack')->nullable(); // Số lượng mỗi combo
             $table->string('shipping_from')->default("TP. Hồ Chí Minh");
             $table->enum('type', ['domestic', 'export'])->default('domestic'); // Cột type chỉ có thể nhận 1 trong 2 giá trị đó
 
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });

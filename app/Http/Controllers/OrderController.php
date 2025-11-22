@@ -88,7 +88,8 @@ class OrderController extends Controller
 
         $validated = $request->validate([
             'note' => ['nullable', 'string', 'max:1000'],
-            'shipping_address' => ['nullable'], // có thể là JSON trên FE; lưu dạng text/json tùy migration
+            'ship_fee' => ['nullable', 'numeric'],
+            'shipping_address' => ['nullable'], 
             'coupon_code' => ['nullable', 'string', 'max:100'],
             'payment_method'    => ['nullable', Rule::in(['cod', 'vnpay', 'momo'])],
         ]);
@@ -102,6 +103,9 @@ class OrderController extends Controller
         if (!$cart || $cart->cartitems->isEmpty()) {
             return response()->json(['message' => 'Giỏ hàng trống'], 422);
         }
+
+        // đảm bảo ship_fee có giá trị số
+        $ship_fee = (float) ($validated['ship_fee'] ?? 0);
 
         // Tính subtotal từ cart items
         $subtotal = $cart->cartitems->sum(function (CartItem $ci) {
@@ -142,15 +146,15 @@ class OrderController extends Controller
             } else {
                 $discountTotal = min((float)$coupon->discount_value, $subtotal);
             }
-            $coupon->update([
-                'usage_count' => DB::raw('usage_count + 1'),
-            ]);
+            // Use the query builder increment to avoid calling a protected model method
+            Coupon::where('id', $coupon->id)->increment('used_count');
         }
 
-        $grandTotal = max($subtotal - $discountTotal, 0);
+        // Cộng phí vận chuyển vào grand total, đảm bảo không âm và làm tròn 2 chữ số
+        $grandTotal = round(max($subtotal - $discountTotal + $ship_fee, 0), 2);
 
         // Tạo đơn + items trong transaction
-        $order = DB::transaction(function () use ($user, $validated, $coupon, $subtotal, $discountTotal, $grandTotal, $cart, $paymentMethod) {
+        $order = DB::transaction(function () use ($user, $validated, $coupon, $subtotal, $discountTotal, $ship_fee, $grandTotal, $cart, $paymentMethod) {
             $code = 'CM' . now()->format('YmdHis') . strtoupper(Str::random(4));
 
             $order = Order::create([
@@ -161,6 +165,7 @@ class OrderController extends Controller
                 'transaction_code' => null,
                 'subtotal'        => $subtotal,
                 'discount_total'  => $discountTotal,
+                'ship_fee'       => $ship_fee,
                 'grand_total'     => $grandTotal,
                 'shipping_address' => $validated['shipping_address'] ?? null,
                 'note'            => $validated['note'] ?? null,
