@@ -71,6 +71,7 @@ class CouponController extends Controller
     {
         $coupon = Coupon::findOrFail($id);
         $coupon->state = $request->input('state');
+        $coupon->reason_end = $request->input('reason_end');
         $coupon->is_active = 1;
         $coupon->save();
 
