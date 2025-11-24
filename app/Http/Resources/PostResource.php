@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Storage;
 
 class PostResource extends JsonResource
 {
@@ -15,28 +14,40 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
         return [
-            'id'               => $this->id,
-            'title'            => $this->title,
-            'slug'             => $this->slug,
-            'content'          => $this->content,
-            'meta_title'       => $this->meta_title,
-            'meta_description' => $this->meta_description,
-            'thumbnail'        => $this->thumbnail ? asset('storage/' . $this->thumbnail) : null,
-            'translation_key'  => $this->translation_key,
-            'status'           => $this->status,
+            'id'        => $this->id,
+            'title'     => $this->when($this->relationLoaded('postTranslations'), fn() => optional($this->getRelation('postTranslations')->first())->title),
+            'thumbnail' => $this->thumbnail ? asset('storage/' . $this->thumbnail) : null,
+            'status'    => $this->status,
 
-            'user'      => $this->whenLoaded('user', fn() => [
-                'id'    => $this->user->id,
-                'name'  => $this->user->name,
+            'translations' => $this->when($this->relationLoaded('postTranslations'), fn() =>
+                $this->getRelation('postTranslations')->map(fn($t) => [
+                    'id'               => $t->id,
+                    'language_id'      => $t->language_id,
+                    'title'            => $t->title,
+                    'slug'             => $t->slug,
+                    'content'          => $t->content,
+                    'meta_title'       => $t->meta_title,
+                    'meta_description' => $t->meta_description,
+                ])
+            ),
+
+            'post_category' => $this->when($this->relationLoaded('postCategory'), fn() => [
+                'id' => $this->postCategory?->id,
+                'translations' => $this->postCategory && $this->postCategory->relationLoaded('postCategoryTranslations')
+                    ? $this->postCategory->getRelation('postCategoryTranslations')->map(fn($t) => [
+                        'id'   => $t->id,
+                        'name' => $t->name,
+                    ])->values()
+                    : null,
             ]),
-            'language'=> $this->whenLoaded('language', fn() => [
-                'id' => $this->language->id,
-                'code' => $this->language->code,
-            ]) ,
-            
-            'created_at'=> $this->created_at?->format('d/m/Y'),
+
+            'user' => $this->whenLoaded('user', fn() => [
+                'id'   => $this->user->id,
+                'name' => $this->user->name,
+            ]),
+
+            'created_at' => $this->created_at?->format('d/m/Y'),
         ];
     }
 }

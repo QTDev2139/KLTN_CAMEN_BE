@@ -22,13 +22,17 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'languages_id' => 'sometimes|integer',
-            'title' => 'sometimes|string',
-            'slug' => 'sometimes|string',
-            'content' => 'sometimes|string',
-            'meta_title' => 'sometimes|string',
-            'meta_description' => 'sometimes|string',
-            'thumbnail' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'status' => 'nullable|boolean',
+            'post_category_id' => 'nullable|exists:post_categories,id',
+
+            'post_translations' => 'required|array|min:1',
+            'post_translations.*.language_id' => 'required|exists:languages,id',
+            'post_translations.*.title' => 'required|string|max:255',
+            'post_translations.*.slug' => 'required|string|max:255',
+            'post_translations.*.content' => 'required|string',
+            'post_translations.*.meta_title' => 'nullable|string|max:255',
+            'post_translations.*.meta_description' => 'nullable|string',
         ];
     }
 }

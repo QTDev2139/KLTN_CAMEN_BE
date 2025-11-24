@@ -7,12 +7,13 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTranslation;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index($lang)
+    public function index($lang, $type)
     {
         $products = Product::query()
             ->with([
@@ -21,6 +22,7 @@ class ProductController extends Controller
                     $language->whereHas('language', fn($query) => $query->where('code', $lang));
                 },
             ])
+            ->where('type', $type)
             ->get();
 
         return ProductResource::collection($products);
@@ -28,7 +30,7 @@ class ProductController extends Controller
     public function showProductByCategory($slug, $lang)
     {
         if ($slug === 'san-pham' || $slug === 'products') {
-            return $this->index($lang);
+            return $this->index($lang, $type = 'domestic');
         }
         $products = Product::query()
             ->whereRelation('category.categoryTranslation', 'slug', $slug)
@@ -36,6 +38,7 @@ class ProductController extends Controller
                 'product_images',
                 'product_translations' => fn($language) => $language->whereRelation('language', 'code', $lang),
             ])
+            ->where('type', 'domestic')
             ->get();
 
         return ProductResource::collection($products);
@@ -81,15 +84,29 @@ class ProductController extends Controller
             ], 422);
         }
         // 1. Tạo product
-        $product = Product::create([
-            'price'             => $data['price'],
-            'compare_at_price'  => $data['compare_at_price'],
-            'stock_quantity'    => $data['stock_quantity'],
-            'origin'            => $data['origin'],
-            'quantity_per_pack' => $data['quantity_per_pack'],
-            'shipping_from'     => $data['shipping_from'],
-            'category_id'       => $data['category_id'],
-        ]);
+        if ($data['type'] === 'domestic') {
+            $product = Product::create([
+                'price'             => $data['price'],
+                'compare_at_price'  => $data['compare_at_price'],
+                'stock_quantity'    => $data['stock_quantity'],
+                'origin'            => $data['origin'],
+                'quantity_per_pack' => $data['quantity_per_pack'],
+                'shipping_from'     => $data['shipping_from'],
+                'category_id'       => $data['category_id'],
+            ]);
+        }
+        if ($data['type'] === 'export') {
+            $product = Product::create([
+                'price'             => null,
+                'compare_at_price'  => null,
+                'stock_quantity'    => null,
+                'origin'            => $data['origin'],
+                'quantity_per_pack' => null,
+                'shipping_from'     => $data['shipping_from'],
+                'category_id'       => null,
+                'type'              => $data['type'],
+            ]);
+        }
         // 2. Tạo product_translation
         foreach ($data['product_translations'] as $p_tran) {
             ProductTranslation::create([
@@ -148,16 +165,31 @@ class ProductController extends Controller
         }
 
         // Cập nhật bảng product
-        $product->update([
-            'is_active'         => $data['is_active'] ?? $product->is_active,
-            'price'             => $data['price'],
-            'compare_at_price'  => $data['compare_at_price']  ?? null,
-            'stock_quantity'    => $data['stock_quantity'],
-            'origin'            => $data['origin'],
-            'quantity_per_pack' => $data['quantity_per_pack'],
-            'shipping_from'     => $data['shipping_from'],
-            'category_id'       => $data['category_id'],
-        ]);
+        if ($data['type'] === 'domestic') {
+            $product->update([
+                'is_active'         => $data['is_active'] ?? $product->is_active,
+                'price'             => $data['price'],
+                'compare_at_price'  => $data['compare_at_price']  ?? null,
+                'stock_quantity'    => $data['stock_quantity'],
+                'origin'            => $data['origin'],
+                'quantity_per_pack' => $data['quantity_per_pack'],
+                'shipping_from'     => $data['shipping_from'],
+                'category_id'       => $data['category_id'],
+            ]);
+        }
+        if ($data['type'] === 'export') {
+            $product->update([
+                'is_active'         => $data['is_active'] ?? $product->is_active,
+                'price'             => null,
+                'compare_at_price'  => null,
+                'stock_quantity'    => null,
+                'origin'            => $data['origin'],
+                'quantity_per_pack' => null,
+                'shipping_from'     => $data['shipping_from'],
+                'category_id'       => null,
+                'type'              => $data['type'],
+            ]);
+        }
 
         // Cập nhật product_translations
         foreach ($data['product_translations'] as $p_tran) {
@@ -183,36 +215,7 @@ class ProductController extends Controller
         return response()->json(['message' => 'Cập nhật sản phẩm thành công'], 200);
     }
 
-    /**
-     * Update existing product image
-     */
-    private function updateExistingImage($imageData, $request, $index)
-    {
-        $existingImage = ProductImage::find($imageData['id']);
-        if (!$existingImage) {
-            return;
-        }
 
-        $image_url = $existingImage->image_url;
-
-        // Nếu có file ảnh mới, cập nhật ảnh
-        if ($request->hasFile("product_images.$index.image")) {
-            // Xóa ảnh cũ
-            if ($image_url) {
-                Storage::disk('public')->delete($image_url);
-            }
-
-            // Lưu ảnh mới
-            $file = $request->file("product_images.$index.image");
-            $file_name = time() . '_' . $file->getClientOriginalName();
-            $image_url = $file->storeAs('product_img', $file_name, 'public');
-        }
-
-        $existingImage->update([
-            'image_url'  => $image_url,
-            'sort_order' => $imageData['sort_order'] ?? $index,
-        ]);
-    }
 
 
     private function processImagesForUpdate(array $existingImages, array $submittedImages, $request, $productId)
@@ -282,6 +285,18 @@ class ProductController extends Controller
             ]);
         }
     }
+
+    public function getSalesCount()
+    {
+        $salesByProduct = OrderItem::query()
+            ->whereHas('order', fn($q) => $q->where('status', 'completed'))
+            ->selectRaw('product_id, SUM(qty) as sales_count')
+            ->groupBy('product_id')
+            ->get();
+
+        return response()->json($salesByProduct);
+    }
+
     public function destroy($id)
     {
         $product = Product::with(['product_images', 'product_translations'])->findOrFail($id);
