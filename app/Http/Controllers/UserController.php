@@ -53,21 +53,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    // Show danh sách nhân viên là customer
-    public function getDsnv()
+    // Show danh sách nhân viên 
+    public function getPersonnel($id)
     {
-        $users = User::where('role_id', 6)->get();
+        $users = User::where('role_id', $id)->get();
         return UserResource::collection($users);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit(User $User) // không sài trong api
-    // {
-    //     //
-    // }
-
+    
     /**
      * Update the specified resource in storage.
      */

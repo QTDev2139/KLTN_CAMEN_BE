@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PostCategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
@@ -28,19 +30,18 @@ use App\Http\Controllers\UserController;
 // ====================
 
 Route::prefix('posts')->group(function () {
-    Route::get('/', [PostController::class, 'index']);           // Danh sách bài viết
-    Route::get('/{id}', [PostController::class, 'show']);        // Chi tiết bài viết theo ID
-    Route::get('/slug/{slug}', [PostController::class, 'getKey']); // Lấy bài viết theo slug
-    Route::get('/lang/{code}/key/{key}', [PostController::class, 'showByLangAndKey']); // Bài viết theo ngôn ngữ + key
+    Route::get('/{lang}', [PostController::class, 'index']);           // Danh sách bài viết
+    Route::get('lang/{lang}/slug/{slug}', [PostController::class, 'show']);        // Chi tiết bài viết theo ID
 });
 Route::prefix('product')->group(function () {
-    Route::get('/{lang}', [ProductController::class, 'index']);                 // Danh sách sản phẩm
+    Route::get('/{lang}/type/{type}', [ProductController::class, 'index']);                 // Danh sách sản phẩm
     Route::get('/slug/{slug}/lang/{lang}', [ProductController::class, 'showProductByCategory']);           // Danh sách sản phẩm theo category
     Route::get('/id/{id}', [ProductController::class, 'showProductById']);           // Danh sách sản phẩm theo id
     Route::get('/{slug}/lang/{lang}', [ProductController::class, 'show']);           // Chi tiết sản phẩm
     Route::put('/{id}', [ProductController::class, 'update']);                      // Cập nhật sản phẩm
     Route::post('/', [ProductController::class, 'store']);                      // Tạo sản phẩm
-    Route::delete('/{id}', [ProductController::class, 'destroy']);              // Xóa sản phẩm
+    Route::delete('/{id}', [ProductController::class, 'destroy']);
+    Route::get('/sales-count', [ProductController::class, 'getSalesCount']);           // Chi tiết sản phẩm
 });
 Route::prefix('category')->group(function () {
     Route::get('/{lang}', [CategoryController::class, 'index']);                // Danh sách sản phẩm
@@ -60,6 +61,12 @@ Route::prefix('coupon')->group(function () {
     Route::put('/active/{id}', [CouponController::class, 'updateActive']);
     Route::delete('/{id}', [CouponController::class, 'destroy']);
 });
+
+Route::prefix('post-categories')->group(function () {
+    Route::get('/{lang}', [PostCategoryController::class, 'index']);                // Danh sách sản phẩm
+});
+
+Route::post('/contact', [ContactController::class, 'submit']);
 
 // ====================
 // 🔐 AUTH ROUTES
@@ -106,7 +113,7 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', UserController::class)
         ->only(['index', 'store', 'update', 'destroy']);
     Route::post('/update-role/{role}', [UserController::class, 'updateRole']);
-    Route::get('/dsnv/customer', [UserController::class, 'getDsnv']);
+    Route::get('/personnel/{id}', [UserController::class, 'getPersonnel']);
 
     // Quản lý đơn hàng
     Route::get('/orders', [OrderController::class, 'index']);
@@ -120,13 +127,16 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/vnpay', [PaymentController::class, 'vnpay_payment']);
         Route::get('/vnpay/status/{order_id}', [PaymentController::class, 'vnpay_status']);
     });
-    
+
     Route::prefix('review')->group(function () {
         Route::post('/', [ReviewController::class, 'store']);
         Route::get('/', [ReviewController::class, 'index']);
         Route::delete('/{id}', [ReviewController::class, 'destroy']);
     });
 
+    // Quản lý danh mục bài viết
+    Route::apiResource('post-categories', PostCategoryController::class)
+        ->only(['store', 'update', 'destroy']);
 });
 Route::prefix('payment')->group(function () {
     Route::get('/vnpay/callback', [PaymentController::class, 'vnpay_callback']);
@@ -157,4 +167,10 @@ Route::middleware('auth:api')->group(function () {
 
     // Đánh dấu đã đọc (optional)
     Route::post('chat/rooms/{room}/read', [ChatMessageController::class, 'markAsRead']);
+
+
+    Route::get('/contact', [ContactController::class, 'index']);
+    Route::put('/contact/{id}', [ContactController::class, 'updateSupportContact']);
+    Route::put('/contact/status/{id}', [ContactController::class, 'updateStatusContact']);
+    Route::delete('/contact/{id}', [ContactController::class, 'destroy']);
 });
