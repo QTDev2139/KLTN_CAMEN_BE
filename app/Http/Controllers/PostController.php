@@ -31,7 +31,7 @@ class PostController extends Controller
                 'postCategory' => function ($q) use ($languageId) {
                     if ($languageId !== null) {
                         $q->whereRelation('postCategoryTranslations', 'language_id', $languageId)
-                          ->with(['postCategoryTranslations' => fn($qt) => $qt->where('language_id', $languageId)]);
+                            ->with(['postCategoryTranslations' => fn($qt) => $qt->where('language_id', $languageId)]);
                     } else {
                         $q->with('postCategoryTranslations');
                     }
@@ -47,6 +47,27 @@ class PostController extends Controller
             ->get();
 
         return PostResource::collection($posts);
+    }
+
+
+    public function show($lang, $slug)
+    {
+        $post = Post::query()
+            ->whereRelation('postTranslations', 'slug', $slug)
+            ->with([
+                'user:id,name',
+                'postTranslations' => function ($q) use ($lang) {
+                    $q->where('language_id', $lang);
+                },
+
+            ])
+            ->first();
+
+        if (!$post) {
+            return response()->json([], 200); 
+        }
+
+        return new PostResource($post);
     }
 
 
@@ -85,21 +106,6 @@ class PostController extends Controller
 
         return new PostResource($post->load('postTranslations', 'user'));
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $post = Post::with([
-            'user:id,name',
-            'postTranslations'
-        ])->findOrFail($id);
-
-        return new PostResource($post);
-    }
-
-
 
     /**
      * Update the specified resource in storage.

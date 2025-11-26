@@ -12,14 +12,13 @@ class PostCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($lang)
+    public function index()
     {
         $category = PostCategory::query()
             ->with([
                 'postCategoryTranslations'
             ])
             ->get();
-
         return response()->json($category);
     }
 
