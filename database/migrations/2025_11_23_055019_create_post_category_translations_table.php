@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('post_category_translations', function (Blueprint $table) {
             $table->id();
-            $table->string('thumbnail');
-            $table->boolean('status')->default(false);
-
-            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->string('slug');
+            
+            $table->unsignedBigInteger('language_id');
             $table->unsignedBigInteger('post_category_id');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('language_id')->references('id')->on('languages')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('post_category_id')->references('id')->on('post_categories')->onUpdate('cascade')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('post_category_translations');
     }
 };

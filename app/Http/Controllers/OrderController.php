@@ -8,6 +8,7 @@ use App\Models\CartItem;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -89,7 +90,7 @@ class OrderController extends Controller
         $validated = $request->validate([
             'note' => ['nullable', 'string', 'max:1000'],
             'ship_fee' => ['nullable', 'numeric'],
-            'shipping_address' => ['nullable'], 
+            'shipping_address' => ['nullable'],
             'coupon_code' => ['nullable', 'string', 'max:100'],
             'payment_method'    => ['nullable', Rule::in(['cod', 'vnpay', 'momo'])],
         ]);
@@ -109,7 +110,6 @@ class OrderController extends Controller
 
         // Tính subtotal từ cart items
         $subtotal = $cart->cartitems->sum(function (CartItem $ci) {
-            // ưu tiên unit_price trên cart item; fallback sang product->price nếu thiếu
             $unit = $ci->unit_price ?? optional($ci->product)->price ?? 0;
             return $unit * (int)$ci->qty;
         });
@@ -123,7 +123,6 @@ class OrderController extends Controller
                 ->where('code', $validated['coupon_code'])
                 ->where('is_active', true)
                 ->when(true, function ($q) {
-                    // ngày hiệu lực (nếu có trong DB)
                     $q->where(function ($qq) {
                         $qq->whereNull('start_date')->orWhere('start_date', '<=', now());
                     })->where(function ($qq) {
@@ -140,59 +139,94 @@ class OrderController extends Controller
                 return response()->json(['message' => 'Đơn hàng không đạt giá trị tối thiểu để áp mã'], 422);
             }
 
-            // Tính giảm giá
             if ($coupon->discount_type === 'percent') {
                 $discountTotal = round($subtotal * ((float)$coupon->discount_value / 100), 2);
             } else {
                 $discountTotal = min((float)$coupon->discount_value, $subtotal);
             }
-            // Use the query builder increment to avoid calling a protected model method
             Coupon::where('id', $coupon->id)->increment('used_count');
         }
 
         // Cộng phí vận chuyển vào grand total, đảm bảo không âm và làm tròn 2 chữ số
         $grandTotal = round(max($subtotal - $discountTotal + $ship_fee, 0), 2);
 
-        // Tạo đơn + items trong transaction
-        $order = DB::transaction(function () use ($user, $validated, $coupon, $subtotal, $discountTotal, $ship_fee, $grandTotal, $cart, $paymentMethod) {
-            $code = 'CM' . now()->format('YmdHis') . strtoupper(Str::random(4));
+        // --- KIỂM TRA STOCK TRƯỚC KHI TẠO ĐƠN ---
+        $insufficient = [];
+        foreach ($cart->cartitems as $ci) {
+            $product = $ci->product;
+            $qty = (int) $ci->qty;
+            // nếu product tồn tại và có stock_quantity (không null) thì kiểm tra
+            if ($product && !is_null($product->stock_quantity) && (int)$product->stock_quantity < $qty) {
+                $insufficient[] = [
+                    'product_id' => $product->id,
+                    'available' => (int)$product->stock_quantity,
+                    'requested' => $qty,
+                ];
+            }
+        }
+        if (!empty($insufficient)) {
+            return response()->json([
+                'message' => 'Số lượng trong kho không đủ cho một hoặc nhiều sản phẩm',
+                'items' => $insufficient
+            ], 422);
+        }
 
-            $order = Order::create([
-                'code'            => $code,
-                'status'          => 'pending',
-                'payment_method'  => $paymentMethod,
-                'payment_status'  => 'unpaid',
-                'transaction_code' => null,
-                'subtotal'        => $subtotal,
-                'discount_total'  => $discountTotal,
-                'ship_fee'       => $ship_fee,
-                'grand_total'     => $grandTotal,
-                'shipping_address' => $validated['shipping_address'] ?? null,
-                'note'            => $validated['note'] ?? null,
-                'user_id'         => $user->id,
-                'coupon_id'       => $coupon?->id,
-            ]);
+        // Tạo đơn + items trong transaction (và cập nhật stock)
+        try {
+            $order = DB::transaction(function () use ($user, $validated, $coupon, $subtotal, $discountTotal, $ship_fee, $grandTotal, $cart, $paymentMethod) {
+                $code = 'CM' . now()->format('YmdHis') . strtoupper(Str::random(4));
 
-            // Tạo OrderItems từ cart items
-            foreach ($cart->cartitems as $ci) {
-                $unit = $ci->unit_price ?? optional($ci->product)->price ?? 0;
-                OrderItem::create([
-                    'order_id'   => $order->id,
-                    'product_id' => $ci->product_id,
-                    'qty'        => (int)$ci->qty,
-                    'unit_price' => $unit,
-                    'subtotal'   => $unit * (int)$ci->qty,
+                $order = Order::create([
+                    'code'            => $code,
+                    'status'          => 'pending',
+                    'payment_method'  => $paymentMethod,
+                    'payment_status'  => 'unpaid',
+                    'transaction_code' => null,
+                    'subtotal'        => $subtotal,
+                    'discount_total'  => $discountTotal,
+                    'ship_fee'        => $ship_fee,
+                    'grand_total'     => $grandTotal,
+                    'shipping_address' => $validated['shipping_address'] ?? null,
+                    'note'            => $validated['note'] ?? null,
+                    'user_id'         => $user->id,
+                    'coupon_id'       => $coupon?->id,
                 ]);
-            }
 
-            // Xóa giỏ hàng sau khi tạo đơn
-            if ($paymentMethod === 'cod') {
-                $cart->cartitems()->delete();
-                $cart->update(['is_active' => false]);
-            }
+                // Tạo OrderItems từ cart items và cập nhật stock
+                foreach ($cart->cartitems as $ci) {
+                    $unit = $ci->unit_price ?? optional($ci->product)->price ?? 0;
+                    OrderItem::create([
+                        'order_id'   => $order->id,
+                        'product_id' => $ci->product_id,
+                        'qty'        => (int)$ci->qty,
+                        'unit_price' => $unit,
+                        'subtotal'   => $unit * (int)$ci->qty,
+                    ]);
 
-            return $order;
-        });
+                    // Nếu product có stock tracked => giảm số lượng
+                    // đảm bảo không giảm thành số âm: chỉ giảm khi stock >= qty
+                    $updated = Product::where('id', $ci->product_id)
+                        ->whereNotNull('stock_quantity')
+                        ->where('stock_quantity', '>=', (int)$ci->qty)
+                        ->decrement('stock_quantity', (int)$ci->qty);
+
+                    if ($updated === 0 && !is_null(optional($ci->product)->stock_quantity)) {
+                        // có thể xảy ra race condition: rollback transaction
+                        throw new \Exception('Số lượng tồn kho không đủ cho product_id ' . $ci->product_id);
+                    }
+                }
+
+                // Xóa giỏ hàng sau khi tạo đơn (nếu COD)
+                if ($paymentMethod === 'cod') {
+                    $cart->cartitems()->delete();
+                    $cart->update(['is_active' => false]);
+                }
+
+                return $order;
+            });
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Không thể tạo đơn: ' . $e->getMessage()], 422);
+        }
 
         return response()->json([
             'message' => 'Tạo đơn hàng thành công',

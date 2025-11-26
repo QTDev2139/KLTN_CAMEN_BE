@@ -24,10 +24,12 @@ class CartItemResource extends JsonResource
                 return [
                     'id' => $this->product->id,
                     'quantity_per_pack' => $this->product->quantity_per_pack ?? null,
+                    'stock_quantity' => $this->product->stock_quantity ?? null,
                 ];
             }, [
                 'id' => $this->product_id,
                 'quantity_per_pack' => null,
+                'stock_quantity' => null,
             ]),
             'product_name' => $this->product?->product_translations?->first()?->name ?? 'N/A',
             'product_image' => asset('storage/' . $this->product?->product_images?->first()?->image_url)

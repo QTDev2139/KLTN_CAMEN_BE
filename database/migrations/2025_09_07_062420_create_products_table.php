@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_active')->default(true);
-            $table->float('price')->nullable();
-            $table->float('compare_at_price')->nullable(); // Giá khuyến mãi
+            $table->decimal('price', 10, 2)->nullable();
+            $table->decimal('compare_at_price', 10, 2)->nullable(); // Giá khuyến mãi
             $table->integer('stock_quantity')->nullable(); // số lượng tồn
             $table->string('origin')->default("Việt nam");
             $table->integer('quantity_per_pack')->nullable(); // Số lượng mỗi combo
