@@ -52,6 +52,15 @@ class Product extends Model
         return $this->hasMany(Review::class, 'product_id');
     }
 
+    public function quantityDeliveries(): HasMany
+    {
+        return $this->hasMany(QuantityDelivery::class, 'product_id');
+    }
+
+    public function quantityImports(): HasMany
+    {
+        return $this->hasMany(QuantityImport::class, 'product_id');
+    }
     // // Tính rating trung bình
     // public function averageRating()
     // {

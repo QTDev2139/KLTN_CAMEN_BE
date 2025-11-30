@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
-
+            'status' => $this->status,
             'role' => $this->whenLoaded('role', fn() => [
                 'name' => $this->role->name,
             ]),

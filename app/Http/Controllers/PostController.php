@@ -99,7 +99,6 @@ class PostController extends Controller
                 'title' => $tr['title'],
                 'slug' => $tr['slug'],
                 'content' => $tr['content'],
-                'meta_title' => $tr['meta_title'] ?? null,
                 'meta_description' => $tr['meta_description'] ?? null,
             ]);
         }
@@ -141,7 +140,6 @@ class PostController extends Controller
                     'title' => $tr['title'],
                     'slug' => $tr['slug'],
                     'content' => $tr['content'],
-                    'meta_title' => $tr['meta_title'] ?? null,
                     'meta_description' => $tr['meta_description'] ?? null,
                 ]
             );
