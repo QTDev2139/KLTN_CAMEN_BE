@@ -146,6 +146,8 @@ Route::prefix('payment')->group(function () {
 
 use App\Http\Controllers\ChatRoomController;
 use App\Http\Controllers\ChatMessageController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\RequestImportController;
 
 Route::middleware('auth:api')->group(function () {
     Route::post('chat/rooms/open', [ChatRoomController::class, 'openRoom']);
@@ -173,4 +175,16 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/contact/{id}', [ContactController::class, 'updateSupportContact']);
     Route::put('/contact/status/{id}', [ContactController::class, 'updateStatusContact']);
     Route::delete('/contact/{id}', [ContactController::class, 'destroy']);
+
+    Route::get('/request-imports', [RequestImportController::class, 'index']);
+    Route::get('/request-imports/{id}', [RequestImportController::class, 'show']);
+    Route::post('/request-imports', [RequestImportController::class, 'store']);
+    Route::put('/request-imports/{id}', [RequestImportController::class, 'update']);
+    Route::put('/request-imports/status/{id}', [RequestImportController::class, 'updateStatus']);
+    Route::delete('/request-imports/{id}', [RequestImportController::class, 'destroy']);
+
+    Route::get('/deliveries/{id}', [DeliveryController::class, 'show']);
+    Route::post('/deliveries', [DeliveryController::class, 'store']);
+    Route::put('/deliveries/{id}', [DeliveryController::class, 'update']);
+    Route::put('/deliveries/missed/{id}', [DeliveryController::class, 'updateProductMissed']);
 });

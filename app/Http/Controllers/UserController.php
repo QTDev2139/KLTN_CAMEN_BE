@@ -14,37 +14,30 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', '!=', 4)->get();
+        $users = User::with('role')
+            ->select('id', 'email', 'name', 'role_id', 'status')
+            ->where('role_id', '!=', 4)
+            ->orderByDesc('status')
+            ->get();
+
         return UserResource::collection($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    // public function create() // không sài trong api
-    // {
-    //     //
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $name = $request->input('name');
         $email = $request->input('email');
-        $password = $request->input('password');
         $role_id = $request->input('role_id');
         if(User::where('email', $email)->exists()) {
             return response()->json([
-                "message" => "Email đã được sử dụngg",
+                "message" => "Email đã được sử dụng",
             ], 409);
         }
 
         $user = User::create([
             'name' => $name,
             'email' => $email,
-            'password' => Hash::make($password),
+            'password' => Hash::make("123456"),
             'role_id' => $role_id,
         ]);
         return response()->json(['message' => 'Đăng ký tài khoản thành công'], 201);
@@ -69,9 +62,11 @@ class UserController extends Controller
         $User = User::findOrFail($id);
 
         $User->update([
-            'password' => Hash::make($request->get('password')),
+            'name' => $request->get('name'),
+            'role_id' => $request->get('role_id'),
+            'status' => $request->get('status'),
         ]);
-        return response() -> json(["message" => "Mật khẩu được cập nhật thành công"]);
+        return response() -> json(["message" => "Thông tin tài khoản được cập nhật thành công"]);
     }
 
     /**
