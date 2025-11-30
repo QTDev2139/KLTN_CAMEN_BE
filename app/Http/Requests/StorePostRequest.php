@@ -31,7 +31,6 @@ class StorePostRequest extends FormRequest
             'post_translations.*.title' => 'required|string|max:255',
             'post_translations.*.slug' => 'required|string|max:255',
             'post_translations.*.content' => 'required|string',
-            'post_translations.*.meta_title' => 'nullable|string|max:255',
             'post_translations.*.meta_description' => 'nullable|string',
         ];
     }

@@ -27,7 +27,6 @@ class PostResource extends JsonResource
                     'title'            => $t->title,
                     'slug'             => $t->slug,
                     'content'          => $t->content,
-                    'meta_title'       => $t->meta_title,
                     'meta_description' => $t->meta_description,
                 ])
             ),

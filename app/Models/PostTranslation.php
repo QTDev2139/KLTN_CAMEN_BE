@@ -7,17 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PostTranslation extends Model
 {
-    /**
-     * Các field có thể gán hàng loạt
-     * (phù hợp với migration `post_translations`)
-     */
+  
     protected $fillable = [
         'title',
         'slug',
         'content',
-        'meta_title',
         'meta_description',
-        'language_id', // theo migration tên cột là 
+        'language_id', 
         'post_id',
     ];
 

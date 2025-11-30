@@ -238,6 +238,10 @@ class AuthController extends Controller
 
         $user = Auth::guard('api')->user();
 
+        if ($user->status == false) {
+            return response()->json(['error' => 'Tài khoản đã bị vô hiệu hóa'], 403);
+        }
+
         if ($user->role_id == 4) {
             ChatRoom::firstOrCreate([
                 'customer_id' => $user->id,
