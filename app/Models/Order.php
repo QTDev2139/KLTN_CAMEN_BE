@@ -17,7 +17,11 @@ class Order extends Model
         'grand_total',
         'payment_method',
         'payment_status',
+        'payment_date',
         'transaction_code',
+        'refund_amount',
+        'refund_transaction_code',
+        'img_refund',
         'shipping_address',
         'note',
         'user_id',
@@ -31,6 +35,7 @@ class Order extends Model
         'ship_fee'      => 'decimal:2',
         'grand_total'    => 'decimal:2',
         'shipping_address' => 'array',
+        'img_refund' => 'array',
     ];
 
     // n Orders -> 1 User

@@ -31,6 +31,7 @@ class OrderController extends Controller
 
         $orders = Order::with([
             'orderItems.product.product_images',
+            'orderItems.product.product_translations',
             'coupon',
         ])
             ->orderByDesc('id')
@@ -75,7 +76,7 @@ class OrderController extends Controller
 
         return OrderResource::collection($orders);
     }
-    
+
     /**
      * POST /api/orders
      * Tạo đơn hàng từ giỏ hiện tại (có thể đính kèm coupon_code)
@@ -265,6 +266,53 @@ class OrderController extends Controller
         }
     }
 
+    public function refundRequest(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
+        }
+
+        $validated = $request->validate([
+            'order_code'    => ['required', 'string'],
+            'reason_refund' => ['nullable', 'string', 'max:1000'],
+            'images'        => ['nullable', 'array'],
+            'images.*'      => ['file', 'mimes:jpg,jpeg,png,gif,webp', 'max:5120'],
+        ]);
+
+        $order = Order::where('code', $validated['order_code'])->first();
+        if (!$order) {
+            return response()->json(['message' => 'Đơn hàng không tồn tại'], 404);
+        }
+
+        // Nếu user không phải chủ đơn (hoặc admin) thì từ chối
+        if ($order->user_id !== $user->id) {
+            return response()->json(['message' => 'Không có quyền thao tác đơn này'], 403);
+        }
+
+        // Prepare existing images (Order->img_refund is cast to array in model)
+        $existingImgs = is_array($order->img_refund) ? $order->img_refund : [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $file_name = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('refunds', $file_name, 'public');
+                $existingImgs[] = $path;
+            }
+        }
+
+        $order->reason_refund = $validated['reason_refund'] ?? $order->reason_refund;
+        if (!empty($existingImgs)) {
+            $order->img_refund = $existingImgs;
+        }
+        $order->status = 'refund_requested';
+        $order->save();
+
+        return response()->json([
+            'message' => 'Yêu cầu hoàn tiền đã được gửi',
+            'data' => $order->load(['orderItems.product.product_images', 'coupon']),
+        ], 200);
+    }
 
     /**
      * DELETE /api/orders/{id}

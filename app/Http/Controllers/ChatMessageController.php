@@ -7,15 +7,16 @@ use App\Events\MessageSent;
 use App\Models\ChatMessage;
 use App\Models\ChatRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChatMessageController extends Controller
 {
     public function index(Request $request, ChatRoom $room)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
         // Chỉ cho phép xem nếu thuộc room
-        if ($user->id !== 1 && $room->customer_id !== $user->id && $room->staff_id !== $user->id) {
+        if ($user->id != 1 && $room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
         }
 
@@ -29,9 +30,9 @@ class ChatMessageController extends Controller
 
     public function store(Request $request, ChatRoom $room)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
-        if ($room->customer_id !== $user->id && $room->staff_id !== $user->id) {
+        if ($room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
         }
 
@@ -78,7 +79,7 @@ class ChatMessageController extends Controller
         return response()->json(['message' => 'Xem'], 200);
     }
 
-        if ($room->customer_id !== $user->id && $room->staff_id !== $user->id) {
+        if ($room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
         }
 

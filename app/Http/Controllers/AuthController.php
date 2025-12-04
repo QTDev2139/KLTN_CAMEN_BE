@@ -8,12 +8,10 @@ use App\Models\User;
 use App\Http\Resources\UserResource;
 use App\Models\ChatRoom;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Str;
 
@@ -218,11 +216,8 @@ class AuthController extends Controller
         if (!$user) {
             return response()->json(['message' => 'Không được phép'], 407);
         }
-        if ($user->role_id != 4) {
-            return response()->json(['message' => 'Chỉ khách hàng mới được đổi mật khẩu'], 403);
-        }
         if (!Hash::check($password, $user->password)) {
-            return response()->json(['message' => 'Mật khẩu hiện tại không đúng'], 422);
+            return response()->json(['message' => "Mật khẩu hiện tại không đúng"], 422);
         }
         $user->password = Hash::make($newPassword);
         $user->save();

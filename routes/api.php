@@ -13,6 +13,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,11 +122,15 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::put('/orders/{id}', [OrderController::class, 'update']);
+    Route::post('/orders/refund/request', [OrderController::class, 'refundRequest']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
     Route::prefix('payment')->group(function () {
         Route::post('/vnpay', [PaymentController::class, 'vnpay_payment']);
         Route::get('/vnpay/status/{order_id}', [PaymentController::class, 'vnpay_status']);
+        Route::post('/vnpay_manual_refund', [PaymentController::class, 'vnpay_manual_refund']);
+        Route::post('/vnpay_auto_refund', [PaymentController::class, 'vnpay_auto_refund']);
+
     });
 
     Route::prefix('review')->group(function () {
@@ -188,3 +193,6 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/deliveries/{id}', [DeliveryController::class, 'update']);
     Route::put('/deliveries/missed/{id}', [DeliveryController::class, 'updateProductMissed']);
 });
+
+Route::get('announcements', [AnnouncementController::class, 'index']);
+Route::get('announcements/file/{encoded}', [AnnouncementController::class, 'show']);
