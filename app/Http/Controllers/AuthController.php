@@ -210,7 +210,7 @@ class AuthController extends Controller
 
     public function changePassword(StoreAuthRequest $request)
     {
-        $password = $request->input('password');
+        $password = $request->input('oldPassword');
         $newPassword = $request->input('newPassword');
         $user = $request->user();
         if (!$user) {

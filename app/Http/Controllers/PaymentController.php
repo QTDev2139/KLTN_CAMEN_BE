@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Coupon;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -359,7 +362,7 @@ class PaymentController extends Controller
             'code' => 'required|string',
             'trans_type' => 'required|in:02,03', // 02: Toàn bộ, 03: Một phần
             'amount' => 'required|numeric|min:1000',
-            'reason' => 'nullable|string|max:255',
+            'reason_refund' => 'nullable|string|max:255',
         ]);
 
         $order = Order::where('code', $request->code)->first();
@@ -374,7 +377,7 @@ class PaymentController extends Controller
         $alreadyRefunded = $order->refund_amount ?? 0;
         $refundableAmount = $totalPaid - $alreadyRefunded;
         $requestedAmount = $request->amount;
-        $reason = $request->reason ?? 'Yêu cầu hoàn tiền thủ công';
+        $reason = $request->reason_refund ?? 'Đã hoàn tiền';
 
         if ($requestedAmount > $refundableAmount) {
             return response()->json(['message' => 'Số tiền hoàn lại vượt quá số tiền còn lại có thể hoàn (còn lại: ' . number_format($refundableAmount) . ' VND).'], 400);
@@ -442,6 +445,35 @@ class PaymentController extends Controller
             'System', // Người tạo yêu cầu là Hệ thống
             '127.0.0.1' // IP có thể là IP tĩnh của Server hoặc 127.0.0.1
         );
+
+        // Update lại số lượng sản phẩm trong kho nếu hoàn tiền thành công
+        if ($result['success']) {
+            try {
+                DB::transaction(function () use ($order) {
+                    // Tăng lại stock cho từng order item nếu product có stock_quantity tracked
+                    $items = $order->orderItems()->get();
+                    foreach ($items as $it) {
+                        Product::where('id', $it->product_id)
+                            ->whereNotNull('stock_quantity')
+                            ->increment('stock_quantity', (int)$it->qty);
+                    }
+
+                    // Nếu đơn sử dụng coupon thì giảm used_count (nếu > 0)
+                    if ($order->coupon_id) {
+                        Coupon::where('id', $order->coupon_id)
+                            ->where('used_count', '>', 0)
+                            ->decrement('used_count', 1);
+                    }
+                });
+
+                Log::info('Auto refund: stock and coupon updated', ['order' => $order->code]);
+            } catch (\Exception $e) {
+                Log::error('Auto refund: failed to update stock/coupon', [
+                    'order' => $order->code,
+                    'error' => $e->getMessage()
+                ]);
+            }
+        }
 
         return $result;
     }

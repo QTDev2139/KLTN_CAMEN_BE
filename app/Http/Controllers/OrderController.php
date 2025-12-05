@@ -120,20 +120,22 @@ class OrderController extends Controller
         $discountTotal = 0;
 
         if (!empty($validated['coupon_code'])) {
+            $now = now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString();
+            if($now)
             $coupon = Coupon::query()
                 ->where('code', $validated['coupon_code'])
                 ->where('is_active', true)
                 ->when(true, function ($q) {
                     $q->where(function ($qq) {
-                        $qq->whereNull('start_date')->orWhere('start_date', '<=', now());
+                        $qq->whereNull('start_date')->orWhere('start_date', '<=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
                     })->where(function ($qq) {
-                        $qq->whereNull('end_date')->orWhere('end_date', '>=', now());
+                        $qq->whereNull('end_date')->orWhere('end_date', '>=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
                     });
                 })
                 ->first();
-
+            
             if (!$coupon) {
-                return response()->json(['message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn'], 422);
+                return response()->json(['message' => "Mã giảm giá không hợp lệ $now hoặc1 $coupon đã hết hạn"], 422);
             }
 
             if (!is_null($coupon->min_order_amount) && $subtotal < (float)$coupon->min_order_amount) {
@@ -247,11 +249,15 @@ class OrderController extends Controller
         }
 
         $validated = $request->validate([
-            'status' => ['required', 'in:pending,processing,shipped,completed,cancelled,failed'],
+            'status' => ['required', 'in:pending,processing,shipped,completed,cancelled,failed,refund_requested,refunded,partially_refunded'],
             // 'note' => ['nullable', 'string', 'max:1000'],
+            'reason_refund' => ['nullable', 'string', 'max:1000'],
+            
         ]);
 
         $order = Order::findOrFail($id);
+
+        $order->reason_refund = $order->reason_refund || '';
 
         if ($validated['status'] !== $order->status && $validated['status'] === 'completed') {
             $order->status = $validated['status'];
