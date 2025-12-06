@@ -51,7 +51,7 @@ class ReviewController extends Controller
                 ->where('id', $item['order_item_id'])
                 ->first();
 
-            if (!$orderItem || $orderItem->order->user_id !== $user->id) {
+            if (!$orderItem || $orderItem->order->user_id != $user->id) {
                 continue;
             }
             if (!in_array($orderItem->order->status, ['completed'])) {

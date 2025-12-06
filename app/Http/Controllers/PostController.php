@@ -29,7 +29,7 @@ class PostController extends Controller
             ->with([
                 'user:id,name',
                 'postCategory' => function ($q) use ($languageId) {
-                    if ($languageId !== null) {
+                    if ($languageId != null) {
                         $q->whereRelation('postCategoryTranslations', 'language_id', $languageId)
                             ->with(['postCategoryTranslations' => fn($qt) => $qt->where('language_id', $languageId)]);
                     } else {
@@ -37,7 +37,7 @@ class PostController extends Controller
                     }
                 },
                 'postTranslations' => function ($q) use ($languageId) {
-                    if ($languageId !== null) {
+                    if ($languageId != null) {
                         $q->where('language_id', $languageId);
                     }
                     // nếu $languageId === null => không filter, lấy tất cả translations

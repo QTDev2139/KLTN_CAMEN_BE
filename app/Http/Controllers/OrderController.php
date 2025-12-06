@@ -94,6 +94,7 @@ class OrderController extends Controller
             'shipping_address' => ['nullable'],
             'coupon_code' => ['nullable', 'string', 'max:100'],
             'payment_method'    => ['nullable', Rule::in(['cod', 'vnpay', 'momo'])],
+            'total_amount' => ['nullable', 'numeric'],
         ]);
         $paymentMethod = $validated['payment_method'] ?? 'cod';
 
@@ -150,8 +151,7 @@ class OrderController extends Controller
             Coupon::where('id', $coupon->id)->increment('used_count');
         }
 
-        // Cộng phí vận chuyển vào grand total, đảm bảo không âm và làm tròn 2 chữ số
-        $grandTotal = round(max($subtotal - $discountTotal + $ship_fee, 0), 2);
+        $grandTotal = round($validated['total_amount']);
 
         // --- KIỂM TRA STOCK TRƯỚC KHI TẠO ĐƠN ---
         $insufficient = [];
@@ -292,7 +292,7 @@ class OrderController extends Controller
         }
 
         // Nếu user không phải chủ đơn (hoặc admin) thì từ chối
-        if ($order->user_id !== $user->id) {
+        if ($order->user_id != $user->id) {
             return response()->json(['message' => 'Không có quyền thao tác đơn này'], 403);
         }
 
