@@ -13,6 +13,7 @@ class Cors
         // Cho phép frontend từ máy 192.168.1.103:3001 (React)
         $allowedOrigins = [
             'http://localhost:3001',
+            'http://camenfood.id.vn/',
             'http://127.0.0.1:3001',
             'http://192.168.1.103:3001',
         ];

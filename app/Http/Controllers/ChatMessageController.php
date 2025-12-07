@@ -7,15 +7,16 @@ use App\Events\MessageSent;
 use App\Models\ChatMessage;
 use App\Models\ChatRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChatMessageController extends Controller
 {
     public function index(Request $request, ChatRoom $room)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
         // Chỉ cho phép xem nếu thuộc room
-        if ($user->id !== 1 && $room->customer_id !== $user->id && $room->staff_id !== $user->id) {
+        if ($user->id != 1 && $room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
         }
 
@@ -29,9 +30,9 @@ class ChatMessageController extends Controller
 
     public function store(Request $request, ChatRoom $room)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
-        if ($room->customer_id !== $user->id && $room->staff_id !== $user->id) {
+        if ($room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
         }
 
@@ -74,11 +75,11 @@ class ChatMessageController extends Controller
     public function markAsRead(Request $request, ChatRoom $room)
     {
         $user = $request->user();
-        if ($user->id === 1) { 
-        return response()->json(['message' => 'Xem'], 200);
-    }
+        if ($user->id === 1) {
+            return response()->json(['message' => 'Xem'], 200);
+        }
 
-        if ($room->customer_id !== $user->id && $room->staff_id !== $user->id) {
+        if ($room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
         }
 
@@ -88,5 +89,16 @@ class ChatMessageController extends Controller
             ->update(['read_at' => now()]);
 
         return response()->json(['message' => 'OK']);
+    }
+
+    public function destroy($chatroomId)
+    {
+        $deletedCount = ChatMessage::where('chat_room_id', $chatroomId)->delete();
+
+        if ($deletedCount > 0) {
+            return response()->json(['message' => 'Xóa ' . $deletedCount . ' tin nhắn thành công'], 200);
+        }
+
+        return response()->json(['message' => 'Không tìm thấy tin nhắn để xóa trong phòng chat này'], 404);
     }
 }

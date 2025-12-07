@@ -13,6 +13,12 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\ChatMessageController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\RequestImportController;
+use App\Http\Controllers\Api\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,11 +127,15 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/orders/{id}', [OrderController::class, 'show']);
     Route::post('/orders', [OrderController::class, 'store']);
     Route::put('/orders/{id}', [OrderController::class, 'update']);
+    Route::post('/orders/refund/request', [OrderController::class, 'refundRequest']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
     Route::prefix('payment')->group(function () {
         Route::post('/vnpay', [PaymentController::class, 'vnpay_payment']);
         Route::get('/vnpay/status/{order_id}', [PaymentController::class, 'vnpay_status']);
+        Route::post('/vnpay_manual_refund', [PaymentController::class, 'vnpay_manual_refund']);
+        Route::post('/vnpay_auto_refund', [PaymentController::class, 'vnpay_auto_refund']);
+
     });
 
     Route::prefix('review')->group(function () {
@@ -137,17 +147,21 @@ Route::middleware('auth:api')->group(function () {
     // Quản lý danh mục bài viết
     Route::apiResource('post-categories', PostCategoryController::class)
         ->only(['store', 'update', 'destroy']);
+
+    // ====================
+    // 📊 STATISTICS ROUTES (Thống kê)
+    // ====================
+    Route::prefix('v1/statistics')->group(function () {
+        // Lấy dữ liệu overview (5 box KPI)
+        Route::get('/overview', [StatisticController::class, 'getOverview']);
+        // Lấy toàn bộ dữ liệu dashboard (KPI boxes + Charts)
+        Route::get('/dashboard-data', [StatisticController::class, 'getDashboardData']);
+    });
 });
+
 Route::prefix('payment')->group(function () {
     Route::get('/vnpay/callback', [PaymentController::class, 'vnpay_callback']);
 });
-
-
-
-use App\Http\Controllers\ChatRoomController;
-use App\Http\Controllers\ChatMessageController;
-use App\Http\Controllers\DeliveryController;
-use App\Http\Controllers\RequestImportController;
 
 Route::middleware('auth:api')->group(function () {
     Route::post('chat/rooms/open', [ChatRoomController::class, 'openRoom']);
@@ -170,6 +184,9 @@ Route::middleware('auth:api')->group(function () {
     // Đánh dấu đã đọc (optional)
     Route::post('chat/rooms/{room}/read', [ChatMessageController::class, 'markAsRead']);
 
+    // Xóa tin nhắn
+    Route::delete('chat/messages/{chatroomId}', [ChatMessageController::class, 'destroy']);
+
 
     Route::get('/contact', [ContactController::class, 'index']);
     Route::put('/contact/{id}', [ContactController::class, 'updateSupportContact']);
@@ -188,3 +205,6 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/deliveries/{id}', [DeliveryController::class, 'update']);
     Route::put('/deliveries/missed/{id}', [DeliveryController::class, 'updateProductMissed']);
 });
+
+Route::get('announcements', [AnnouncementController::class, 'index']);
+Route::get('announcements/file/{encoded}', [AnnouncementController::class, 'show']);
