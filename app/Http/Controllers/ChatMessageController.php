@@ -75,9 +75,9 @@ class ChatMessageController extends Controller
     public function markAsRead(Request $request, ChatRoom $room)
     {
         $user = $request->user();
-        if ($user->id === 1) { 
-        return response()->json(['message' => 'Xem'], 200);
-    }
+        if ($user->id === 1) {
+            return response()->json(['message' => 'Xem'], 200);
+        }
 
         if ($room->customer_id != $user->id && $room->staff_id != $user->id) {
             return response()->json(['message' => 'Không có quyền xem tin nhắn này'], 403);
@@ -89,5 +89,16 @@ class ChatMessageController extends Controller
             ->update(['read_at' => now()]);
 
         return response()->json(['message' => 'OK']);
+    }
+
+    public function destroy($chatroomId)
+    {
+        $deletedCount = ChatMessage::where('chat_room_id', $chatroomId)->delete();
+
+        if ($deletedCount > 0) {
+            return response()->json(['message' => 'Xóa ' . $deletedCount . ' tin nhắn thành công'], 200);
+        }
+
+        return response()->json(['message' => 'Không tìm thấy tin nhắn để xóa trong phòng chat này'], 404);
     }
 }

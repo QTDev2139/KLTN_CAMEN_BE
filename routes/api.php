@@ -14,6 +14,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\ChatMessageController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\RequestImportController;
+use App\Http\Controllers\Api\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -142,17 +147,21 @@ Route::middleware('auth:api')->group(function () {
     // Quản lý danh mục bài viết
     Route::apiResource('post-categories', PostCategoryController::class)
         ->only(['store', 'update', 'destroy']);
+
+    // ====================
+    // 📊 STATISTICS ROUTES (Thống kê)
+    // ====================
+    Route::prefix('v1/statistics')->group(function () {
+        // Lấy dữ liệu overview (5 box KPI)
+        Route::get('/overview', [StatisticController::class, 'getOverview']);
+        // Lấy toàn bộ dữ liệu dashboard (KPI boxes + Charts)
+        Route::get('/dashboard-data', [StatisticController::class, 'getDashboardData']);
+    });
 });
+
 Route::prefix('payment')->group(function () {
     Route::get('/vnpay/callback', [PaymentController::class, 'vnpay_callback']);
 });
-
-
-
-use App\Http\Controllers\ChatRoomController;
-use App\Http\Controllers\ChatMessageController;
-use App\Http\Controllers\DeliveryController;
-use App\Http\Controllers\RequestImportController;
 
 Route::middleware('auth:api')->group(function () {
     Route::post('chat/rooms/open', [ChatRoomController::class, 'openRoom']);
@@ -174,6 +183,9 @@ Route::middleware('auth:api')->group(function () {
 
     // Đánh dấu đã đọc (optional)
     Route::post('chat/rooms/{room}/read', [ChatMessageController::class, 'markAsRead']);
+
+    // Xóa tin nhắn
+    Route::delete('chat/messages/{chatroomId}', [ChatMessageController::class, 'destroy']);
 
 
     Route::get('/contact', [ContactController::class, 'index']);
