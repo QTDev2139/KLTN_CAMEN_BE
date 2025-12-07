@@ -16,23 +16,21 @@ class ReviewController extends Controller
      * GET /api/reviews
      * Lấy danh sách review của sản phẩm
      */
-    public function index(Request $request)
+    public function index()
     {
-        $productId = $request->query('product_id');
-
-        if (!$productId) {
-            return response()->json(['message' => 'product_id is required'], 422);
-        }
-
         $reviews = Review::with([
             'user',
-            'orderItem'
+            'orderItem.order',
+            'product.product_translations',
+            'product.product_images'
         ])
-            ->where('product_id', $productId)
+            ->whereHas('orderItem', function ($q) {
+                $q->whereNotNull('order_id');
+            })
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->get();
 
-        return response()->json($reviews);
+        return response()->json($reviews, 200);
     }
 
     /**
@@ -53,7 +51,7 @@ class ReviewController extends Controller
                 ->where('id', $item['order_item_id'])
                 ->first();
 
-            if (!$orderItem || $orderItem->order->user_id !== $user->id) {
+            if (!$orderItem || $orderItem->order->user_id != $user->id) {
                 continue;
             }
             if (!in_array($orderItem->order->status, ['completed'])) {

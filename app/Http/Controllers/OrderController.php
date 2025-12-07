@@ -31,6 +31,7 @@ class OrderController extends Controller
 
         $orders = Order::with([
             'orderItems.product.product_images',
+            'orderItems.product.product_translations',
             'coupon',
         ])
             ->orderByDesc('id')
@@ -75,7 +76,7 @@ class OrderController extends Controller
 
         return OrderResource::collection($orders);
     }
-    
+
     /**
      * POST /api/orders
      * Tạo đơn hàng từ giỏ hiện tại (có thể đính kèm coupon_code)
@@ -93,6 +94,7 @@ class OrderController extends Controller
             'shipping_address' => ['nullable'],
             'coupon_code' => ['nullable', 'string', 'max:100'],
             'payment_method'    => ['nullable', Rule::in(['cod', 'vnpay', 'momo'])],
+            'total_amount' => ['nullable', 'numeric'],
         ]);
         $paymentMethod = $validated['payment_method'] ?? 'cod';
 
@@ -119,20 +121,22 @@ class OrderController extends Controller
         $discountTotal = 0;
 
         if (!empty($validated['coupon_code'])) {
+            $now = now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString();
+            if($now)
             $coupon = Coupon::query()
                 ->where('code', $validated['coupon_code'])
                 ->where('is_active', true)
                 ->when(true, function ($q) {
                     $q->where(function ($qq) {
-                        $qq->whereNull('start_date')->orWhere('start_date', '<=', now());
+                        $qq->whereNull('start_date')->orWhere('start_date', '<=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
                     })->where(function ($qq) {
-                        $qq->whereNull('end_date')->orWhere('end_date', '>=', now());
+                        $qq->whereNull('end_date')->orWhere('end_date', '>=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
                     });
                 })
                 ->first();
-
+            
             if (!$coupon) {
-                return response()->json(['message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn'], 422);
+                return response()->json(['message' => "Mã giảm giá không hợp lệ $now hoặc1 $coupon đã hết hạn"], 422);
             }
 
             if (!is_null($coupon->min_order_amount) && $subtotal < (float)$coupon->min_order_amount) {
@@ -147,8 +151,7 @@ class OrderController extends Controller
             Coupon::where('id', $coupon->id)->increment('used_count');
         }
 
-        // Cộng phí vận chuyển vào grand total, đảm bảo không âm và làm tròn 2 chữ số
-        $grandTotal = round(max($subtotal - $discountTotal + $ship_fee, 0), 2);
+        $grandTotal = round($validated['total_amount']);
 
         // --- KIỂM TRA STOCK TRƯỚC KHI TẠO ĐƠN ---
         $insufficient = [];
@@ -246,11 +249,15 @@ class OrderController extends Controller
         }
 
         $validated = $request->validate([
-            'status' => ['required', 'in:pending,processing,shipped,completed,cancelled,failed'],
+            'status' => ['required', 'in:pending,processing,shipped,completed,cancelled,failed,refund_requested,refunded,partially_refunded'],
             // 'note' => ['nullable', 'string', 'max:1000'],
+            'reason_refund' => ['nullable', 'string', 'max:1000'],
+            
         ]);
 
         $order = Order::findOrFail($id);
+
+        $order->reason_refund = $order->reason_refund || '';
 
         if ($validated['status'] !== $order->status && $validated['status'] === 'completed') {
             $order->status = $validated['status'];
@@ -265,6 +272,53 @@ class OrderController extends Controller
         }
     }
 
+    public function refundRequest(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'Vui lòng đăng nhập'], 407);
+        }
+
+        $validated = $request->validate([
+            'order_code'    => ['required', 'string'],
+            'reason_refund' => ['nullable', 'string', 'max:1000'],
+            'images'        => ['nullable', 'array'],
+            'images.*'      => ['file', 'mimes:jpg,jpeg,png,gif,webp', 'max:5120'],
+        ]);
+
+        $order = Order::where('code', $validated['order_code'])->first();
+        if (!$order) {
+            return response()->json(['message' => 'Đơn hàng không tồn tại'], 404);
+        }
+
+        // Nếu user không phải chủ đơn (hoặc admin) thì từ chối
+        if ($order->user_id != $user->id) {
+            return response()->json(['message' => 'Không có quyền thao tác đơn này'], 403);
+        }
+
+        // Prepare existing images (Order->img_refund is cast to array in model)
+        $existingImgs = is_array($order->img_refund) ? $order->img_refund : [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $file_name = time() . '_' . $file->getClientOriginalName();
+                $path = $file->storeAs('refunds', $file_name, 'public');
+                $existingImgs[] = $path;
+            }
+        }
+
+        $order->reason_refund = $validated['reason_refund'] ?? $order->reason_refund;
+        if (!empty($existingImgs)) {
+            $order->img_refund = $existingImgs;
+        }
+        $order->status = 'refund_requested';
+        $order->save();
+
+        return response()->json([
+            'message' => 'Yêu cầu hoàn tiền đã được gửi',
+            'data' => $order->load(['orderItems.product.product_images', 'coupon']),
+        ], 200);
+    }
 
     /**
      * DELETE /api/orders/{id}

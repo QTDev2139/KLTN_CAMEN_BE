@@ -11,7 +11,7 @@ class ChatRoomController extends Controller
 {
     public function index(Request $request)
     {
-        $user = $request->user();
+        $user = Auth::user();
         $roleId = $user->role_id;
 
         $query = ChatRoom::query()->orderByDesc('updated_at');
@@ -93,7 +93,7 @@ class ChatRoomController extends Controller
 
     public function show(Request $request, ChatRoom $room)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
         // Chỉ cho phép xem room nếu là 1 trong 2 người
         if ($room->customer_id !== $user->id && $room->staff_id !== $user->id) {
