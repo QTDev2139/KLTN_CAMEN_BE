@@ -63,6 +63,7 @@ class UserController extends Controller
 
         $User->update([
             'name' => $request->get('name'),
+            'email' => $request->get('email'),
             'role_id' => $request->get('role_id'),
             'status' => $request->get('status'),
         ]);

@@ -103,7 +103,6 @@ class ReviewController extends Controller
         }
 
         $review = Review::where('id', $id)
-            ->where('user_id', $user->id)
             ->firstOrFail();
 
         // Xóa ảnh trong storage
