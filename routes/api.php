@@ -19,6 +19,7 @@ use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\RequestImportController;
 use App\Http\Controllers\Api\StatisticController;
+use Illuminate\Support\Facades\Broadcast;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,11 @@ use App\Http\Controllers\Api\StatisticController;
 // ====================
 // 📰 PUBLIC ROUTES (Không cần đăng nhập)
 // ====================
+
+Route::post('/broadcasting/auth', function () {
+    return Broadcast::auth(request());
+})->middleware('auth:api');
+
 
 Route::prefix('posts')->group(function () {
     Route::get('/{lang}', [PostController::class, 'index']);           // Danh sách bài viết

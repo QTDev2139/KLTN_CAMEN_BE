@@ -16,6 +16,11 @@ class Cors
             'http://camenfood.id.vn/',
             'http://127.0.0.1:3001',
             'http://192.168.1.103:3001',
+            'http://vlssoft.id.vn:45355',
+            'https://vlssoft.id.vn:45355',
+            'http://vlssoft.id.vn:45354',
+            'https://vlssoft.id.vn:45354',
+
         ];
 
         $origin = $request->headers->get('Origin');

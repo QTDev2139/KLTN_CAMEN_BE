@@ -17,7 +17,7 @@ class ChatRoomController extends Controller
         $query = ChatRoom::query()->orderByDesc('updated_at');
 
         // 1. Phân quyền Admin: xem tất cả phòng chát
-        if ($roleId == 1 || $roleId == 3) {
+        if ($roleId == 1 || $roleId == 3 || $roleId == 6 ) {
             $query->with(['customer', 'staff', 'lastMessage']);
 
             // 2. Phân quyền Khách hàng: Chỉ xem các phòng mà mình là customer
@@ -69,11 +69,9 @@ class ChatRoomController extends Controller
 
     public function joinRoom(Request $request, $roomId)
     {
-     
         $staffId = $request->input('staff_id');
         // Tìm phòng chat
         $room = ChatRoom::find($roomId);
-
         if (!$room) {
             return response()->json([
                 'message' => "Phòng chat với ID $roomId không tồn tại."
@@ -91,7 +89,7 @@ class ChatRoomController extends Controller
         return response()->json($room);
     }
 
-    public function show(Request $request, ChatRoom $room)
+    public function show(ChatRoom $room)
     {
         $user = Auth::user();
 
