@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Dec 07, 2025 at 07:39 AM
--- Server version: 9.1.0
--- PHP Version: 8.3.14
+-- Host: localhost:3306
+-- Generation Time: Dec 08, 2025 at 10:39 PM
+-- Server version: 8.0.35-cll-lve
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kltn-be`
+-- Database: `vlssoftv68eb_kltn-be`
 --
 
 -- --------------------------------------------------------
@@ -27,13 +27,27 @@ SET time_zone = "+00:00";
 -- Table structure for table `cache`
 --
 
-DROP TABLE IF EXISTS `cache`;
-CREATE TABLE IF NOT EXISTS `cache` (
+CREATE TABLE `cache` (
   `key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `value` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `expiration` int NOT NULL,
-  PRIMARY KEY (`key`)
+  `expiration` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('laravel-cache-register:info:123@gmail', 'a:3:{s:8:\"otp_hash\";s:60:\"$2y$12$9uA8zTUVF87rMDGQkScQXOj/GY70t.hfQih2lGqd0muGcn8oCwDIy\";s:13:\"password_hash\";s:60:\"$2y$12$dewgywxS.jF6GwIRS6Lqv.0dBTQHJ6a/ZyFyL2hj5Epw3UcCeaARu\";s:4:\"name\";N;}', 1764816520),
+('laravel-cache-register:otp:123@gmail', 'a:3:{s:8:\"otp_hash\";s:60:\"$2y$12$dpqoflrE0N0w43F5G/IYq.U61x9sCTHeizwPXjEpCZt5hRTiFmcGG\";s:13:\"password_hash\";s:60:\"$2y$12$gKKZ1hqwLiADUsxqkHxkjuq8.DDNjB2I7nPNDH8WBajYnBzAqFXwa\";s:4:\"name\";N;}', 1764815439),
+('laravel-cache-register:otp:Nhingo.3367@gmail.com', 'a:3:{s:8:\"otp_hash\";s:60:\"$2y$12$9Ffdxb2J9ijj8J6wkP.nV.kuvXc4jLAb2y59fnXg0flYEudpg5etS\";s:13:\"password_hash\";s:60:\"$2y$12$wXe1.cqeKA.NYeSoPeA3PeBheAdz0wbM8hdCpYw2zI29TBRS/Kcqy\";s:4:\"name\";s:9:\"Hoang Nhi\";}', 1765105763),
+('laravel-cache-register:otp:Tranletruongvu12a192021@gmail.com', 'a:3:{s:8:\"otp_hash\";s:60:\"$2y$12$zRJEQbg.qsM4B.HCIoYqe.ZdN/czMkQ7XzTiXNk8WhyfK6biFuGy6\";s:13:\"password_hash\";s:60:\"$2y$12$pmPrwml22kEkps1yLKtLN.vrRD.QOhws5pIViLVq00/Qqx0v4Z6du\";s:4:\"name\";N;}', 1764788169),
+('laravel-cache-register:info:Tranletruongvu12a192021@gmail.com', 'a:3:{s:8:\"otp_hash\";s:60:\"$2y$12$65Zbv8ftznuzvdVRmJYS/OpJpQH2NnWPhLz6OAkFC6vaHgiiGvutq\";s:13:\"password_hash\";s:60:\"$2y$12$bH1f7fWMQeyE0fT5z8p7ne6P7GWG7mejJ4vfFjEXFG1nF5Nt2ZGR6\";s:4:\"name\";N;}', 1764789249),
+('laravel-cache-forget_password:otp:datpika98@gmail.com', 'a:1:{s:8:\"otp_hash\";s:60:\"$2y$12$1B2Z5mpiPOZLpEPDO/HoeugdGqZsM9Wd9aRvP6kmjPEhjq6sYYSBW\";}', 1764789375),
+('laravel-cache-forget_password:info:datpika98@gmail.com', 'a:1:{s:8:\"otp_hash\";s:60:\"$2y$12$vpUGnnobUU.Y.SxPXmcpoOzT4XdCrLD5.OSqer6CvgjD4BsLWbc2K\";}', 1764790455),
+('laravel-cache-register:info:Nhingo.3367@gmail.com', 'a:3:{s:8:\"otp_hash\";s:60:\"$2y$12$fzyFRtmz7nVrYEodUt/9neqk//NOUBWnO1snWD3kCK7Pk23yCMniO\";s:13:\"password_hash\";s:60:\"$2y$12$KJFmgIWNdS7EU.l5HD0kNOHrmIfirf7A8MyiUc7ea7D98kbLtllmS\";s:4:\"name\";s:9:\"Hoang Nhi\";}', 1765106843),
+('laravel-cache-forget_password:otp:user1@gmail.com', 'a:1:{s:8:\"otp_hash\";s:60:\"$2y$12$6dY34oBuD2oUG21BgJPCM.aGcJo5m7QUQJq4dIvLdlWgVRos5yEBe\";}', 1765105697),
+('laravel-cache-forget_password:info:user1@gmail.com', 'a:1:{s:8:\"otp_hash\";s:60:\"$2y$12$rnK5rKZ.d7YRFHQTJ6HHge/YC8lkhjavcQ1kr9dZceZWVQlctfYVK\";}', 1765106778);
 
 -- --------------------------------------------------------
 
@@ -41,12 +55,10 @@ CREATE TABLE IF NOT EXISTS `cache` (
 -- Table structure for table `cache_locks`
 --
 
-DROP TABLE IF EXISTS `cache_locks`;
-CREATE TABLE IF NOT EXISTS `cache_locks` (
+CREATE TABLE `cache_locks` (
   `key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `owner` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `expiration` int NOT NULL,
-  PRIMARY KEY (`key`)
+  `expiration` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -55,20 +67,16 @@ CREATE TABLE IF NOT EXISTS `cache_locks` (
 -- Table structure for table `cartitems`
 --
 
-DROP TABLE IF EXISTS `cartitems`;
-CREATE TABLE IF NOT EXISTS `cartitems` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cartitems` (
+  `id` bigint UNSIGNED NOT NULL,
   `qty` int NOT NULL,
   `unit_price` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
   `cart_id` bigint UNSIGNED NOT NULL,
   `product_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cartitems_cart_id_foreign` (`cart_id`),
-  KEY `cartitems_product_id_foreign` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `cartitems`
@@ -76,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `cartitems` (
 
 INSERT INTO `cartitems` (`id`, `qty`, `unit_price`, `subtotal`, `cart_id`, `product_id`, `created_at`, `updated_at`) VALUES
 (77, 10, 144000.00, 1440000.00, 4, 17, '2025-12-03 11:54:22', '2025-12-03 12:08:11'),
+(98, 1, 144000.00, 144000.00, 3, 17, '2025-12-04 21:21:56', '2025-12-04 21:21:56'),
 (79, 10, 150000.00, 1500000.00, 4, 19, '2025-12-03 12:05:57', '2025-12-03 12:08:15'),
 (81, 8, 150000.00, 1200000.00, 6, 18, '2025-12-03 12:08:35', '2025-12-03 12:09:26'),
 (82, 10, 147000.00, 1470000.00, 6, 21, '2025-12-03 12:08:59', '2025-12-03 12:09:10');
@@ -86,28 +95,28 @@ INSERT INTO `cartitems` (`id`, `qty`, `unit_price`, `subtotal`, `cart_id`, `prod
 -- Table structure for table `carts`
 --
 
-DROP TABLE IF EXISTS `carts`;
-CREATE TABLE IF NOT EXISTS `carts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `carts` (
+  `id` bigint UNSIGNED NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `user_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `carts_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `carts`
 --
 
 INSERT INTO `carts` (`id`, `is_active`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 0, 2, '2025-10-25 04:45:00', '2025-12-04 10:18:11'),
-(2, 0, 3, '2025-11-07 08:14:13', '2025-11-20 09:33:35'),
-(3, 0, 9, '2025-11-21 20:09:25', '2025-12-04 09:13:19'),
+(1, 0, 2, '2025-10-25 04:45:00', '2025-12-06 03:04:47'),
+(2, 0, 3, '2025-11-07 08:14:13', '2025-12-07 07:05:34'),
+(3, 0, 9, '2025-11-21 20:09:25', '2025-12-04 21:19:11'),
 (4, 0, 18, '2025-12-03 11:45:01', '2025-12-03 11:50:15'),
 (5, 0, 19, '2025-12-03 11:47:15', '2025-12-03 11:57:14'),
-(6, 0, 20, '2025-12-03 12:01:55', '2025-12-03 12:07:31');
+(6, 0, 20, '2025-12-03 12:01:55', '2025-12-03 12:07:31'),
+(7, 0, 21, '2025-12-03 18:17:44', '2025-12-03 18:23:15'),
+(8, 0, 7, '2025-12-05 02:43:01', '2025-12-05 02:46:49'),
+(9, 1, 25, '2025-12-06 02:24:44', '2025-12-06 02:24:44');
 
 -- --------------------------------------------------------
 
@@ -115,13 +124,11 @@ INSERT INTO `carts` (`id`, `is_active`, `user_id`, `created_at`, `updated_at`) V
 -- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categories` (
+  `id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `categories`
@@ -138,19 +145,15 @@ INSERT INTO `categories` (`id`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `category_translations`
 --
 
-DROP TABLE IF EXISTS `category_translations`;
-CREATE TABLE IF NOT EXISTS `category_translations` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `category_translations` (
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `language_id` bigint UNSIGNED NOT NULL,
   `category_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_translations_language_id_foreign` (`language_id`),
-  KEY `category_translations_category_id_foreign` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `category_translations`
@@ -170,12 +173,10 @@ INSERT INTO `category_translations` (`id`, `name`, `slug`, `language_id`, `categ
 -- Table structure for table `chat_histories`
 --
 
-DROP TABLE IF EXISTS `chat_histories`;
-CREATE TABLE IF NOT EXISTS `chat_histories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `chat_histories` (
+  `id` bigint UNSIGNED NOT NULL,
   `message` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `sent_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `sent_at` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -184,31 +185,41 @@ CREATE TABLE IF NOT EXISTS `chat_histories` (
 -- Table structure for table `chat_messages`
 --
 
-DROP TABLE IF EXISTS `chat_messages`;
-CREATE TABLE IF NOT EXISTS `chat_messages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `chat_messages` (
+  `id` bigint UNSIGNED NOT NULL,
   `chat_room_id` bigint UNSIGNED NOT NULL,
   `sender_id` bigint UNSIGNED NOT NULL,
   `message` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `images` json DEFAULT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `chat_messages_sender_id_foreign` (`sender_id`),
-  KEY `chat_messages_chat_room_id_created_at_index` (`chat_room_id`,`created_at`)
-) ENGINE=MyISAM AUTO_INCREMENT=221 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `chat_messages`
 --
 
 INSERT INTO `chat_messages` (`id`, `chat_room_id`, `sender_id`, `message`, `images`, `read_at`, `created_at`, `updated_at`) VALUES
-(216, 10, 9, 'a', '[]', NULL, '2025-12-06 03:02:33', '2025-12-06 03:02:33'),
-(217, 10, 9, 'hi', '[]', NULL, '2025-12-07 00:23:52', '2025-12-07 00:23:52'),
-(218, 10, 9, 'a', '[]', NULL, '2025-12-07 00:25:30', '2025-12-07 00:25:30'),
-(219, 10, 9, 'a', '[]', NULL, '2025-12-07 00:29:16', '2025-12-07 00:29:16'),
-(220, 10, 9, 'lokokok', '[]', NULL, '2025-12-07 00:29:19', '2025-12-07 00:29:19');
+(194, 10, 9, 'alo', '[]', '2025-12-03 08:50:54', '2025-12-03 08:08:16', '2025-12-03 08:50:54'),
+(196, 10, 9, 'alo', '[]', '2025-12-03 08:50:54', '2025-12-03 08:12:13', '2025-12-03 08:50:54'),
+(197, 10, 9, 'hi', '[]', '2025-12-03 08:50:54', '2025-12-03 08:12:38', '2025-12-03 08:50:54'),
+(198, 10, 9, 'hi', '[]', '2025-12-03 08:50:54', '2025-12-03 08:14:16', '2025-12-03 08:50:54'),
+(199, 10, 9, 'hi', '[]', '2025-12-03 08:50:54', '2025-12-03 08:25:12', '2025-12-03 08:50:54'),
+(200, 10, 9, 'hi', '[]', '2025-12-03 08:50:54', '2025-12-03 08:25:58', '2025-12-03 08:50:54'),
+(201, 10, 9, 'Xin chào, tôi cần hỗ trợ!', '[]', '2025-12-03 08:50:54', '2025-12-03 08:29:04', '2025-12-03 08:50:54'),
+(202, 10, 9, 'hi', '[]', '2025-12-03 08:50:54', '2025-12-03 08:32:42', '2025-12-03 08:50:54'),
+(203, 10, 9, 'Xin chào, tôi cần hỗ trợ!', '[]', '2025-12-03 08:50:54', '2025-12-03 08:37:19', '2025-12-03 08:50:54'),
+(204, 10, 7, 'hả', '[]', '2025-12-03 09:07:07', '2025-12-03 08:50:57', '2025-12-03 09:07:07'),
+(205, 10, 9, 'xinchao', '[]', NULL, '2025-12-03 09:04:08', '2025-12-03 09:04:08'),
+(206, 11, 18, 'Hi', '[]', '2025-12-06 06:32:27', '2025-12-03 12:13:33', '2025-12-06 06:32:27'),
+(207, 14, 21, 'Chào', '[]', '2025-12-03 18:16:17', '2025-12-03 18:14:14', '2025-12-03 18:16:17'),
+(208, 14, 7, 'Bạn cần hổ trợ thông tin gì', '[\"chat_images/1764811001_mien2.webp\", \"chat_images/1764811001_mien1.webp\"]', '2025-12-03 18:17:23', '2025-12-03 18:16:41', '2025-12-03 18:17:23'),
+(209, 14, 7, 'Bạn cần hổ trợ thông tin gì', '[\"chat_images/1764811004_mien2.webp\", \"chat_images/1764811004_mien1.webp\"]', '2025-12-03 18:17:23', '2025-12-03 18:16:44', '2025-12-03 18:17:23'),
+(221, 10, 9, 'Xin chào, tôi cần hỗ trợ!', '[]', NULL, '2025-12-07 11:33:50', '2025-12-07 11:33:50'),
+(220, 15, 3, 'xin chào', '[]', NULL, '2025-12-07 04:22:45', '2025-12-07 04:22:45'),
+(218, 10, 9, '.', '[]', NULL, '2025-12-05 06:39:15', '2025-12-05 06:39:15'),
+(219, 10, 9, 'Xin chào, tôi cần hỗ trợ!', '[]', NULL, '2025-12-05 06:53:02', '2025-12-05 06:53:02');
 
 -- --------------------------------------------------------
 
@@ -216,30 +227,29 @@ INSERT INTO `chat_messages` (`id`, `chat_room_id`, `sender_id`, `message`, `imag
 -- Table structure for table `chat_rooms`
 --
 
-DROP TABLE IF EXISTS `chat_rooms`;
-CREATE TABLE IF NOT EXISTS `chat_rooms` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `chat_rooms` (
+  `id` bigint UNSIGNED NOT NULL,
   `customer_id` bigint UNSIGNED NOT NULL,
   `staff_id` bigint UNSIGNED DEFAULT NULL,
   `last_message_id` bigint UNSIGNED DEFAULT NULL,
   `status` enum('pending','active','closed') CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `chat_rooms_customer_id_staff_id_unique` (`customer_id`,`staff_id`),
-  KEY `chat_rooms_staff_id_foreign` (`staff_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `chat_rooms`
 --
 
 INSERT INTO `chat_rooms` (`id`, `customer_id`, `staff_id`, `last_message_id`, `status`, `created_at`, `updated_at`) VALUES
-(9, 2, NULL, 214, 'pending', '2025-12-02 22:43:29', '2025-12-05 06:33:09'),
-(10, 9, 7, 220, 'active', '2025-12-03 07:39:04', '2025-12-07 00:29:19'),
-(11, 18, 7, 206, 'active', '2025-12-03 11:42:56', '2025-12-06 02:02:21'),
+(9, 2, 7, 217, 'active', '2025-12-02 22:43:29', '2025-12-05 06:34:20'),
+(10, 9, 7, 221, 'active', '2025-12-03 07:39:04', '2025-12-07 11:33:50'),
+(11, 18, 26, 206, 'active', '2025-12-03 11:42:56', '2025-12-06 06:22:39'),
 (12, 19, NULL, NULL, 'pending', '2025-12-03 11:45:40', '2025-12-03 11:45:40'),
-(13, 20, NULL, NULL, 'pending', '2025-12-03 12:00:18', '2025-12-03 12:00:18');
+(13, 20, NULL, NULL, 'pending', '2025-12-03 12:00:18', '2025-12-03 12:00:18'),
+(14, 21, 7, 209, 'active', '2025-12-03 18:13:29', '2025-12-03 18:16:44'),
+(15, 3, 26, 220, 'active', '2025-12-04 21:29:54', '2025-12-07 07:55:29'),
+(16, 25, NULL, NULL, 'pending', '2025-12-06 02:24:20', '2025-12-06 02:24:20');
 
 -- --------------------------------------------------------
 
@@ -247,9 +257,8 @@ INSERT INTO `chat_rooms` (`id`, `customer_id`, `staff_id`, `last_message_id`, `s
 -- Table structure for table `contacts`
 --
 
-DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE IF NOT EXISTS `contacts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contacts` (
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `phone` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -259,10 +268,16 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `contacts_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `phone`, `title`, `content`, `status`, `note`, `user_id`, `created_at`, `updated_at`) VALUES
+(11, 'Trần Việt Quân', 'tranvietquan02102003@gmail.com', '0865452731', 'export', 'a', 0, NULL, 5, '2025-12-03 18:10:37', '2025-12-04 12:24:48'),
+(12, 'nhi', 'abc@gmail.com', '090234121', 'agency', 'sà', 0, NULL, NULL, '2025-12-04 12:25:35', '2025-12-04 12:25:35');
 
 -- --------------------------------------------------------
 
@@ -270,9 +285,8 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 -- Table structure for table `coupons`
 --
 
-DROP TABLE IF EXISTS `coupons`;
-CREATE TABLE IF NOT EXISTS `coupons` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coupons` (
+  `id` bigint UNSIGNED NOT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `discount_type` enum('percentage','fixed') CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT 'fixed',
@@ -288,19 +302,18 @@ CREATE TABLE IF NOT EXISTS `coupons` (
   `reason_end` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `coupons_code_unique` (`code`),
-  KEY `coupons_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `coupons`
 --
 
 INSERT INTO `coupons` (`id`, `user_id`, `code`, `discount_type`, `discount_value`, `max_discount_amount`, `min_order_amount`, `usage_limit`, `used_count`, `start_date`, `end_date`, `state`, `note`, `reason_end`, `is_active`, `created_at`, `updated_at`) VALUES
-(13, 1, 'BIRTHDAYCAMEN', 'fixed', 100000.00, NULL, 200000.00, 10, 0, '2025-12-05 00:00:00', '2025-12-11 23:59:00', 'approved', NULL, NULL, 1, '2025-12-03 12:00:51', '2025-12-04 06:51:38'),
-(14, 1, 'NOLAV', 'fixed', 200000.00, NULL, 100000.00, 10, 2, '2025-12-04 21:25:00', '2025-12-11 23:59:00', 'approved', NULL, NULL, 1, '2025-12-04 07:24:02', '2025-12-04 09:05:01');
+(13, 1, 'BIRTHDAYCAMEN', 'fixed', 100000.00, NULL, 200000.00, 10, 2, '2025-12-05 00:00:00', '2025-12-11 23:59:00', 'approved', NULL, NULL, 1, '2025-12-03 12:00:51', '2025-12-07 07:05:34'),
+(14, 22, 'NOEN', 'fixed', 500000.00, NULL, 500000.00, 10, 2, '2025-12-05 00:00:00', '2025-12-11 23:59:00', 'approved', NULL, NULL, 1, '2025-12-03 18:45:08', '2025-12-04 21:45:07'),
+(15, 1, 'NOIEM', 'percentage', 30.00, 50000.00, 100000.00, 10, 3, '2025-12-05 10:28:00', '2025-12-12 23:59:00', 'approved', NULL, NULL, 1, '2025-12-04 20:26:24', '2025-12-05 02:29:43'),
+(16, 5, '889989', 'fixed', 1000.00, NULL, 100000.00, 10, 0, '2025-12-08 00:00:00', '2025-12-14 23:59:00', 'pending', NULL, NULL, 1, '2025-12-07 08:19:13', '2025-12-07 08:19:13');
 
 -- --------------------------------------------------------
 
@@ -308,20 +321,25 @@ INSERT INTO `coupons` (`id`, `user_id`, `code`, `discount_type`, `discount_value
 -- Table structure for table `deliveries`
 --
 
-DROP TABLE IF EXISTS `deliveries`;
-CREATE TABLE IF NOT EXISTS `deliveries` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `deliveries` (
+  `id` bigint UNSIGNED NOT NULL,
   `delivery_number` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `date` date NOT NULL,
   `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `user_id` bigint UNSIGNED NOT NULL,
   `request_import_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `deliveries_user_id_foreign` (`user_id`),
-  KEY `deliveries_request_import_id_foreign` (`request_import_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `deliveries`
+--
+
+INSERT INTO `deliveries` (`id`, `delivery_number`, `date`, `note`, `user_id`, `request_import_id`, `created_at`, `updated_at`) VALUES
+(11, 'DEL-20251204013202CSTK', '2025-12-04', NULL, 15, 14, '2025-12-03 18:32:02', '2025-12-03 18:34:21'),
+(12, 'DEL-20251206100129QZ1X', '2025-12-06', 'đủ', 15, 15, '2025-12-06 03:01:29', '2025-12-06 03:02:31'),
+(13, 'DEL-20251207150438IZC1', '2025-12-07', NULL, 15, 16, '2025-12-07 08:04:38', '2025-12-07 09:06:39');
 
 -- --------------------------------------------------------
 
@@ -329,18 +347,15 @@ CREATE TABLE IF NOT EXISTS `deliveries` (
 -- Table structure for table `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `failed_jobs` (
+  `id` bigint UNSIGNED NOT NULL,
   `uuid` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `connection` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `queue` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `payload` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `exception` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `failed_jobs`
@@ -355,18 +370,15 @@ INSERT INTO `failed_jobs` (`id`, `uuid`, `connection`, `queue`, `payload`, `exce
 -- Table structure for table `jobs`
 --
 
-DROP TABLE IF EXISTS `jobs`;
-CREATE TABLE IF NOT EXISTS `jobs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jobs` (
+  `id` bigint UNSIGNED NOT NULL,
   `queue` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `payload` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `attempts` tinyint UNSIGNED NOT NULL,
   `reserved_at` int UNSIGNED DEFAULT NULL,
   `available_at` int UNSIGNED NOT NULL,
-  `created_at` int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `jobs_queue_index` (`queue`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `created_at` int UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `jobs`
@@ -385,8 +397,7 @@ INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `availa
 -- Table structure for table `job_batches`
 --
 
-DROP TABLE IF EXISTS `job_batches`;
-CREATE TABLE IF NOT EXISTS `job_batches` (
+CREATE TABLE `job_batches` (
   `id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `total_jobs` int NOT NULL,
@@ -396,8 +407,7 @@ CREATE TABLE IF NOT EXISTS `job_batches` (
   `options` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `cancelled_at` int DEFAULT NULL,
   `created_at` int NOT NULL,
-  `finished_at` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `finished_at` int DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -406,15 +416,13 @@ CREATE TABLE IF NOT EXISTS `job_batches` (
 -- Table structure for table `languages`
 --
 
-DROP TABLE IF EXISTS `languages`;
-CREATE TABLE IF NOT EXISTS `languages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `languages` (
+  `id` bigint UNSIGNED NOT NULL,
   `code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `languages`
@@ -430,13 +438,11 @@ INSERT INTO `languages` (`id`, `code`, `name`, `created_at`, `updated_at`) VALUE
 -- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `migrations` (
+  `id` int UNSIGNED NOT NULL,
   `migration` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `batch` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -489,20 +495,16 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `orderitems`
 --
 
-DROP TABLE IF EXISTS `orderitems`;
-CREATE TABLE IF NOT EXISTS `orderitems` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orderitems` (
+  `id` bigint UNSIGNED NOT NULL,
   `qty` int NOT NULL,
   `unit_price` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
   `order_id` bigint UNSIGNED NOT NULL,
   `product_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orderitems_order_id_foreign` (`order_id`),
-  KEY `orderitems_product_id_foreign` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=97 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `orderitems`
@@ -516,12 +518,41 @@ INSERT INTO `orderitems` (`id`, `qty`, `unit_price`, `subtotal`, `order_id`, `pr
 (88, 1, 144000.00, 144000.00, 82, 17, '2025-12-03 11:54:49', '2025-12-03 11:54:49'),
 (89, 4, 150000.00, 600000.00, 83, 19, '2025-12-03 11:57:14', '2025-12-03 11:57:14'),
 (90, 3, 150000.00, 450000.00, 84, 19, '2025-12-03 12:07:31', '2025-12-03 12:07:31'),
-(91, 10, 150000.00, 1500000.00, 85, 18, '2025-12-04 08:46:59', '2025-12-04 08:46:59'),
-(92, 2, 144000.00, 288000.00, 86, 17, '2025-12-04 09:05:01', '2025-12-04 09:05:01'),
-(93, 1, 144000.00, 144000.00, 87, 17, '2025-12-04 09:12:50', '2025-12-04 09:12:50'),
-(94, 1, 144000.00, 144000.00, 88, 17, '2025-12-04 09:55:49', '2025-12-04 09:55:49'),
-(95, 2, 150000.00, 300000.00, 89, 19, '2025-12-04 10:08:53', '2025-12-04 10:08:53'),
-(96, 1, 144000.00, 144000.00, 90, 17, '2025-12-04 10:18:11', '2025-12-04 10:18:11');
+(91, 5, 150000.00, 750000.00, 85, 18, '2025-12-03 17:59:01', '2025-12-03 17:59:01'),
+(92, 6, 144000.00, 864000.00, 85, 17, '2025-12-03 17:59:01', '2025-12-03 17:59:01'),
+(93, 1, 144000.00, 144000.00, 86, 17, '2025-12-03 18:18:35', '2025-12-03 18:18:35'),
+(94, 4, 150000.00, 600000.00, 87, 19, '2025-12-03 18:19:47', '2025-12-03 18:19:47'),
+(95, 1, 144000.00, 144000.00, 88, 17, '2025-12-03 18:22:46', '2025-12-03 18:22:46'),
+(96, 4, 150000.00, 600000.00, 89, 18, '2025-12-04 20:27:18', '2025-12-04 20:27:18'),
+(97, 1, 144000.00, 144000.00, 90, 17, '2025-12-04 20:29:41', '2025-12-04 20:29:41'),
+(98, 1, 144000.00, 144000.00, 91, 17, '2025-12-04 20:38:14', '2025-12-04 20:38:14'),
+(99, 1, 144000.00, 144000.00, 92, 17, '2025-12-04 20:42:50', '2025-12-04 20:42:50'),
+(100, 1, 144000.00, 144000.00, 93, 17, '2025-12-04 20:43:01', '2025-12-04 20:43:01'),
+(101, 1, 144000.00, 144000.00, 94, 17, '2025-12-04 20:43:55', '2025-12-04 20:43:55'),
+(102, 1, 144000.00, 144000.00, 95, 17, '2025-12-04 20:44:53', '2025-12-04 20:44:53'),
+(103, 1, 144000.00, 144000.00, 96, 17, '2025-12-04 20:45:39', '2025-12-04 20:45:39'),
+(104, 1, 144000.00, 144000.00, 97, 17, '2025-12-04 20:46:03', '2025-12-04 20:46:03'),
+(105, 1, 144000.00, 144000.00, 98, 17, '2025-12-04 20:46:12', '2025-12-04 20:46:12'),
+(106, 2, 144000.00, 288000.00, 99, 17, '2025-12-04 20:47:59', '2025-12-04 20:47:59'),
+(107, 1, 144000.00, 144000.00, 100, 17, '2025-12-04 20:49:05', '2025-12-04 20:49:05'),
+(108, 1, 144000.00, 144000.00, 101, 17, '2025-12-04 20:50:29', '2025-12-04 20:50:29'),
+(109, 1, 144000.00, 144000.00, 102, 17, '2025-12-04 20:51:59', '2025-12-04 20:51:59'),
+(110, 1, 144000.00, 144000.00, 103, 17, '2025-12-04 21:14:12', '2025-12-04 21:14:12'),
+(111, 1, 144000.00, 144000.00, 104, 17, '2025-12-04 21:16:01', '2025-12-04 21:16:01'),
+(112, 1, 144000.00, 144000.00, 105, 17, '2025-12-04 21:18:36', '2025-12-04 21:18:36'),
+(113, 1, 144000.00, 144000.00, 106, 17, '2025-12-04 21:42:10', '2025-12-04 21:42:10'),
+(114, 5, 144000.00, 720000.00, 107, 17, '2025-12-04 21:45:07', '2025-12-04 21:45:07'),
+(115, 4, 144000.00, 576000.00, 108, 17, '2025-12-04 22:07:00', '2025-12-04 22:07:00'),
+(116, 5, 150000.00, 750000.00, 109, 19, '2025-12-05 01:57:24', '2025-12-05 01:57:24'),
+(117, 4, 150000.00, 600000.00, 110, 19, '2025-12-05 02:29:43', '2025-12-05 02:29:43'),
+(118, 7, 150000.00, 1050000.00, 111, 18, '2025-12-05 02:43:15', '2025-12-05 02:43:15'),
+(119, 10, 144000.00, 1440000.00, 112, 17, '2025-12-05 02:46:49', '2025-12-05 02:46:49'),
+(120, 5, 150000.00, 750000.00, 113, 19, '2025-12-06 03:04:47', '2025-12-06 03:04:47'),
+(121, 5, 150000.00, 750000.00, 114, 19, '2025-12-07 06:44:46', '2025-12-07 06:44:46'),
+(122, 2, 150000.00, 300000.00, 115, 16, '2025-12-07 07:05:34', '2025-12-07 07:05:34'),
+(123, 1, 150000.00, 150000.00, 115, 18, '2025-12-07 07:05:34', '2025-12-07 07:05:34'),
+(124, 3, 147000.00, 441000.00, 115, 21, '2025-12-07 07:05:34', '2025-12-07 07:05:34'),
+(125, 3, 150000.00, 450000.00, 115, 19, '2025-12-07 07:05:34', '2025-12-07 07:05:34');
 
 -- --------------------------------------------------------
 
@@ -529,9 +560,8 @@ INSERT INTO `orderitems` (`id`, `qty`, `unit_price`, `subtotal`, `order_id`, `pr
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `orders` (
+  `id` bigint UNSIGNED NOT NULL,
   `code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `status` enum('pending','processing','shipped','completed','cancelled','refund_requested','refunded') CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT 'pending',
   `subtotal` decimal(10,2) NOT NULL DEFAULT '0.00',
@@ -552,12 +582,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `user_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `coupon_id` bigint UNSIGNED DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `orders_code_unique` (`code`),
-  KEY `orders_user_id_foreign` (`user_id`),
-  KEY `fk_coupon_id` (`coupon_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `coupon_id` bigint UNSIGNED DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `orders`
@@ -571,12 +597,37 @@ INSERT INTO `orders` (`id`, `code`, `status`, `subtotal`, `discount_total`, `shi
 (82, 'CM20251203185449H6T6', 'shipped', 144000.00, 0.00, 0.00, 144000.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Barry\", \"ward\": \"Phường Sài Gòn\", \"email\": \"datpika98@gmail.com\", \"phone\": \"0332360503\", \"gender\": \"Nam\", \"street\": \"Hsjska\", \"province\": \"Thành phố Hồ Chí Minh\"}', 'Hậks', 18, '2025-12-03 11:54:49', '2025-12-03 12:06:14', NULL),
 (83, 'CM20251203185714WEAG', 'shipped', 600000.00, 0.00, 0.00, 600000.00, 'cod', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Tuan\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tuanmei12@gmail.com\", \"phone\": \"0972986824\", \"gender\": \"Nam\", \"street\": \"Aaaaa\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 19, '2025-12-03 11:57:14', '2025-12-03 12:06:11', NULL),
 (84, 'CM20251203190731UGQE', 'cancelled', 450000.00, 0.00, 0.00, 450000.00, 'cod', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Cua nè A\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tranletruongvu12a192021@gmail.com\", \"phone\": \"0971342340\", \"gender\": \"Nam\", \"street\": \"Aaaaa\", \"province\": \"Thành phố Hồ Chí Minh\"}', 'Aaaa', 20, '2025-12-03 12:07:31', '2025-12-03 12:07:47', NULL),
-(85, 'CM20251204154659MPXY', 'cancelled', 1500000.00, 200000.00, 50000.00, 1350000.00, 'vnpay', 'refunded', '2025-12-04 08:47:57', '15320571', 1350000.00, '15320575', NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 08:46:59', '2025-12-04 08:48:25', 14),
-(86, 'CM202512041605014IZH', 'refund_requested', 288000.00, 200000.00, 50000.00, 138000.00, 'vnpay', 'partially_refunded', '2025-12-04 09:05:37', '15320609', 118000.00, '15320620', 'Thiếu sản phẩm', '[\"refunds/1764864526_placeholder.png\", \"refunds/1764864526_placeholder.jpg\"]', NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Xã Ba Bể\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thái Nguyên\"}', NULL, 9, '2025-12-04 09:05:01', '2025-12-04 09:09:39', 14),
-(87, 'CM20251204161250ARSQ', 'refund_requested', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'partially_refunded', '2025-12-04 09:13:19', '15320630', 14000.00, '15320668', 'Hư', '[\"refunds/1764865411_caloc1.webp\"]', NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 09:12:50', '2025-12-04 09:25:04', NULL),
-(88, 'CM20251204165549VRNN', 'completed', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'paid', '2025-12-04 09:56:24', '15320784', 104000.00, '15320792', '1', '[\"refunds/1764867695_caloc2.webp\", \"refunds/1764867695_caloc1.webp\"]', NULL, '{\"name\": \"User 1\", \"ward\": \"Phường Thục Phán\", \"email\": \"user1@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 to 2\", \"province\": \"Cao Bằng\"}', NULL, 2, '2025-12-04 09:55:49', '2025-12-04 10:02:17', NULL),
-(89, 'CM20251204170853WGFH', 'completed', 300000.00, 0.00, 0.00, 300000.00, 'vnpay', 'paid', '2025-12-04 10:10:08', '15320804', NULL, NULL, '0', NULL, NULL, '{\"name\": \"User 1\", \"ward\": \"Phường Sài Gòn\", \"email\": \"user1@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 to 2\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 2, '2025-12-04 10:08:53', '2025-12-04 10:10:25', NULL),
-(90, 'CM20251204171811QJXQ', 'pending', 144000.00, 0.00, 0.00, 144000.00, 'cod', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"User 1\", \"ward\": \"Phường Sài Gòn\", \"email\": \"user1@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 to 2\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 2, '2025-12-04 10:18:11', '2025-12-04 10:18:11', NULL);
+(85, 'CM20251204005901AKCJ', 'completed', 1614000.00, 0.00, 0.00, 1614000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 9, '2025-12-03 17:59:01', '2025-12-03 17:59:31', NULL),
+(86, 'CM20251204011835SYQV', 'cancelled', 144000.00, 0.00, 0.00, 144000.00, 'cod', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 21, '2025-12-03 18:18:35', '2025-12-03 18:19:07', NULL),
+(87, 'CM202512040119471SVT', 'cancelled', 600000.00, 0.00, 50000.00, 650000.00, 'vnpay', 'refunded', '2025-12-03 18:20:31', '15318578', 650000.00, '15318579', NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ngọc Hà\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 21, '2025-12-03 18:19:47', '2025-12-03 18:21:23', NULL),
+(88, 'CM2025120401224697BE', 'completed', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'paid', '2025-12-03 18:23:15', '15318581', NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 21, '2025-12-03 18:22:46', '2025-12-03 18:26:14', NULL),
+(89, 'CM20251205032718SXQB', 'cancelled', 600000.00, 500000.00, 50000.00, 150000.00, 'vnpay', 'failed', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:27:18', '2025-12-04 20:28:32', 14),
+(90, 'CM20251205032941HUBE', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'refund_failed', '2025-12-04 20:30:15', '15321381', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:29:41', '2025-12-04 20:30:41', 15),
+(91, 'CM2025120503381415BQ', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'refund_failed', '2025-12-04 20:38:59', '15321408', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:38:14', '2025-12-04 20:39:14', 15),
+(92, 'CM20251205034250GA5H', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:42:50', '2025-12-04 20:43:41', 15),
+(93, 'CM202512050343015G9H', 'pending', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:43:01', '2025-12-04 20:43:01', 15),
+(94, 'CM20251205034355DUBB', 'processing', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Hà Giang 2\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Tuyên Quang\"}', NULL, 9, '2025-12-04 20:43:55', '2025-12-06 09:24:24', NULL),
+(95, 'CM202512050344537CO8', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ngọc Hà\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 2, '2025-12-04 20:44:53', '2025-12-04 21:02:48', 15),
+(96, 'CM20251205034539KRLY', 'pending', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Hà Giang 2\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Tuyên Quang\"}', NULL, 9, '2025-12-04 20:45:39', '2025-12-04 20:45:39', NULL),
+(97, 'CM20251205034603ZTAL', 'pending', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'unpaid', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Hà Giang 2\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Tuyên Quang\"}', NULL, 9, '2025-12-04 20:46:03', '2025-12-04 20:46:03', NULL),
+(98, 'CM20251205034612GLW4', 'cancelled', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'refunded', '2025-12-04 20:46:36', '15321434', 194000.00, '15321435', '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Hà Giang 2\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Tuyên Quang\"}', NULL, 9, '2025-12-04 20:46:12', '2025-12-04 20:46:53', NULL),
+(99, 'CM20251205034759KL4L', 'cancelled', 288000.00, 30.00, 50000.00, 337970.00, 'vnpay', 'refund_failed', '2025-12-04 20:48:26', '15321441', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:47:59', '2025-12-04 20:48:39', 15),
+(100, 'CM20251205034905ETVZ', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'refund_failed', '2025-12-04 20:49:30', '15321444', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ngọc Hà\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 2, '2025-12-04 20:49:05', '2025-12-04 21:09:19', 15),
+(101, 'CM202512050350281LC6', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'refund_failed', '2025-12-04 20:50:54', '15321448', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 20:50:28', '2025-12-04 20:51:10', 15),
+(102, 'CM20251205035159INUD', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'refund_failed', '2025-12-04 20:52:23', '15321452', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 2, '2025-12-04 20:51:59', '2025-12-04 20:54:14', 15),
+(103, 'CM20251205041412FBLM', 'cancelled', 144000.00, 0.00, 50000.00, 194000.00, 'vnpay', 'refunded', '2025-12-04 21:14:49', '15321507', 194000.00, '15321508', '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 21:14:12', '2025-12-04 21:15:04', NULL),
+(104, 'CM202512050416018GXG', 'completed', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'paid', '2025-12-04 21:16:27', '15321512', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 2, '2025-12-04 21:16:01', '2025-12-06 08:49:36', 15),
+(105, 'CM20251205041836PB8L', 'cancelled', 144000.00, 30.00, 50000.00, 193970.00, 'vnpay', 'refund_failed', '2025-12-04 21:19:11', '15321518', NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 9, '2025-12-04 21:18:36', '2025-12-04 21:20:03', 15),
+(106, 'CM20251205044210Z6ZF', 'cancelled', 144000.00, 30.00, 50000.00, 150800.00, 'vnpay', 'refunded', '2025-12-04 21:42:40', '15321564', 150800.00, '15321566', '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Thục Phán\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Cao Bằng\"}', NULL, 3, '2025-12-04 21:42:10', '2025-12-04 21:43:18', 15),
+(107, 'CM20251205044507GODK', 'refunded', 720000.00, 500000.00, 50000.00, 270000.00, 'vnpay', 'partially_refunded', '2025-12-04 21:45:31', '15321571', 170000.00, '15321611', '1', '[\"refunds/1764910979_caloc2.webp\", \"refunds/1764910979_caloc1.webp\"]', NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Ba Đình\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hà Nội\"}', NULL, 2, '2025-12-04 21:45:07', '2025-12-04 22:04:45', 14),
+(108, 'CM20251205050700ME0V', 'completed', 576000.00, 100000.00, 0.00, 476000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt Quân\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tranvietquan02102003@gmail.com\", \"phone\": \"0865452731\", \"gender\": \"Nam\", \"street\": \"30 Tổ 2, Ấp 1\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 2, '2025-12-04 22:07:00', '2025-12-04 22:07:31', 13),
+(109, 'CM20251205085724HZXJ', 'shipped', 750000.00, 30.00, 50000.00, 575000.00, 'vnpay', 'failed', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"User 2\", \"ward\": \"Phường Láng\", \"email\": \"user2@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"tt\", \"province\": \"Thành phố Hà Nội\"}', NULL, 3, '2025-12-05 01:57:24', '2025-12-07 10:19:55', 15),
+(110, 'CM20251205092943FC1B', 'refund_requested', 600000.00, 30.00, 0.00, 420000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, 'thích', '[\"refunds/1764927400_2023.jpeg\", \"refunds/1764927400_banner.jpg\"]', NULL, '{\"name\": \"User 2\", \"ward\": \"Phường Bến Thành\", \"email\": \"user2@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"s\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 3, '2025-12-05 02:29:43', '2025-12-05 02:36:40', 15),
+(111, 'CM202512050943153PD7', 'refund_requested', 1050000.00, 0.00, 0.00, 1050000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, 't', '[\"refunds/1764927916_2023.jpeg\"]', NULL, '{\"name\": \"Trần Việt\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tranviet@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"s\", \"province\": \"Thành phố Hồ Chí Minh\"}', 's', 7, '2025-12-05 02:43:15', '2025-12-05 02:45:16', NULL),
+(112, 'CM20251205094649LOAR', 'completed', 1440000.00, 0.00, 0.00, 1440000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"Trần Việt\", \"ward\": \"Phường Sài Gòn\", \"email\": \"tranviet@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"d\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 7, '2025-12-05 02:46:49', '2025-12-05 02:47:05', NULL),
+(113, 'CM20251206100447EUWZ', 'completed', 750000.00, 0.00, 0.00, 750000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"User 1\", \"ward\": \"Phường Sài Gòn\", \"email\": \"user1@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"s\", \"province\": \"Thành phố Hồ Chí Minh\"}', 'a', 2, '2025-12-06 03:04:47', '2025-12-06 03:05:29', NULL),
+(114, 'CM20251207134446GQOY', 'completed', 750000.00, 0.00, 0.00, 750000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"User 2\", \"ward\": \"Phường Xóm Chiếu\", \"email\": \"user2@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"123\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 3, '2025-12-07 06:44:46', '2025-12-07 06:45:28', NULL),
+(115, 'CM20251207140534Q7Q4', 'completed', 1341000.00, 100000.00, 0.00, 1241000.00, 'cod', 'paid', NULL, NULL, NULL, NULL, '0', NULL, NULL, '{\"name\": \"User 2\", \"ward\": \"Phường Hạnh Thông\", \"email\": \"user2@gmail.com\", \"phone\": \"0346433367\", \"gender\": \"Nam\", \"street\": \"60/18 Huỳnh Khương An Phường 5 Quận Gò Vấp, Hồ Chí Minh\", \"province\": \"Thành phố Hồ Chí Minh\"}', NULL, 3, '2025-12-07 07:05:34', '2025-12-07 07:05:44', 13);
 
 -- --------------------------------------------------------
 
@@ -584,12 +635,10 @@ INSERT INTO `orders` (`id`, `code`, `status`, `subtotal`, `discount_total`, `shi
 -- Table structure for table `password_reset_tokens`
 --
 
-DROP TABLE IF EXISTS `password_reset_tokens`;
-CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
+CREATE TABLE `password_reset_tokens` (
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`email`)
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -598,9 +647,8 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
 -- Table structure for table `payments`
 --
 
-DROP TABLE IF EXISTS `payments`;
-CREATE TABLE IF NOT EXISTS `payments` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `payments` (
+  `id` bigint UNSIGNED NOT NULL,
   `method` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `transaction_code` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `amount` decimal(8,2) NOT NULL,
@@ -608,8 +656,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
   `status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 -- --------------------------------------------------------
@@ -618,19 +665,15 @@ CREATE TABLE IF NOT EXISTS `payments` (
 -- Table structure for table `posts`
 --
 
-DROP TABLE IF EXISTS `posts`;
-CREATE TABLE IF NOT EXISTS `posts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `posts` (
+  `id` bigint UNSIGNED NOT NULL,
   `thumbnail` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `user_id` bigint UNSIGNED NOT NULL,
   `post_category_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `posts_user_id_foreign` (`user_id`),
-  KEY `posts_post_category_id_foreign` (`post_category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `posts`
@@ -654,13 +697,11 @@ INSERT INTO `posts` (`id`, `thumbnail`, `status`, `user_id`, `post_category_id`,
 -- Table structure for table `post_categories`
 --
 
-DROP TABLE IF EXISTS `post_categories`;
-CREATE TABLE IF NOT EXISTS `post_categories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `post_categories` (
+  `id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `post_categories`
@@ -677,19 +718,15 @@ INSERT INTO `post_categories` (`id`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `post_category_translations`
 --
 
-DROP TABLE IF EXISTS `post_category_translations`;
-CREATE TABLE IF NOT EXISTS `post_category_translations` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `post_category_translations` (
+  `id` bigint UNSIGNED NOT NULL,
   `name` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `slug` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `language_id` bigint UNSIGNED NOT NULL,
   `post_category_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_category_translations_language_id_foreign` (`language_id`),
-  KEY `post_category_translations_post_category_id_foreign` (`post_category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `post_category_translations`
@@ -709,9 +746,8 @@ INSERT INTO `post_category_translations` (`id`, `name`, `slug`, `language_id`, `
 -- Table structure for table `post_translations`
 --
 
-DROP TABLE IF EXISTS `post_translations`;
-CREATE TABLE IF NOT EXISTS `post_translations` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `post_translations` (
+  `id` bigint UNSIGNED NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `content` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -719,11 +755,8 @@ CREATE TABLE IF NOT EXISTS `post_translations` (
   `language_id` bigint UNSIGNED NOT NULL,
   `post_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `post_translations_post_id_foreign` (`post_id`),
-  KEY `post_translations_language_id_foreign` (`language_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `post_translations`
@@ -759,9 +792,8 @@ INSERT INTO `post_translations` (`id`, `title`, `slug`, `content`, `meta_descrip
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `products` (
+  `id` bigint UNSIGNED NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `price` decimal(10,2) DEFAULT NULL,
   `compare_at_price` decimal(10,2) DEFAULT NULL,
@@ -772,22 +804,20 @@ CREATE TABLE IF NOT EXISTS `products` (
   `type` enum('domestic','export') CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL DEFAULT 'domestic',
   `category_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `products_category_id_foreign` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `is_active`, `price`, `compare_at_price`, `stock_quantity`, `origin`, `quantity_per_pack`, `shipping_from`, `type`, `category_id`, `created_at`, `updated_at`) VALUES
-(19, 1, 150000.00, 0.00, 84, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 10:56:14', '2025-12-04 10:08:53'),
-(18, 1, 150000.00, 0.00, 88, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 10:51:59', '2025-12-04 08:46:59'),
-(17, 1, 144000.00, 0.00, 94, 'Việt Nam', 10, 'TP. Hồ Chí Minh', 'domestic', 3, '2025-12-03 10:47:27', '2025-12-04 10:18:11'),
-(16, 1, 150000.00, 0.00, 100, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 10:19:35', '2025-12-03 11:18:44'),
-(20, 1, 144000.00, 0.00, 100, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 11:01:22', '2025-12-03 11:11:26'),
-(21, 1, 147000.00, 0.00, 100, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 11:06:04', '2025-12-03 11:20:14'),
+(19, 1, 150000.00, 0.00, 119, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 10:56:14', '2025-12-07 07:05:34'),
+(18, 1, 150000.00, 0.00, 27, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 10:51:59', '2025-12-07 09:06:39'),
+(17, 1, 144000.00, 0.00, 110, 'Việt Nam', 10, 'TP. Hồ Chí Minh', 'domestic', 3, '2025-12-03 10:47:27', '2025-12-06 03:02:31'),
+(16, 1, 150000.00, 0.00, 98, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 10:19:35', '2025-12-07 07:05:34'),
+(20, 1, 144000.00, 0.00, 108, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 11:01:22', '2025-12-07 09:06:39'),
+(21, 1, 147000.00, 0.00, 97, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-03 11:06:04', '2025-12-07 07:05:34'),
 (23, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 11:42:13', '2025-12-03 11:42:13'),
 (24, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 11:49:19', '2025-12-03 11:49:19'),
 (25, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 11:52:39', '2025-12-03 11:52:39'),
@@ -796,7 +826,8 @@ INSERT INTO `products` (`id`, `is_active`, `price`, `compare_at_price`, `stock_q
 (28, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 11:59:13', '2025-12-03 11:59:13'),
 (29, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 12:01:23', '2025-12-03 12:01:23'),
 (30, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 12:03:38', '2025-12-03 12:03:38'),
-(31, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 12:06:22', '2025-12-03 12:06:22');
+(31, 1, NULL, NULL, NULL, 'Việt Nam', NULL, 'TP. Hồ Chí Minh', 'export', NULL, '2025-12-03 12:06:22', '2025-12-03 12:06:22'),
+(33, 1, 0.00, 21.00, NULL, 'Việt Nam', 3, 'TP. Hồ Chí Minh', 'domestic', 2, '2025-12-04 12:56:06', '2025-12-04 12:56:06');
 
 -- --------------------------------------------------------
 
@@ -804,17 +835,14 @@ INSERT INTO `products` (`id`, `is_active`, `price`, `compare_at_price`, `stock_q
 -- Table structure for table `product_images`
 --
 
-DROP TABLE IF EXISTS `product_images`;
-CREATE TABLE IF NOT EXISTS `product_images` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product_images` (
+  `id` bigint UNSIGNED NOT NULL,
   `image_url` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `sort_order` int NOT NULL DEFAULT '0',
   `product_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_images_product_id_foreign` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `product_images`
@@ -852,7 +880,8 @@ INSERT INTO `product_images` (`id`, `image_url`, `sort_order`, `product_id`, `cr
 (65, 'product_img/1764788353_BUN-CA-NGU-1-1-scaled.jpg', 0, 28, '2025-12-03 11:59:13', '2025-12-03 11:59:13'),
 (66, 'product_img/1764788483_BANH-CANH-CUA-1-scaled.jpg', 0, 29, '2025-12-03 12:01:23', '2025-12-03 12:01:23'),
 (67, 'product_img/1764788618_BANH-CANH-CHA-CA-scaled.jpg', 0, 30, '2025-12-03 12:03:38', '2025-12-03 12:03:38'),
-(68, 'product_img/1764788782_BANH-CANH-CA-LOC-scaled.jpg', 0, 31, '2025-12-03 12:06:22', '2025-12-03 12:06:22');
+(68, 'product_img/1764788782_BANH-CANH-CA-LOC-scaled.jpg', 0, 31, '2025-12-03 12:06:22', '2025-12-03 12:06:22'),
+(70, 'product_img/1764878166_2022.jpg', 0, 33, '2025-12-04 12:56:06', '2025-12-04 12:56:06');
 
 -- --------------------------------------------------------
 
@@ -860,9 +889,8 @@ INSERT INTO `product_images` (`id`, `image_url`, `sort_order`, `product_id`, `cr
 -- Table structure for table `product_translations`
 --
 
-DROP TABLE IF EXISTS `product_translations`;
-CREATE TABLE IF NOT EXISTS `product_translations` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product_translations` (
+  `id` bigint UNSIGNED NOT NULL,
   `name` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `slug` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `description` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
@@ -872,11 +900,8 @@ CREATE TABLE IF NOT EXISTS `product_translations` (
   `product_id` bigint UNSIGNED NOT NULL,
   `language_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_translations_product_id_foreign` (`product_id`),
-  KEY `product_translations_language_id_foreign` (`language_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `product_translations`
@@ -916,7 +941,9 @@ INSERT INTO `product_translations` (`id`, `name`, `slug`, `description`, `nutrit
 (59, 'Bánh Canh Chả Cá', 'banh-canh-cha-ca', 'Súp bún chả cá với nước dùng đậm đà, sợi bún mềm và chả cá thơm ngon tạo nên một món ăn độc đáo.', '<table class=\"woocommerce-product-attributes shop_attributes\" style=\"border-collapse: collapse; width: 100%; border-width: 1px;\" border=\"1\" aria-label=\"Chi tiết sản phẩm\">\r\n<tbody>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_serving-size\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Khẩu phần ăn</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">250g</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_calories\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Lượng calo</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">357</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_total-fat-6-9g\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Tổng chất b&eacute;o 6,9g</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">13%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_saturated-fat-1-43g\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Chất b&eacute;o b&atilde;o h&ograve;a 1,43g</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">8%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_cholesterol-0mg\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Cholesterol 0mg</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">0%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_sodium-2010mg\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Natri 2010mg</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">100%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_total-carbohydrate-57g\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Tổng carbohydrate 57g</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">18%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_dietary-fiber-4-65g\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Chất xơ 4,65g</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">18%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_includes-0g-added-sugars-0g\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Bao gồm 0g đường bổ sung 0g</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">0%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_protein16-6g\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Protein16,6g</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">3%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_vitamin-d-0mcg\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Vitamin D 0mcg</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">0%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_calcium-72-5mg\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Canxi 72,5mg</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">5%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_postassium-255mg\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Postassium 255mg</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">5%</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_iron-4-78mg\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">Sắt 4,78mg</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">28%</span></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>', '<p><strong><span dir=\"auto\">Hướng dẫn 1: L&ograve; vi s&oacute;ng</span></strong><br><span dir=\"auto\">1. Cho tất cả nguy&ecirc;n liệu trong g&oacute;i v&agrave;o b&aacute;t (g&oacute;i satay d&agrave;nh cho người ăn cay) với 400-450ml nước s&ocirc;i hoặc nước thường.</span><br><span dir=\"auto\">2. Cho b&aacute;t v&agrave;o l&ograve; vi s&oacute;ng, chọn c&ocirc;ng suất cao (180-200oC) trong 5-6 ph&uacute;t với nước s&ocirc;i hoặc 10-12 ph&uacute;t với nước thường.</span><br><span dir=\"auto\">3. Lấy b&aacute;t ra khỏi l&ograve; vi s&oacute;ng v&agrave; thưởng thức.</span></p>\r\n<p><strong><span dir=\"auto\">Hướng dẫn 2: Nấu tr&ecirc;n bếp</span></strong><br><span dir=\"auto\">1. Cho tất cả nguy&ecirc;n liệu trong g&oacute;i v&agrave;o nồi (g&oacute;i satay d&agrave;nh cho người ăn cay) c&ugrave;ng 400-450ml nước, đun s&ocirc;i khoảng 3-4 ph&uacute;t.</span><br><span dir=\"auto\">2. Đổ ra b&aacute;t, th&ecirc;m g&oacute;i h&agrave;nh t&acirc;y v&agrave; thưởng thức.</span></p>', NULL, 30, 1, '2025-12-03 12:03:38', '2025-12-03 12:03:38'),
 (60, 'Fish Cake Noodle Soup', 'fish-cake-noodle-soup', 'Fish cake noodle soup with rich broth, tender noodles, and flavorful fish cakes create a unique dish.', '<table class=\"woocommerce-product-attributes shop_attributes\" style=\"width: 100%; height: 856.8px; border-collapse: collapse; border-width: 1px;\" border=\"1\" aria-label=\"Chi tiết sản phẩm\">\r\n<tbody>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_serving-size\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Serving size</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>250g</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_calories\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Calories</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>357</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_total-fat-6-9g\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Total fat 6.9g</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>13%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_saturated-fat-1-43g\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Saturated Fat 1.43g</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>8%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_cholesterol-0mg\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Cholesterol 0mg</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>0%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_sodium-2010mg\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Sodium 2010mg</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>100%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_total-carbohydrate-57g\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Total Carbohydrate 57g</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>18%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_dietary-fiber-4-65g\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Dietary Fiber 4.65g</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>18%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_includes-0g-added-sugars-0g\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Includes 0g added sugars 0g</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>0%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_protein16-6g\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Protein16.6g</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>3%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_vitamin-d-0mcg\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Vitamin D 0mcg</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>0%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_calcium-72-5mg\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Calcium 72.5mg</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>5%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_postassium-255mg\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Postassium 255mg</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>5%</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_iron-4-78mg\" style=\"height: 61.2px;\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"width: 75.072%; border-width: 1px;\" scope=\"row\">Iron 4.78mg</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"width: 13.9899%; border-width: 1px;\">\r\n<p>28%</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>', '<p><strong>Directions 1: Microwave</strong><br>1. Put all the ingredients from the package into a bowl (satay package for spicy eaters) with 400-450ml of boiling water or normal temperature water.<br>2. Put the bowl in the microwave, choose high power (180-200oC) for 5-6 minutes with boiling water or 10-12 minutes with normal temperature water.<br>3. Take the bowl out of the microwave and enjoy.</p>\r\n<p><strong>Directions 2: Cook on the stove</strong><br>1. Put all the ingredients from the package into the pot (satay package for spicy eaters) with 400-450ml water, boil for about 3-4 minutes.<br>2. Pour into a bowl, add the onion package and enjoy.</p>', '<p>no data</p>', 30, 2, '2025-12-03 12:03:38', '2025-12-03 12:03:38'),
 (61, 'Bánh Canh Cá Lóc', 'banh-canh-ca-loc', 'Cháo cá lóc hay còn gọi là canh cá lóc là đặc sản nổi tiếng của quê hương Quảng Trị.', '<table class=\"woocommerce-product-attributes shop_attributes\" style=\"border-collapse: collapse; width: 100%; border-width: 1px;\" border=\"1\" aria-label=\"Chi tiết sản phẩm\">\r\n<tbody>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_noodles-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">G&oacute;i m&igrave;</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">Bột gạo</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_snakehead-fish-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">G&oacute;i c&aacute; l&oacute;c</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">C&aacute; l&oacute;c*(90%) (c&aacute;), nước mắm (c&aacute;), hạt n&ecirc;m, hẹ.</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_sauce-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">G&oacute;i nước sốt</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">Nước cốt xương c&aacute; l&oacute;c (15%) (c&aacute;), hẹ, nước mắm (c&aacute;), hạt n&ecirc;m.</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_satay-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">G&oacute;i Satay</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">Hẹ (18%), dầu ăn (đậu n&agrave;nh), bột ớt, hạt ti&ecirc;u.</span></p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_green-onion-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\"><span dir=\"auto\">G&oacute;i h&agrave;nh l&aacute;</span></th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p><span dir=\"auto\">100% h&agrave;nh l&aacute;.</span></p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>', '<p><strong><span dir=\"auto\">Hướng dẫn 1: L&ograve; vi s&oacute;ng</span></strong></p>\r\n<p><span dir=\"auto\">1. Cho tất cả nguy&ecirc;n liệu trong g&oacute;i v&agrave;o b&aacute;t (</span><br><span dir=\"auto\">g&oacute;i satay d&agrave;nh cho người ăn cay) c&ugrave;ng 400-500ml nước s&ocirc;i hoặc</span><br><span dir=\"auto\">nước thường.</span><br><span dir=\"auto\">2. Cho b&aacute;t v&agrave;o l&ograve; vi s&oacute;ng, chọn c&ocirc;ng suất cao</span><br><span dir=\"auto\">(180-200oC) trong 5-6 ph&uacute;t với nước s&ocirc;i hoặc 10-12</span><br><span dir=\"auto\">ph&uacute;t với nước thường.</span><br><span dir=\"auto\">3. Lấy b&aacute;t ra khỏi l&ograve; vi s&oacute;ng v&agrave; thưởng thức.</span></p>\r\n<p><strong><span dir=\"auto\">Hướng dẫn 2: Nấu tr&ecirc;n bếp</span></strong><br><span dir=\"auto\">1. Cho tất cả nguy&ecirc;n liệu trong g&oacute;i v&agrave;o nồi (</span><br><span dir=\"auto\">g&oacute;i satay d&agrave;nh cho người ăn cay) c&ugrave;ng 400-500ml nước, đun s&ocirc;i khoảng</span><br><span dir=\"auto\">3-4 ph&uacute;t.</span><br><span dir=\"auto\">2. Đổ ra b&aacute;t, th&ecirc;m g&oacute;i h&agrave;nh t&acirc;y v&agrave; thưởng thức.</span></p>', NULL, 31, 1, '2025-12-03 12:06:22', '2025-12-03 12:06:22'),
-(62, 'Snakehead Fish Noodle Soup', 'snakehead-fish-noodle-soup', 'Snakehead fish porridge also known as snakehead fish soup is a famous specialty of the hometown of Quang Tri.', '<table class=\"woocommerce-product-attributes shop_attributes\" style=\"border-collapse: collapse; width: 100%; border-width: 1px;\" border=\"1\" aria-label=\"Chi tiết sản phẩm\">\r\n<tbody>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_noodles-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Noodles package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Rice flour</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_snakehead-fish-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Snakehead fish package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Snakehead fish*(90%) (fish), fish sauce (fish), seasoning seeds, chives.</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_sauce-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Sauce package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Snakehead fish bones concentrate (15%) (fish), chives, fish sauce (fish), seasoning seeds.</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_satay-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Satay package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Chives (18%), cooking oil (soybean), chilli powder, pepper.</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_green-onion-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Green onion package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>100% green onion.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>', '<p><strong>Directions 1: Microwave</strong></p>\r\n<p>1. Put all the ingredients from the package into a bowl (satay<br>package for spicy eaters) with 400-500ml of boiling water or<br>normal temperature water.<br>2. Put the bowl in the microwave, choose high power<br>(180-200oC) for 5-6 minutes with boiling water or 10-12<br>minutes with normal temperature water.<br>3. Take the bowl out of the microwave and enjoy.</p>\r\n<p><strong>Directions 2: Cook on the stove</strong><br>1. Put all the ingredients from the package into the pot (satay<br>package for spicy eaters) with 400-500ml water, boil for about<br>3-4 minutes.<br>2. Pour into a bowl, add the onion package and enjoy.</p>', NULL, 31, 2, '2025-12-03 12:06:22', '2025-12-03 12:06:22');
+(62, 'Snakehead Fish Noodle Soup', 'snakehead-fish-noodle-soup', 'Snakehead fish porridge also known as snakehead fish soup is a famous specialty of the hometown of Quang Tri.', '<table class=\"woocommerce-product-attributes shop_attributes\" style=\"border-collapse: collapse; width: 100%; border-width: 1px;\" border=\"1\" aria-label=\"Chi tiết sản phẩm\">\r\n<tbody>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_noodles-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Noodles package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Rice flour</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_snakehead-fish-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Snakehead fish package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Snakehead fish*(90%) (fish), fish sauce (fish), seasoning seeds, chives.</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_sauce-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Sauce package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Snakehead fish bones concentrate (15%) (fish), chives, fish sauce (fish), seasoning seeds.</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_satay-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Satay package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>Chives (18%), cooking oil (soybean), chilli powder, pepper.</p>\r\n</td>\r\n</tr>\r\n<tr class=\"woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_green-onion-package\">\r\n<th class=\"woocommerce-product-attributes-item__label\" style=\"border-width: 1px;\" scope=\"row\">Green onion package</th>\r\n<td class=\"woocommerce-product-attributes-item__value\" style=\"border-width: 1px;\">\r\n<p>100% green onion.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>&nbsp;</p>', '<p><strong>Directions 1: Microwave</strong></p>\r\n<p>1. Put all the ingredients from the package into a bowl (satay<br>package for spicy eaters) with 400-500ml of boiling water or<br>normal temperature water.<br>2. Put the bowl in the microwave, choose high power<br>(180-200oC) for 5-6 minutes with boiling water or 10-12<br>minutes with normal temperature water.<br>3. Take the bowl out of the microwave and enjoy.</p>\r\n<p><strong>Directions 2: Cook on the stove</strong><br>1. Put all the ingredients from the package into the pot (satay<br>package for spicy eaters) with 400-500ml water, boil for about<br>3-4 minutes.<br>2. Pour into a bowl, add the onion package and enjoy.</p>', NULL, 31, 2, '2025-12-03 12:06:22', '2025-12-03 12:06:22'),
+(66, 'd', 'd', 'd', '<p>d</p>', '<p>d</p>', '<p>d</p>', 33, 2, '2025-12-04 12:56:06', '2025-12-04 12:56:06'),
+(65, '2d', '2d', 'd', '<p>d</p>', '<p>đ</p>', '<p>d</p>', 33, 1, '2025-12-04 12:56:06', '2025-12-04 12:56:06');
 
 -- --------------------------------------------------------
 
@@ -924,9 +951,8 @@ INSERT INTO `product_translations` (`id`, `name`, `slug`, `description`, `nutrit
 -- Table structure for table `quantity_deliveries`
 --
 
-DROP TABLE IF EXISTS `quantity_deliveries`;
-CREATE TABLE IF NOT EXISTS `quantity_deliveries` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `quantity_deliveries` (
+  `id` bigint UNSIGNED NOT NULL,
   `quantity` int NOT NULL,
   `sent_qty` int NOT NULL,
   `received_qty` int DEFAULT NULL,
@@ -934,11 +960,22 @@ CREATE TABLE IF NOT EXISTS `quantity_deliveries` (
   `product_id` bigint UNSIGNED NOT NULL,
   `delivery_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `quantity_deliveries_product_id_foreign` (`product_id`),
-  KEY `quantity_deliveries_delivery_id_foreign` (`delivery_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `quantity_deliveries`
+--
+
+INSERT INTO `quantity_deliveries` (`id`, `quantity`, `sent_qty`, `received_qty`, `shortage_qty`, `product_id`, `delivery_id`, `created_at`, `updated_at`) VALUES
+(54, 31, 31, 8, 23, 20, 13, '2025-12-07 09:06:39', '2025-12-07 09:06:39'),
+(53, 12, 12, 12, 0, 18, 13, '2025-12-07 09:06:39', '2025-12-07 09:06:39'),
+(50, 19, 19, 19, 0, 19, 12, '2025-12-06 03:02:31', '2025-12-06 03:02:31'),
+(49, 370, 370, 370, 0, 18, 12, '2025-12-06 03:02:31', '2025-12-06 03:02:31'),
+(48, 13, 13, 13, 0, 17, 12, '2025-12-06 03:02:31', '2025-12-06 03:02:31'),
+(44, 40, 40, 40, 0, 19, 11, '2025-12-03 18:33:30', '2025-12-03 18:34:21'),
+(43, 40, 40, 40, 0, 18, 11, '2025-12-03 18:33:30', '2025-12-03 18:34:21'),
+(42, 40, 40, 40, 0, 17, 11, '2025-12-03 18:33:30', '2025-12-03 18:33:30');
 
 -- --------------------------------------------------------
 
@@ -946,18 +983,28 @@ CREATE TABLE IF NOT EXISTS `quantity_deliveries` (
 -- Table structure for table `quantity_imports`
 --
 
-DROP TABLE IF EXISTS `quantity_imports`;
-CREATE TABLE IF NOT EXISTS `quantity_imports` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `quantity_imports` (
+  `id` bigint UNSIGNED NOT NULL,
   `quantity` int NOT NULL,
   `product_id` bigint UNSIGNED NOT NULL,
   `request_import_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `quantity_imports_product_id_foreign` (`product_id`),
-  KEY `quantity_imports_request_import_id_foreign` (`request_import_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `quantity_imports`
+--
+
+INSERT INTO `quantity_imports` (`id`, `quantity`, `product_id`, `request_import_id`, `created_at`, `updated_at`) VALUES
+(37, 31, 20, 16, NULL, NULL),
+(36, 12, 18, 16, NULL, NULL),
+(35, 19, 19, 15, '2025-12-06 02:59:52', '2025-12-06 02:59:52'),
+(34, 370, 18, 15, '2025-12-06 02:59:52', '2025-12-06 02:59:52'),
+(33, 13, 17, 15, '2025-12-06 02:59:52', '2025-12-06 02:59:52'),
+(30, 40, 19, 14, NULL, NULL),
+(29, 40, 18, 14, NULL, NULL),
+(28, 40, 17, 14, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -965,19 +1012,25 @@ CREATE TABLE IF NOT EXISTS `quantity_imports` (
 -- Table structure for table `request_imports`
 --
 
-DROP TABLE IF EXISTS `request_imports`;
-CREATE TABLE IF NOT EXISTS `request_imports` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `request_imports` (
+  `id` bigint UNSIGNED NOT NULL,
   `date` date NOT NULL,
   `status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `note` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `has_shortage` tinyint(1) DEFAULT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `request_imports_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `request_imports`
+--
+
+INSERT INTO `request_imports` (`id`, `date`, `status`, `note`, `has_shortage`, `user_id`, `created_at`, `updated_at`) VALUES
+(16, '2025-12-07', 'partially', NULL, 1, 26, '2025-12-07 08:00:30', '2025-12-07 09:06:39'),
+(15, '2025-12-06', 'completed', NULL, 0, 26, '2025-12-06 02:59:47', '2025-12-06 03:02:31'),
+(14, '2025-12-04', 'completed', NULL, 0, 7, '2025-12-03 18:31:04', '2025-12-03 18:34:21');
 
 -- --------------------------------------------------------
 
@@ -985,9 +1038,8 @@ CREATE TABLE IF NOT EXISTS `request_imports` (
 -- Table structure for table `reviews`
 --
 
-DROP TABLE IF EXISTS `reviews`;
-CREATE TABLE IF NOT EXISTS `reviews` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reviews` (
+  `id` bigint UNSIGNED NOT NULL,
   `rating` int NOT NULL,
   `comment` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `images` json DEFAULT NULL,
@@ -996,19 +1048,19 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   `product_id` bigint UNSIGNED NOT NULL,
   `order_item_id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `reviews_user_id_foreign` (`user_id`),
-  KEY `reviews_product_id_foreign` (`product_id`),
-  KEY `reviews_order_item_id_foreign` (`order_item_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `reviews`
 --
 
 INSERT INTO `reviews` (`id`, `rating`, `comment`, `images`, `reply_content`, `user_id`, `product_id`, `order_item_id`, `created_at`, `updated_at`) VALUES
-(18, 5, 'Ngon', '[\"reviews/1764868715_MY-QUANG-CA-LOC-1-300x300.webp\"]', NULL, 2, 19, 95, '2025-12-04 10:18:36', '2025-12-04 10:18:36');
+(22, 5, '', '[]', NULL, 3, 19, 125, '2025-12-07 07:10:14', '2025-12-07 07:10:14'),
+(21, 5, '', '[]', NULL, 3, 21, 124, '2025-12-07 07:10:14', '2025-12-07 07:10:14'),
+(20, 5, '', '[]', NULL, 3, 18, 123, '2025-12-07 07:10:14', '2025-12-07 07:10:14'),
+(18, 5, 'Ngon', '[\"reviews/1764911287_MY-QUANG-CA-LOC-1-300x300.webp\"]', NULL, 2, 17, 115, '2025-12-04 22:08:07', '2025-12-04 22:08:07'),
+(19, 3, '', '[]', NULL, 3, 16, 122, '2025-12-07 07:10:14', '2025-12-07 07:10:14');
 
 -- --------------------------------------------------------
 
@@ -1016,14 +1068,12 @@ INSERT INTO `reviews` (`id`, `rating`, `comment`, `images`, `reply_content`, `us
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -1044,17 +1094,13 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- Table structure for table `sessions`
 --
 
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE IF NOT EXISTS `sessions` (
+CREATE TABLE `sessions` (
   `id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   `user_agent` text CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci,
   `payload` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `sessions_user_id_index` (`user_id`),
-  KEY `sessions_last_activity_index` (`last_activity`)
+  `last_activity` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
@@ -1062,43 +1108,56 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('wi1v6Wp7YQ7jmLyX8i260Idz23wh1omkVWDfDQqU', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMks3c21udG9zMlNxbXhnaEgwd0N3ektZYXEyOHJtR0RaU1E4WGxiaSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1765092553),
-('gpAzHGSKvU3Rq8ertvcwjJ6QyxEkc8RsQcfpknlR', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoieEtMT0ZWODFkV1RzaExycjRrY0pqbXpzcnpiNGczZkdXbDhZMjR1ciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1765092537),
-('a05QZeCGYSHWMQUhSB6jK1mNeoPbbRw9wjlecVFn', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoialF4NjVpcHRFS25TRTFXQnpyMGx5M2hNbWZXQW1xSnNPTDhNYXB3ZiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764941556),
-('LH3YHWzzkDyAlleDyVMwlXEHVUDQKRPkRxYtObWH', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMlBPeVJvemxRTUdGcVZZY3V3Y21adURSSVRPSmFnSkx2TWlsZHNmdCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764940653),
-('EBMJ7Jt8Kb5V2xVYZxqOLP7b4dgpCO0b2XrgWOiJ', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiNTN2QVA0ekxJMTk1cTdiaE9PaEVVRjY4SEhnd0R2UEROb3dkR0hVQiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764868657),
-('41UYNMUZ039r9ITPgXw3JKZRdewdwgwEFOT2i2uz', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiNkh0eHRiNFR6eERDbEtkaGFVWDZiR0JXSjlHSXZOazUzdVJiNjVKZSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764868294),
-('fU5zCZ0PO0ZHhQHtP36c2ZCIOIBbFJX7NPzJPV0C', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiaERRU2dlNDBtTlo2Z1hSQ0lKWjFldEZlaVRMYlZ6d2RmWVJSMWJUMCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764868212),
-('FZHJBSwcNRom7Y2jqAXtLVqaXO7o0Bp2J81rf3Le', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiRVNoQXF0THhtTlBuaGNFbjZaVEVQMW5JTm5kWVJsYjNNZmxDenhuViI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764868147),
-('NjKlthSipnNXN9zgVv4GkFNrN4iO0boLIwAspQhT', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoidFdhM2N4Tk1RNER1VFhwdENmdXZBUVl6eDZvMXhJOGR1VDNEbHNLRCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764867965),
-('S4wJ8DaWZZgubXYfbCd6JN1fOQSmFBCzWJESGE1e', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiVmNFemFaZTVTdkxzVnE1eXZhYXB2R3QxOEZKQTZzY2lCbTZ3MTRiRiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764867389),
-('JR481rBL3QLCvO5BQJqR52FjXWnd9kyFDCxebWFY', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiUm11T0F0bllURkRTWGtOVnMwM3g5MGJ5clFQWDMwQjYxOHhKQTVFUSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764867331),
-('SLXHB5Ekpkr0EWW4AhjzlIQJQJWHqknuOsyP4zzN', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiY2xaQVBoNmpFbERwQTJFTWl0OFBJd0dRajJFSVhhNzF6UWxGamhrQSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764864809),
-('oV4QVaeP6oCab193mi5CE1p7VcsfywUFDM9BaBu2', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMjl1dmk3ajBpSDY2eVV4NlVubGRmdWFjbFllV2x2akJNbU52eVdKRiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764864690),
-('0bX4RvIEXHI7KZf7TjJzpSQRsuM60AOd0dxwAGFu', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibE9aNXZNSDFaYU1xOHA5amdkS2I3a3lKZks1Z2RzVk14ZDRkR1ZIOCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764864346),
-('PjYUsl99Ok3eQhrpuKiOXb02EF02LNsscVwXFlLL', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiSUIzUzE5bllxNDNaTUlZc3U4c2ZuUkxGWjZxRkhpbkVUVDgzYkJ4NSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764863289),
-('M8MSq4pVcijR2EQHXL7KEEF9rAFR4Pply9LWseC9', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiV0t2dXNpcUtqVW5HRjZZck9OaEVtSUNFTkZOaEQ4NUVHRVYxTW01ZSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764862426),
-('m55z9TpK0Rsuy70RbTGTCl6wbJrRDuAMkrMXhsA5', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiM3ZQeDFuSlNsek8zaHdNcW9JTVNyTzJOWm1xVWdPYktJZmh0VW55cCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764862394),
-('7XIqV3ncODQ5DqWRggG6nSYAFeiOAKqatWTQPIf4', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoieElwbXdRbnV1N2Nta25wR081UnYzQ3o2aU02d2VtdmxUcW1xUWhOWiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764861068),
-('n6vQKGm4Sx83xzgHn3BtrjsirFAcVE7X2cLXOHm5', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiTFdsNkJVVGpMb0FNYVpkUHhnRmp3NGVodE5kSXdjOTNwVjZrdVZ2RiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764861087),
-('cvV7hQ8hHYvsVSlde6Rlg8epsMjd8jlzu69hPF6g', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiZkpoZzhiQ0k2T3dna29kWkhqSEhtdUZVY1dGcURiY2tpQ0hla3V3ayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860943),
-('UkAnmpriiL5T9MEMzxVleSC8J01rVbB6VvJXKTTE', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiVnJPV0hrZmRrZ0RVQUVFeWdSMVhOQUEwOGJrbUJCTGI4eVFyN29qbSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860940),
-('nTsNUb6x1c1KEEUQSnUglKFC0zohlE0YPzQYOZfR', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiTkZieUNWWTVUT3hhYzl4MGd4dlpNY2dNV1h5RU5SczlEcmxkSUN6UyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860929),
-('CJrlvnrXLCsf7FNq684Lu0avnjldI8AMOF970e0G', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiWnhzeXJPOGZrT2E0RjJGWFhuSjROVEtNbm5TcEZERENRMTltNVd5TCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860884),
-('aKQqcx1tytFigGcYXMIPG0fmm5QuCUw6kJp9qLJu', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiQ01DVHpJbmY2MVg2a2d6bWx6MGt1dFNiV3RraENaVURtTXRIQ29aUSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764856091),
-('uvnMDg3bbHSz9oa7ZPigLe3nWrG81t4ZDzw0jjZr', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiSkpjRDhhbkkyRUphOUQ3TnRXTlRUdnNLdE5LNHZRdTRkekdiSXhTeiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764856110),
-('mAbaCxhoioh4rc2jJoce3gokedc8UJCq9HY6kJyn', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibnF0Wnk4aGJiN2NnR1Frd2ZCdjhJZkFVb1hTcnRWc3d6VXJoRnlXUCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764857526),
-('kZ8tQzz5HgnW0CoCvdeKKl86mpQjCHZE1e3mKJZV', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiVXpLeWp0cFBUaUk3WXRxODFndFdBRGEzZ015a01POTdxMTBvVkpiSiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764857606),
-('9Thw1Fyi66nE2NlclYcZMoaiHK2CLQ4cxa3UZaWa', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiM1FoS3NkMEU3SFppSFNjN2pjdnk0bUxmTU9rSmNyZG55Rkl2S2MweiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764858147),
-('go3QIUSYaQ0142tk8D45albjvBtOfE0QkTDUacM8', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoib0Q1Z2E3b0ZneXNBcFZrZ09iNmZGRzAxa0RJMjR4aGp6SG1iS3NNcyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764858330),
-('RfIPyshqJQymrQxuE1yvhghHJt6K6ZCJa96DeOhp', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiajVaY3piR0k5Z0d1QlRSaEJkUnVzeEkzeTZFTDdJOHlmR1JOSzdtVyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764859119),
-('15hCWem0tX2L10wTZPet8jVRowUI9ivDDXYwcsjN', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiTHB4eTRheG9hckJYMFVGRWF3T2NTZkRVSEFYMFVkWUM0M0NLQ1pCRyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764859138),
-('vWeiSJBWO5scNYQmPnp6dLCtbaZNGoZAXjXIZOlj', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiRWdJMElMWjY5SXpxQTNFcHBteUpwR0NjbmtGdFN3TlZESW1Od3dnayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764859139),
-('7LWHYDz77LhfChRbLl76z3d4tWvP2spUgLSHB7h6', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiWTV3R1RyT3hqS2RPeVpXampZOUNzZ3F6Vmx3bktnSWZaMGI1ZW9pTCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764859159),
-('WGpxew8uoXpag74DXvv0QNqnDn5whrv8LuPqAI5n', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMUN1ejF1NjR1ZnoxVm1qdFpGaG83c24yanBXTjcxSVNMWUExVm1tZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764859268),
-('KpUpsA2o6FuHEBMZPyU17lECe1VkfCMhdfZQl1mN', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiRGppaTdrbEJzR2RlOXQzTjhYS1NSelZsNXhEVjdrTG5DYXlITzM2UyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860296),
-('AFSBn0hfSUx7DoSE6vN1IdxHFgkyqguNyw6zZ4Mi', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiUUZkNWJhakRKbldQYm1TUUdkcWhoT0txaThrWU5pb00ybE92eGVEaiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860392),
-('Q2AHeP3apkdT0SXLaolzVMcCYktgRY4WYcIldIeB', 9, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoicUMxWXg1RFp0N2RkblY3MHBOVUN0TGNEY3QzZVVETk03U3ZlOWRrUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764860438);
+('rHezYnwBwprX9RHmaMZi2jmYk3c8YYwrfZBXf1uR', NULL, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiOHRQYzB6UExPV1JjWk02Yk1KQjFJbFU2OVZLam95TVZQWGVZbFA2QSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHBzOi8vY2FtZW5mb29kLmlkLnZuL2tsdG4tYmUvcHVibGljL3N0b3JhZ2UtbGluayI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1765122000),
+('kow0uOvgjTWyjHcXhjMq9eRSVyfNqIGi6UsIWWqp', NULL, '42.118.136.157', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZkNXeGJmaTQxSHo3QmFYVmtoVVFVY1NYWWZPRUpObHpZM2JiMGJ4ZyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHBzOi8vY2FtZW5mb29kLmlkLnZuL2tsdG4tYmUvcHVibGljIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1765013364),
+('6fFVv5FmLbGIEjkJpwZWZUbsSXRY1yAnBc2AgqIV', NULL, '103.4.251.241', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQXJUZnNseGFaMmljSXNRZWRxNXV5RTRIeW90dE9PcTl2bFRMOXZQVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzg6Imh0dHBzOi8vY2FtZW5mb29kLmlkLnZuL2tsdG4tYmUvcHVibGljIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1764947202),
+('puD36WfhtQzFNSbCyRS4KvuUbdprudb1YBk96rVf', NULL, '103.4.251.241', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieDNYbmRHVHFpUmNjY2NyRWNFVGwyOXVsNkRLYk1rN3B0bENka3daQSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTY6Imh0dHBzOi8vY2FtZW5mb29kLmlkLnZuL2tsdG4tYmUvcHVibGljL2Jyb2FkY2FzdGluZy9hdXRoIjt9fQ==', 1764947201),
+('DTU8dClGYwxQfEzUAP0YkL4Om1YMzXf4mINbummJ', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiSEY5YkRvWkhuM0phUWJsOUg5eU0yM2hzVGVRc0t2R2VHTjhQZkl2TSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764945423),
+('GdwauKtA3StjFuVbYGgbD2SjR6nR53etNkWpYBKQ', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoieUN5OHZ1SGVoV1J5RjhDd1dOOENVWW1ua1dtWjBseExWdHYzTjFRaCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764941949),
+('RvDvq8voTdy3V2QS1kwSNQYy6lGO8DXX3sOBUEWh', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMXZNVGJwN2ROOHlMNjdweDFSRnVQT0dsUkRiRnlkVWVCUVRybHNoUiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764941650),
+('MAYoL9B2V0Gr8JgFyTAcWyMi6iyoC577iXWCIeme', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiYTB3bGFwTXJnSklmUEJGQk41WnRySWNEWXhOdXFBRVJIY1hXdWFsayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764941435),
+('w0YKhen41eM9Y9p4v1bDwzVRSOzzEvd7A9MxvFBt', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoieFREQmJsMUljanp2TWRaSGRVZ3NmWmFrOUdkMlE3MHJpTEVKaGN2USI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764941342),
+('hMUI9IqYm6ETKRzjZJQ95wa5GOS29crVRSWg6cwk', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoidnhHVUZVNmswQ3IxU05CUkFnOHMydzI1eWZzZ1lIN08wOG5ZSzJNbiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764941275),
+('mZwOnvBZAMYZ2H5xRolJXXU4H3EL8ptfLG8MAyKl', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiTDBBcjhVV2pVUGM3Z3gzVnhDT2w1Q2kwRklqVWx2bFp3dDZzWmUyMSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764933597),
+('zNRXXKs5wkZLY8Q2VeoqOt6lg15E66SJ081VfVVh', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiM3I2NmFLSENlNVJxNndzdHo2Sk05SGxYYmo2UlFLN3ZLOGZ3a2ZVYyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764931285),
+('cbJ0zBOdG3Cin133P4LCo6BfgHBiHRS3zRr4I6Hb', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiWklEekdhcUNiWDRCWHFzaFdicURuWEhuWUVpbmtTQktmWlFYdkZCeSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764925823),
+('nOoxPvnpfpef5Qvf0abSc7TZwS5dSASzhaY2zGFg', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiWXpCTjZqTVJHbk5DbmhhRmRpZnlsYUpFZU8ybERNUDdyV29YM0JBbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764921205),
+('uKfDHVIh1yX2xqTMs2AGq8XPb91KU438ep9yx3Sb', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibWYzbkt1MFJ6SERuRmVGMzFiR0dpYldnSGlGZ1ZYQk5QYTRaUnhWcyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764924567),
+('Xh0U51XgRZR86eFxjfVpjXqffRz8NSyaKFLT11P6', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibGpHQ3NNaGdTMVJ6V2thdEVHUjRXblZzemZ0WHVRSEVuUFI4SkwxRSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764920871),
+('KnlFwTEoYCCfxf1SSytoc6gM4aUKjFiI8F55ZgEf', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiNGJqTGxIUUlPb2J5MW9YelVPS3Q0a1lwU3J1VEUxZWxBVFZLVnZ4cSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764920724),
+('w9x5PObg40oyMTnWHe0D5SzSQEZcZzxlHXFZFgGN', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoicFA1RkJ3dnhBdGVoYmt2Q2FsT2x1aGRzWVphZXNqNk83azNuSGF5SSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764920678),
+('g87NWHyXhVqkAUP2NgkQaRBesP4vFrDxKE9FDQtO', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibW1nZnpRT1FES1g0SER2TkxSVnVsVlNtSEFiMHU3OXo1MzZ2YjBzayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764920520),
+('zob79NBdLKqFd99EDN9Pnyk3x9j3bsXM5hKndMQd', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoidUh4eWJaWEFvRHdxQ3JjeUcyeVhOdmJaVE01Ylh5S2JWWGZJZ1VWdyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764917941),
+('AaiiW3GDjJyYG99r3s1WDQixqq1iliMm9Wp2aERt', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiQnVQMDF4MTJjM2dmd25vTW1QRmVrVk1BV3RFQlFDQm55NUZIeVI0ZCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764917006),
+('HblbM8Yw3oTXDLE1iMjpjlJhy9cgAK3R6sYEbBvN', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibnBDN2laWnhLQlJPZmhjTUVZWHZRRW1qcFVFZEhBNnI1NHhQSzVPOSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764914440),
+('FikDlHjgFaKpTFpnfvNwft5ZaCwDVCuK0I4gwJeL', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoickhBM2NiTm02TGF1MlNTSjRLYnlKZFkwdkh0c0FOZnpoZVRuZ3pjTCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764913475),
+('U1vHc5eSW0ajC5gmtV02GZVxXriQx8mwDhRs3Vru', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiY0c4eVNuTHFuaTVweW84WHhkRVlrbVZnQUpjeVEzQWtIcWF1TzdHbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764912581),
+('b7qV3rTdXSa4C07xlwbitYpII3zAMJHG0EFEvkLc', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiN3VINHgxemFtbWdXUERNWHJVVG1lc0ROVlZiblZCU2tGWE1YelhrZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764911335),
+('au38PI1heP3OnNYhYbYlJ9DIXCgufra9iFTPvLAG', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiV3VqcXJ6UXNZT0NmaXVEM0JTUU1qdUZXQnJWdnd1VTBJZDZmZ3hkeCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764910395),
+('fv2XEstaYt53VCDDcjOwdOVKFOXuV4mi2wvUM4mT', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiaHY5YlFDaVlLWXZGUklJSW1BNkxEQUJ5ZWQ4d2lqV2tzZG9xdUZObiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764910380),
+('5THKNbdmQ0x2VuukSSpumcCtR5vA14AthvDXrnZF', 3, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiUXhUMnVjVEZuempoOWRLQlhvcHdubmxMVTYyemo3RllYZFBGb3NyUiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764910202),
+('5RFo1AeOU2rfWYxyWktEOpdnA69SEeSIEJBo9IZY', 3, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiekJiSUJQcXllT05ETVdBd2U4dzNwNUNSa2tmaUI4bm81Z1FXVHkzbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764909939),
+('xshF59J9evwQBebBkwITVOp4qI5zc13T8YpMwN5s', 3, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoicm5kVEZZSGVoSWN0QnFxMVBUOG1yWlJHMDh2eHkwWnNTWVc4YWVzdyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764909767),
+('JXwgLxlEQKdsPqz6LqguiYsbxPcQIXORuKHEJxYk', 3, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiRjFPc3hDaGRiOWpRWWlPOE9WQW5wMHVaTVh6T3dOR0NxMWlPZGoyRyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764908998),
+('921nEx8aDK3jGpL3gA6YvjF6yxrltC3EwomMvKKh', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiNnB4WmRZTGJWQ2RlYXNoSDBOWkkzQm51TUUwRmF5cWMzZ2liM2RKSCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764908358),
+('WLOBFmC76Ml6lb3kwEMhC8bj0VV7XRYyoMWvT8hf', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiRXhrcXo2TGpTUVJtdW56THI5N3JtbW82UVVpVFUwMzIxM3l5VFhqaiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764908195),
+('97aASruoGzWwu19VA7QcGFsAp5QkUul5o68Ey5oC', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiSjlBSWNGQjU1TnNDbjdSc2tZMjRGY3dLQ0xndDBTcjljVGhsaElMQyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764908097),
+('gn7htho3fUuU1YqA3wXsLlIwQcqVx8HVxtsuHshr', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiYVY0d3Z1RVpDdFhTcU1mTWdLdlRtY1hsQThuaHRGWlA3ZmswRVhkTSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906767),
+('DbnZp0C1XASzdECWMRK3uyaRHMVGqKsuP4pDrQnB', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoib0VmUk1sNUt2ZVZVc2p1UGd6OXJFdktQTUtRcXJ6aksxRW5SZHJPbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906751),
+('AhH5pq7lqF06ayhuh1JdGXN5xmCogA8eWT2NdhN5', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiSEtQc2FWVVJvRFBYWHhMUGlwVk1VVWp3N29DMmV2ZUdKTUpseFcxUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906661),
+('dxfbVXhYOsRAbjlvqk0CLYNKTgw7zqEJYjknVXcV', 2, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiRURxS2U5dDY0UnhkQnNNSmhkRlY1dXZBblNPbVp1WGhRanhDSkRBSiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905053),
+('XnZwNJpUothPhnV07OuS2QnM8vVA5TEjKhVQViOg', 1, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiTDZuMjNuQjRTZnFqSDAwNE1UVW8yNjlGQzZyOEtxV1M0Zld1bmVnYSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905053),
+('XpQjoTmBv2zZbtbMlNYZ36licBLSIkUXYMKCzOXJ', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiOFVJT0RrN2RUVmduR2x0SXFqa01VVVp0SENaQlFEamRnWGx6cmZJbyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905067),
+('z0nkWJOD1NYjqThccx3WMoEmdwGMQTRwkVe3HBlq', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiQ3ZOZ3Ayb1huOWJwSk5nMERNWHhvNkZRUDRPN29XRTkzMG5VYXhJTSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905095),
+('kY4RgbDqAcmP23rhqHg0rGZmBxfAUpw1QSQajyxb', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoidUpDVmJtNTRBOXV2T2ZZWWRRUXBScklhUzdEWWdkWkI4a0dnSU5saiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905253),
+('9TSWs3UXsInLAcNz8W2i6T6qBeIkjqknpW37njiP', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiaER1emp2QlhTcEpMUXNQUjdZanI2NEFSUWhDems2dVlhYWpQVVlGaiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905296),
+('hkVZeDPziSHLHHjHFZREVtCPwv5RBsnTUdky2jAw', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoibDI1VGllS2lJazFaODQzc0QyTHlXQkpBbktCVGw0MTVRWDJkaHVMQSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905422),
+('9AgeJK6OWa50xaVvewFPzCxF3uPBaLfZp2CoAzLj', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiOFJYQVlTc0JYektyell5NHVZbWRrbUhqdlpLb0xzN1RaMldqdmEyZCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764905946),
+('hLnHJP60iUq2HL2ow3cnoCtqWegHuzHWpPnMHuzl', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoieGg1T3lFcGpwZGRpQnFQbmkzS2lNZkxSQThDVUVOYmVPN0F6UHFmayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906209),
+('NaVwxPd6CdgqUF9RjoLqWq8rCzuj1gZuz1Ux4zxF', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiOTVKWU8yM0dkUVE3MThQYUl5UlZHQ2xyTVFhemdJVXZ4NHExejh6OSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906406),
+('vgaKrjZefFCi6IntDcOUBlq9G7EGx4MrtT3MT4tT', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMkdQUlRsSmkwM1lRY0RqZTRkaWpBaTN5ekJ2dkVKUER4NUdrQ0VmNiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906528),
+('MYI0B0JPD9NdiaBZLEAju3kzGSW3tEDq6kyk7gD7', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiMWhBdldjczRyRVRJcVFuVTRqRDRFeWlPM3FuVm52N2hUNWY4Q2U3NiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906578),
+('19vPf1JjAioQ8I1vehgVjotQeL9w25fZrsXpzl45', 9, '118.70.66.17', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiWVpYVHdoeHI4czRueXhUTDVQMzI1UDRPZkozS1ZpUkQ0dmplcno4TCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319fQ==', 1764906604);
 
 -- --------------------------------------------------------
 
@@ -1106,9 +1165,8 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -1117,11 +1175,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role_id` bigint UNSIGNED NOT NULL DEFAULT '4',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`),
-  KEY `users_role_id_foreign` (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `role_id` bigint UNSIGNED NOT NULL DEFAULT '4'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -1129,18 +1184,465 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `status`, `created_at`, `updated_at`, `role_id`) VALUES
 (1, 'Admin', 'admin@gmail.com', NULL, '$2y$12$IemEj3yZRva7SvhuND0TJemokMWCGnRFD.5sJrapg2xwL9GEMNpMm', NULL, 1, NULL, NULL, 1),
-(2, 'User 1', 'user1@gmail.com', NULL, '$2y$12$IemEj3yZRva7SvhuND0TJemokMWCGnRFD.5sJrapg2xwL9GEMNpMm', NULL, 1, NULL, NULL, 4),
-(3, 'User 2', 'user2@gmail.com', NULL, '$2y$12$qk5.yoK9WkpygBK553XcBOj.roS5cOXZ1tTZrIn/ypc6lqe2KaYqq', NULL, 1, NULL, NULL, 4),
+(2, 'User 1', 'user1@gmail.com', NULL, '$2y$12$IemEj3yZRva7SvhuND0TJemokMWCGnRFD.5sJrapg2xwL9GEMNpMm', NULL, 1, NULL, '2025-12-08 08:38:10', 4),
+(3, 'User 2', 'user2@gmail.com', NULL, '$2y$12$qk5.yoK9WkpygBK553XcBOj.roS5cOXZ1tTZrIn/ypc6lqe2KaYqq', NULL, 0, NULL, '2025-12-07 10:33:54', 4),
 (4, 'Việt Quân', 'vietquan@gmail.com', NULL, '$2y$12$IemEj3yZRva7SvhuND0TJemokMWCGnRFD.5sJrapg2xwL9GEMNpMm', NULL, 1, NULL, '2025-11-26 09:36:07', 2),
 (5, 'Hoàng Nhi', 'hoangnhi@gmail.com', NULL, '$2y$12$qk5.yoK9WkpygBK553XcBOj.roS5cOXZ1tTZrIn/ypc6lqe2KaYqq', NULL, 1, NULL, NULL, 3),
 (17, 'Nhi Ngô', 'nhingo@gmail.com', NULL, '$2y$12$ZYEEL7.8TqH4PXxe//V0IOno4lagnLZVUCfORzaWeTsedjPL5ZOIO', NULL, 1, '2025-12-03 10:11:47', '2025-12-03 10:11:47', 3),
 (7, 'Trần Việt', 'tranviet@gmail.com', NULL, '$2y$12$qk5.yoK9WkpygBK553XcBOj.roS5cOXZ1tTZrIn/ypc6lqe2KaYqq', NULL, 1, NULL, NULL, 6),
-(9, 'Trần Việt Quân', 'tranvietquan02102003@gmail.com', NULL, '$2y$12$ATY84ylIuKf1L3c3q4xOZu.rzDYy3MNa7PdtdSNC2s6tuR93PR9XK', NULL, 1, '2025-11-21 01:49:48', '2025-12-04 08:33:12', 4),
-(16, 'Ngân', 'thanhngan@gmail.com', NULL, '$2y$12$h6L95weZXcQya..dw4UXEOdbqm9twAsUTx9jaT9RXDKE5h61Hrgv2', NULL, 0, '2025-12-03 09:40:26', '2025-12-07 00:21:05', 3),
-(15, 'Tui nè', 'nvkho@gmail.com', NULL, '$2y$12$tyKyT27lJ/luXccvsGgLfuFONbf/6ke.2EB2AyGaIf057oKbFYjSe', NULL, 1, '2025-11-29 03:25:11', '2025-11-29 03:25:11', 7),
+(9, 'Trần Việt Quân', 'tranvietquan02102003@gmail.com', NULL, '$2y$12$X5WUiKZ.QmMmsmHo4Dbeou.pqvB5jShfZ8cwp8KLWEseSAhqh9SOW', NULL, 1, '2025-11-21 01:49:48', '2025-12-08 08:38:06', 4),
+(16, 'Ngân', 'thanhngan@gmail.com', NULL, '$2y$12$h6L95weZXcQya..dw4UXEOdbqm9twAsUTx9jaT9RXDKE5h61Hrgv2', NULL, 1, '2025-12-03 09:40:26', '2025-12-03 17:50:13', 4),
+(15, 'Tui nè', 'nvkho@gmail.com', NULL, '$2y$12$tyKyT27lJ/luXccvsGgLfuFONbf/6ke.2EB2AyGaIf057oKbFYjSe', NULL, 1, '2025-11-29 03:25:11', '2025-11-29 03:25:11', 4),
 (18, 'Barry', 'datpika98@gmail.com', NULL, '$2y$12$fFxcgl57ZUR8HnyItOOaN.v4uekzN1KeA5/f3ZO4WIu0u4zt84.JG', NULL, 1, '2025-12-03 11:42:34', '2025-12-03 11:42:34', 4),
 (19, 'Tuan', 'tuanmei12@gmail.com', NULL, '$2y$12$GFI6bewaUQz9yDwtWnNZ3Ot0eJipC27D7XEoTLhyeju.70jCLqOie', NULL, 1, '2025-12-03 11:45:33', '2025-12-03 11:45:33', 4),
-(20, 'Cua nè A', 'tranletruongvu12a192021@gmail.com', NULL, '$2y$12$qk5.yoK9WkpygBK553XcBOj.roS5cOXZ1tTZrIn/ypc6lqe2KaYqq', NULL, 0, NULL, '2025-12-07 00:20:40', 4);
+(20, 'Cua nè A', 'tranletruongvu12a192021@gmail.com', NULL, '$2y$12$qk5.yoK9WkpygBK553XcBOj.roS5cOXZ1tTZrIn/ypc6lqe2KaYqq', NULL, 1, NULL, NULL, 4),
+(21, 'Trần Việt Quân', 'nhoxquanlovecli.com@gmail.com', NULL, '$2y$12$8z32bDjmyg0F1Ru0SRobw.XPQlfxPxAL6jLrjXZefZEEOdMJmOo3G', NULL, 1, '2025-12-03 18:13:20', '2025-12-03 18:13:20', 4),
+(22, 'Quân', 'tranquan@gmail.com', NULL, '$2y$12$QHEpLkdFL28Bckn9ef9b6udqWmz9FuOiiPZygrDr1vdHD7A7PVKOC', NULL, 1, '2025-12-03 18:35:54', '2025-12-03 18:35:54', 4),
+(23, 'Nhi', 'hoangnhi1@gmail.com', NULL, '$2y$12$2yXYrvLamldsxW9Z4.QCYeecCBxWMXG2oiHqe8ewLiBOYXgUWIQnq', NULL, 1, '2025-12-03 18:43:26', '2025-12-03 18:43:26', 4),
+(24, 'test đổi mk', 'aaa@gmail.com', NULL, '$2y$12$vvtlwy9ZxC9BSGl8Bmykq.vLwQ8CIKNEosF/8VoXdH8OlBcBiyem6', NULL, 1, '2025-12-04 12:29:34', '2025-12-04 12:29:34', 4),
+(25, 'NhuanDoan', 'nhuandoan2003@gmail.com', NULL, '$2y$12$5rZdLmXpqnD4HrZ3witE3uiv742DSl4JugL4Kg5yIyvf.kpcNbXH6', NULL, 1, '2025-12-06 02:24:13', '2025-12-06 02:24:13', 4),
+(26, 'Bán hàng', 'nvbh@gmail.com', NULL, '$2y$12$YsOOZFoLvAd/Opu3adBqxepXzzucV1U4tztrtjKaPFh3inTaZa39a', NULL, 1, '2025-12-06 02:59:03', '2025-12-06 02:59:03', 4);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `cache_locks`
+--
+ALTER TABLE `cache_locks`
+  ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `cartitems`
+--
+ALTER TABLE `cartitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cartitems_cart_id_foreign` (`cart_id`),
+  ADD KEY `cartitems_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carts_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category_translations`
+--
+ALTER TABLE `category_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `category_translations_language_id_foreign` (`language_id`),
+  ADD KEY `category_translations_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `chat_histories`
+--
+ALTER TABLE `chat_histories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chat_messages_sender_id_foreign` (`sender_id`),
+  ADD KEY `chat_messages_chat_room_id_created_at_index` (`chat_room_id`,`created_at`);
+
+--
+-- Indexes for table `chat_rooms`
+--
+ALTER TABLE `chat_rooms`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chat_rooms_customer_id_staff_id_unique` (`customer_id`,`staff_id`),
+  ADD KEY `chat_rooms_staff_id_foreign` (`staff_id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `contacts_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `coupons_code_unique` (`code`),
+  ADD KEY `coupons_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `deliveries_user_id_foreign` (`user_id`),
+  ADD KEY `deliveries_request_import_id_foreign` (`request_import_id`) USING BTREE;
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Indexes for table `job_batches`
+--
+ALTER TABLE `job_batches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orderitems`
+--
+ALTER TABLE `orderitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orderitems_order_id_foreign` (`order_id`),
+  ADD KEY `orderitems_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `orders_code_unique` (`code`),
+  ADD KEY `orders_user_id_foreign` (`user_id`),
+  ADD KEY `fk_coupon_id` (`coupon_id`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `posts_user_id_foreign` (`user_id`),
+  ADD KEY `posts_post_category_id_foreign` (`post_category_id`);
+
+--
+-- Indexes for table `post_categories`
+--
+ALTER TABLE `post_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `post_category_translations`
+--
+ALTER TABLE `post_category_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_category_translations_language_id_foreign` (`language_id`),
+  ADD KEY `post_category_translations_post_category_id_foreign` (`post_category_id`);
+
+--
+-- Indexes for table `post_translations`
+--
+ALTER TABLE `post_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_translations_post_id_foreign` (`post_id`),
+  ADD KEY `post_translations_language_id_foreign` (`language_id`) USING BTREE;
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `products_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_images_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_translations`
+--
+ALTER TABLE `product_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_translations_product_id_foreign` (`product_id`),
+  ADD KEY `product_translations_language_id_foreign` (`language_id`);
+
+--
+-- Indexes for table `quantity_deliveries`
+--
+ALTER TABLE `quantity_deliveries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quantity_deliveries_product_id_foreign` (`product_id`),
+  ADD KEY `quantity_deliveries_delivery_id_foreign` (`delivery_id`);
+
+--
+-- Indexes for table `quantity_imports`
+--
+ALTER TABLE `quantity_imports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quantity_imports_product_id_foreign` (`product_id`),
+  ADD KEY `quantity_imports_request_import_id_foreign` (`request_import_id`);
+
+--
+-- Indexes for table `request_imports`
+--
+ALTER TABLE `request_imports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `request_imports_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reviews_user_id_foreign` (`user_id`),
+  ADD KEY `reviews_product_id_foreign` (`product_id`),
+  ADD KEY `reviews_order_item_id_foreign` (`order_item_id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_role_id_foreign` (`role_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cartitems`
+--
+ALTER TABLE `cartitems`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `category_translations`
+--
+ALTER TABLE `category_translations`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `chat_histories`
+--
+ALTER TABLE `chat_histories`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
+
+--
+-- AUTO_INCREMENT for table `chat_rooms`
+--
+ALTER TABLE `chat_rooms`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `deliveries`
+--
+ALTER TABLE `deliveries`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `orderitems`
+--
+ALTER TABLE `orderitems`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `post_categories`
+--
+ALTER TABLE `post_categories`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `post_category_translations`
+--
+ALTER TABLE `post_category_translations`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `post_translations`
+--
+ALTER TABLE `post_translations`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT for table `product_translations`
+--
+ALTER TABLE `product_translations`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+
+--
+-- AUTO_INCREMENT for table `quantity_deliveries`
+--
+ALTER TABLE `quantity_deliveries`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `quantity_imports`
+--
+ALTER TABLE `quantity_imports`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT for table `request_imports`
+--
+ALTER TABLE `request_imports`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

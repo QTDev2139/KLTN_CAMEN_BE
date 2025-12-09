@@ -31,6 +31,7 @@ class OrderResource extends JsonResource
             'updated_at' => $this->updated_at,
             'total_amount' => $this->total_amount,
             'order_items' => OrderItemResource::collection($this->whenLoaded('orderItems')),
+            'refund_amount' => $this->refund_amount,
             'coupon' => new CouponResource($this->whenLoaded('coupon')),
         ];
     }

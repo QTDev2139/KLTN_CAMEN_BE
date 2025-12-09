@@ -13,7 +13,7 @@ class RequestImportController extends Controller
 {
     public function index()
     {
-        $requestImports = RequestImport::with('user', 'quantityImports.product')->get();
+        $requestImports = RequestImport::with('user', 'quantityImports.product')->orderBy('date', 'desc')->get();
         return response()->json($requestImports, 200);
     }
 
