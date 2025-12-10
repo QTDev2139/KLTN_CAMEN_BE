@@ -233,6 +233,7 @@ class OrderController extends Controller
 
         return response()->json([
             'message' => 'Tạo đơn hàng thành công',
+            'data' => $order->load(['orderItems.product.product_images', 'coupon']),
         ], 201);
     }
 
