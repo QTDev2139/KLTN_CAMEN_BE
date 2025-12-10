@@ -25,6 +25,8 @@ class ProductResource extends JsonResource
             'type'                 => $this->type,
             'shipping_from'        => $this->shipping_from,
             'category_id'          => $this->category_id,
+            'average_rating' => $this->reviews_avg_rating ?? $this->averageRating(),
+            'reviews_count' => $this->reviews_count ?? $this->reviews()->count(),
             'product_translations' => $this->whenLoaded('product_translations', function () {
                 return $this->product_translations
                     // tùy chọn: sắp xếp theo language_id hoặc name
