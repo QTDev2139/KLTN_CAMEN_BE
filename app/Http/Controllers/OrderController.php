@@ -122,19 +122,19 @@ class OrderController extends Controller
 
         if (!empty($validated['coupon_code'])) {
             $now = now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString();
-            if($now)
-            $coupon = Coupon::query()
-                ->where('code', $validated['coupon_code'])
-                ->where('is_active', true)
-                ->when(true, function ($q) {
-                    $q->where(function ($qq) {
-                        $qq->whereNull('start_date')->orWhere('start_date', '<=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
-                    })->where(function ($qq) {
-                        $qq->whereNull('end_date')->orWhere('end_date', '>=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
-                    });
-                })
-                ->first();
-            
+            if ($now)
+                $coupon = Coupon::query()
+                    ->where('code', $validated['coupon_code'])
+                    ->where('is_active', true)
+                    ->when(true, function ($q) {
+                        $q->where(function ($qq) {
+                            $qq->whereNull('start_date')->orWhere('start_date', '<=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
+                        })->where(function ($qq) {
+                            $qq->whereNull('end_date')->orWhere('end_date', '>=', now()->setTimezone('Asia/Ho_Chi_Minh')->toDateTimeString());
+                        });
+                    })
+                    ->first();
+
             if (!$coupon) {
                 return response()->json(['message' => "Mã giảm giá không hợp lệ $now hoặc1 $coupon đã hết hạn"], 422);
             }
@@ -252,24 +252,44 @@ class OrderController extends Controller
             'status' => ['required', 'in:pending,processing,shipped,completed,cancelled,failed,refund_requested,refunded,partially_refunded'],
             // 'note' => ['nullable', 'string', 'max:1000'],
             'reason_refund' => ['nullable', 'string', 'max:1000'],
-            
+            'refund_amount' => ['nullable', 'numeric'],
+
         ]);
 
         $order = Order::findOrFail($id);
 
         $order->reason_refund = $order->reason_refund || '';
 
-        if ($validated['status'] !== $order->status && $validated['status'] === 'completed') {
-            $order->status = $validated['status'];
-            $order->payment_status = 'paid';
-            $order->save();
-            return response()->json(['message' => 'Cập nhật đơn hàng thành công']);
-        }
+        $needs_saving = false;
+
         if ($validated['status'] !== $order->status) {
             $order->status = $validated['status'];
+            $needs_saving = true;
+            if ($order->status === 'completed') {
+                $order->payment_status = 'paid';
+            }
+        }
+
+        if (isset($validated['reason_refund'])) {
+            if ($validated['reason_refund'] !== $order->reason_refund) {
+                $order->reason_refund = $validated['reason_refund'];
+                $needs_saving = true;
+            }
+        }
+
+        if (isset($validated['refund_amount'])) {
+            if ((float)$validated['refund_amount'] !== (float)$order->refund_amount) {
+                $order->refund_amount = $validated['refund_amount'];
+                $needs_saving = true;
+            }
+        }
+
+        if ($needs_saving) {
             $order->save();
             return response()->json(['message' => 'Cập nhật đơn hàng thành công']);
         }
+
+        return response()->json(['message' => 'Cập nhật thất bại'], 200);
     }
 
     public function refundRequest(Request $request)
