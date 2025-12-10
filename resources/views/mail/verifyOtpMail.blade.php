@@ -34,7 +34,7 @@
 
                         <p
                             style="font-size: 14px; line-height: 20px; color: #fd0100; font-weight: bold; margin: 0 0 15px 0;">
-                            Mã này sẽ hết hạn trong 5 phút.
+                            Mã này sẽ hết hạn trong 2 phút.
                         </p>
                         <p style="font-size: 14px; line-height: 20px; color: #7f8c8d;">
                             *Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email. Tuyệt đối không chia sẻ mã này

@@ -61,11 +61,11 @@ class Product extends Model
     {
         return $this->hasMany(QuantityImport::class, 'product_id');
     }
-    // // Tính rating trung bình
-    // public function averageRating()
-    // {
-    //     return $this->reviews()->avg('rating');
-    // }
+    // Tính rating trung bình
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
 
     // // Đếm số lượng review
     // public function reviewsCount()
